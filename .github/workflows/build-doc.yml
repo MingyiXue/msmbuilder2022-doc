@@ -19,21 +19,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-      - name: Install dependencies
+        with:
+          python-version: '3.10'
+      - name: Install required packages 
+        run: |
+          conda config --add channels conda-forge
+          conda install -yq zlib
+          conda install h5py
+          python -m pip install --upgrade pip
+          python -m pip install .
+      - name: Install sphinx dependencies
         run: |
           sudo apt-get install -y pandoc
-          pip install .
           cd docs/
           pip install -r requirements.txt
       - name: Sphinx build
         run: |
           make html
-          echo '<meta http-equiv="refresh" content="0; url=./html/index.html" />' > build/index.html
+          echo '<meta http-equiv="refresh" content="0; url=./html/index.html" />' > _build/index.html
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/
+          publish_dir: _build/
           force_orphan: true
