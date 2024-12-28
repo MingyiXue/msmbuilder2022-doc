@@ -51,7 +51,6 @@ of 2D numpy arrays, each of shape ``(length_of_trajecotry, n_features)``.
     MeanShift
     MiniBatchKMeans
     SpectralClustering
-    Ward
 
 
 .. todo: Example of clustering
