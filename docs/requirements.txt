@@ -9,3 +9,4 @@ nbconvert
 pyparsing
 # msmexplorer
 msmb_theme
+sphinx_rtd_theme
