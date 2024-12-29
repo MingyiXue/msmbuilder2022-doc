@@ -28,6 +28,7 @@ jobs:
           # conda install h5py
           # python -m pip install --upgrade pip
           python -m pip install msmbuilder2022
+          python -m pip install numpy==1.23.5
       - name: Install sphinx dependencies
         run: |
           sudo apt-get install -y pandoc
@@ -39,7 +40,8 @@ jobs:
           msmb --version
           echo $CONDA/bin >> $GITHUB_PATH
           cd docs/
-          make html
+          # make html
+          python -m sphinx_build
           echo '<meta http-equiv="refresh" content="0; url=./html/index.html" />' > _build/index.html
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
