@@ -36,6 +36,7 @@ jobs:
           cd ..
       - name: Sphinx build
         run: |
+          echo $CONDA/bin >> $GITHUB_PATH
           cd docs/
           make html
           echo '<meta http-equiv="refresh" content="0; url=./html/index.html" />' > _build/index.html
