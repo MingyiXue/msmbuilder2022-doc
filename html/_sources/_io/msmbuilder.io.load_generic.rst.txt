@@ -1,0 +1,6 @@
+﻿msmbuilder.io.load\_generic
+===========================
+
+.. currentmodule:: msmbuilder.io
+
+.. autofunction:: load_generic

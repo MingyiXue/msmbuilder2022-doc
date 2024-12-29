@@ -1,0 +1,6 @@
+﻿msmbuilder.tpt.fraction\_visited
+================================
+
+.. currentmodule:: msmbuilder.tpt
+
+.. autofunction:: fraction_visited

@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.decomposition.PCA &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Clustering" href="../cluster.html" />
+    <link rel="prev" title="msmbuilder.decomposition.SparseTICA" href="msmbuilder.decomposition.SparseTICA.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../decomposition.html">Decomposition</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#tica">tICA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#pca">PCA</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../decomposition.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.decomposition.tICA.html">msmbuilder.decomposition.tICA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.decomposition.SparseTICA.html">msmbuilder.decomposition.SparseTICA</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.decomposition.PCA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.decomposition.PCA"><code class="docutils literal notranslate"><span class="pre">PCA</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#theory">Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#combination-with-msm">Combination with MSM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../decomposition.html">Decomposition</a></li>
+      <li class="breadcrumb-item active">msmbuilder.decomposition.PCA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_decomposition/msmbuilder.decomposition.PCA.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-decomposition-pca">
+<h1>msmbuilder.decomposition.PCA<a class="headerlink" href="#msmbuilder-decomposition-pca" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.decomposition.PCA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.decomposition.</span></span><span class="sig-name descname"><span class="pre">PCA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whiten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svd_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterated_power</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_oversamples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power_iteration_normalizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.decomposition.PCA" title="Link to this definition">¶</a></dt>
+<dd><p>Principal component analysis (PCA).</p>
+<p>Linear dimensionality reduction using Singular Value Decomposition of the
+data to project it to a lower dimensional space. The input data is centered
+but not scaled for each feature before applying the SVD.</p>
+<p>It uses the LAPACK implementation of the full SVD or a randomized truncated
+SVD by the method of Halko et al. 2009, depending on the shape of the input
+data and the number of components to extract.</p>
+<p>With sparse inputs, the ARPACK implementation of the truncated SVD can be
+used (i.e. through <code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.svds()</span></code>). Alternatively, one
+may consider <code class="xref py py-class docutils literal notranslate"><span class="pre">TruncatedSVD</span></code> where the data are not centered.</p>
+<p>Notice that this class only supports sparse inputs for some solvers such as
+“arpack” and “covariance_eigh”. See <code class="xref py py-class docutils literal notranslate"><span class="pre">TruncatedSVD</span></code> for an
+alternative with sparse data.</p>
+<p>For a usage example, see
+<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/decomposition/plot_pca_iris.html#sphx-glr-auto-examples-decomposition-plot-pca-iris-py" title="(in scikit-learn v1.6)"><span>Principal Component Analysis (PCA) on Iris Dataset</span></a></p>
+<p>Read more in the <a class="reference external" href="https://scikit-learn.org/stable/modules/decomposition.html#pca" title="(in scikit-learn v1.6)"><span class="xref std std-ref">User Guide</span></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>n_components</strong><span class="classifier">int, float or ‘mle’, default=None</span></dt><dd><p>Number of components to keep.
+if n_components is not set all components are kept:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">n_components</span> <span class="pre">==</span> <span class="pre">'mle'</span></code> and <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'full'</span></code>, Minka’s
+MLE is used to guess the dimension. Use of <code class="docutils literal notranslate"><span class="pre">n_components</span> <span class="pre">==</span> <span class="pre">'mle'</span></code>
+will interpret <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'auto'</span></code> as <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'full'</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">n_components</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'full'</span></code>, select the
+number of components such that the amount of variance that needs to be
+explained is greater than the percentage specified by n_components.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'arpack'</span></code>, the number of components must be
+strictly less than the minimum of n_features and n_samples.</p>
+<p>Hence, the None case results in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>copy</strong><span class="classifier">bool, default=True</span></dt><dd><p>If False, data passed to fit are overwritten and running
+fit(X).transform(X) will not yield the expected results,
+use fit_transform(X) instead.</p>
+</dd>
+<dt><strong>whiten</strong><span class="classifier">bool, default=False</span></dt><dd><p>When True (False by default) the <cite>components_</cite> vectors are multiplied
+by the square root of n_samples and then divided by the singular values
+to ensure uncorrelated outputs with unit component-wise variances.</p>
+<p>Whitening will remove some information from the transformed signal
+(the relative variance scales of the components) but can sometime
+improve the predictive accuracy of the downstream estimators by
+making their data respect some hard-wired assumptions.</p>
+</dd>
+<dt><strong>svd_solver</strong><span class="classifier">{‘auto’, ‘full’, ‘covariance_eigh’, ‘arpack’, ‘randomized’},            default=’auto’</span></dt><dd><dl class="simple">
+<dt>“auto” :</dt><dd><p>The solver is selected by a default ‘auto’ policy is based on <cite>X.shape</cite> and
+<cite>n_components</cite>: if the input data has fewer than 1000 features and
+more than 10 times as many samples, then the “covariance_eigh”
+solver is used. Otherwise, if the input data is larger than 500x500
+and the number of components to extract is lower than 80% of the
+smallest dimension of the data, then the more efficient
+“randomized” method is selected. Otherwise the exact “full” SVD is
+computed and optionally truncated afterwards.</p>
+</dd>
+<dt>“full” :</dt><dd><p>Run exact full SVD calling the standard LAPACK solver via
+<cite>scipy.linalg.svd</cite> and select the components by postprocessing</p>
+</dd>
+<dt>“covariance_eigh” :</dt><dd><p>Precompute the covariance matrix (on centered data), run a
+classical eigenvalue decomposition on the covariance matrix
+typically using LAPACK and select the components by postprocessing.
+This solver is very efficient for n_samples &gt;&gt; n_features and small
+n_features. It is, however, not tractable otherwise for large
+n_features (large memory footprint required to materialize the
+covariance matrix). Also note that compared to the “full” solver,
+this solver effectively doubles the condition number and is
+therefore less numerical stable (e.g. on input data with a large
+range of singular values).</p>
+</dd>
+<dt>“arpack” :</dt><dd><p>Run SVD truncated to <cite>n_components</cite> calling ARPACK solver via
+<cite>scipy.sparse.linalg.svds</cite>. It requires strictly
+<cite>0 &lt; n_components &lt; min(X.shape)</cite></p>
+</dd>
+<dt>“randomized” :</dt><dd><p>Run randomized SVD by the method of Halko et al.</p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.18.0.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.5: </span>Added the ‘covariance_eigh’ solver.</p>
+</div>
+</dd>
+<dt><strong>tol</strong><span class="classifier">float, default=0.0</span></dt><dd><p>Tolerance for singular values computed by svd_solver == ‘arpack’.
+Must be of range [0.0, infinity).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.18.0.</span></p>
+</div>
+</dd>
+<dt><strong>iterated_power</strong><span class="classifier">int or ‘auto’, default=’auto’</span></dt><dd><p>Number of iterations for the power method computed by
+svd_solver == ‘randomized’.
+Must be of range [0, infinity).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.18.0.</span></p>
+</div>
+</dd>
+<dt><strong>n_oversamples</strong><span class="classifier">int, default=10</span></dt><dd><p>This parameter is only relevant when <cite>svd_solver=”randomized”</cite>.
+It corresponds to the additional number of random vectors to sample the
+range of <cite>X</cite> so as to ensure proper conditioning. See
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.utils.extmath.randomized_svd.html#sklearn.utils.extmath.randomized_svd" title="(in scikit-learn v1.6)"><code class="xref py py-func docutils literal notranslate"><span class="pre">randomized_svd()</span></code></a> for more details.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.1.</span></p>
+</div>
+</dd>
+<dt><strong>power_iteration_normalizer</strong><span class="classifier">{‘auto’, ‘QR’, ‘LU’, ‘none’}, default=’auto’</span></dt><dd><p>Power iteration normalizer for randomized SVD solver.
+Not used by ARPACK. See <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.utils.extmath.randomized_svd.html#sklearn.utils.extmath.randomized_svd" title="(in scikit-learn v1.6)"><code class="xref py py-func docutils literal notranslate"><span class="pre">randomized_svd()</span></code></a>
+for more details.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.1.</span></p>
+</div>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int, RandomState instance or None, default=None</span></dt><dd><p>Used when the ‘arpack’ or ‘randomized’ solvers are used. Pass an int
+for reproducible results across multiple function calls.
+See <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-random_state" title="(in scikit-learn v1.6)"><span class="xref std std-term">Glossary</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.18.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>components_</strong><span class="classifier">ndarray of shape (n_components, n_features)</span></dt><dd><p>Principal axes in feature space, representing the directions of
+maximum variance in the data. Equivalently, the right singular
+vectors of the centered input data, parallel to its eigenvectors.
+The components are sorted by decreasing <code class="docutils literal notranslate"><span class="pre">explained_variance_</span></code>.</p>
+</dd>
+<dt><strong>explained_variance_</strong><span class="classifier">ndarray of shape (n_components,)</span></dt><dd><p>The amount of variance explained by each of the selected components.
+The variance estimation uses <cite>n_samples - 1</cite> degrees of freedom.</p>
+<p>Equal to n_components largest eigenvalues
+of the covariance matrix of X.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.18.</span></p>
+</div>
+</dd>
+<dt><strong>explained_variance_ratio_</strong><span class="classifier">ndarray of shape (n_components,)</span></dt><dd><p>Percentage of variance explained by each of the selected components.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">n_components</span></code> is not set then all components are stored and the
+sum of the ratios is equal to 1.0.</p>
+</dd>
+<dt><strong>singular_values_</strong><span class="classifier">ndarray of shape (n_components,)</span></dt><dd><p>The singular values corresponding to each of the selected components.
+The singular values are equal to the 2-norms of the <code class="docutils literal notranslate"><span class="pre">n_components</span></code>
+variables in the lower-dimensional space.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.19.</span></p>
+</div>
+</dd>
+<dt><strong>mean_</strong><span class="classifier">ndarray of shape (n_features,)</span></dt><dd><p>Per-feature empirical mean, estimated from the training set.</p>
+<p>Equal to <cite>X.mean(axis=0)</cite>.</p>
+</dd>
+<dt><strong>n_components_</strong><span class="classifier">int</span></dt><dd><p>The estimated number of components. When n_components is set
+to ‘mle’ or a number between 0 and 1 (with svd_solver == ‘full’) this
+number is estimated from input data. Otherwise it equals the parameter
+n_components, or the lesser value of n_features and n_samples
+if n_components is None.</p>
+</dd>
+<dt><strong>n_samples_</strong><span class="classifier">int</span></dt><dd><p>Number of samples in the training data.</p>
+</dd>
+<dt><strong>noise_variance_</strong><span class="classifier">float</span></dt><dd><p>The estimated noise covariance following the Probabilistic PCA model
+from Tipping and Bishop 1999. See “Pattern Recognition and
+Machine Learning” by C. Bishop, 12.2.1 p. 574 or
+<a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a>. It is required to
+compute the estimated data covariance and score samples.</p>
+<p>Equal to the average of (min(n_features, n_samples) - n_components)
+smallest eigenvalues of the covariance matrix of X.</p>
+</dd>
+<dt><strong>n_features_in_</strong><span class="classifier">int</span></dt><dd><p>Number of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+<dt><strong>feature_names_in_</strong><span class="classifier">ndarray of shape (<cite>n_features_in_</cite>,)</span></dt><dd><p>Names of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>. Defined only when <cite>X</cite>
+has feature names that are all strings.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model and apply dimensionality reduction</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_covariance</span></code>()</p></td>
+<td><p>Compute data covariance with the generative model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_precision</span></code>()</p></td>
+<td><p>Compute data precision matrix with the generative model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(X)</p></td>
+<td><p>Transform data back to its original space.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence)</p></td>
+<td><p>Apply dimensionality reduction to single sequence</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X[, y])</p></td>
+<td><p>Return the average log-likelihood of all samples.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score_samples</span></code>(X)</p></td>
+<td><p>Return the log-likelihood of each sample.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply dimensionality reduction to sequences</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KernelPCA</span></code></dt><dd><p>Kernel Principal Component Analysis.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">SparsePCA</span></code></dt><dd><p>Sparse Principal Component Analysis.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">TruncatedSVD</span></code></dt><dd><p>Dimensionality reduction using truncated SVD.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">IncrementalPCA</span></code></dt><dd><p>Incremental Principal Component Analysis.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<p>For n_components == ‘mle’, this class uses the method from:
+<a class="reference external" href="https://tminka.github.io/papers/pca/minka-pca.pdf">Minka, T. P.. “Automatic choice of dimensionality for PCA”.
+In NIPS, pp. 598-604</a></p>
+<p>Implements the probabilistic PCA model from:
+<a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">Tipping, M. E., and Bishop, C. M. (1999). “Probabilistic principal
+component analysis”. Journal of the Royal Statistical Society:
+Series B (Statistical Methodology), 61(3), 611-622.</a>
+via the score and score_samples methods.</p>
+<p>For svd_solver == ‘arpack’, refer to <cite>scipy.sparse.linalg.svds</cite>.</p>
+<p>For svd_solver == ‘randomized’, see:
+<a class="reference external" href="https://doi.org/10.1137/090771806">Halko, N., Martinsson, P. G., and Tropp, J. A. (2011).
+“Finding structure with randomness: Probabilistic algorithms for
+constructing approximate matrix decompositions”.
+SIAM review, 53(2), 217-288.</a>
+and also
+<a class="reference external" href="https://doi.org/10.1016/j.acha.2010.02.003">Martinsson, P. G., Rokhlin, V., and Tygert, M. (2011).
+“A randomized algorithm for the decomposition of matrices”.
+Applied and Computational Harmonic Analysis, 30(1), 47-68.</a></p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">PCA(n_components=2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span>
+<span class="go">[0.9924... 0.0075...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">singular_values_</span><span class="p">)</span>
+<span class="go">[6.30061... 0.54980...]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">PCA(n_components=2, svd_solver=&#39;full&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span>
+<span class="go">[0.9924... 0.00755...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">singular_values_</span><span class="p">)</span>
+<span class="go">[6.30061... 0.54980...]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;arpack&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">PCA(n_components=1, svd_solver=&#39;arpack&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span>
+<span class="go">[0.99244...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">singular_values_</span><span class="p">)</span>
+<span class="go">[6.30061...]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.decomposition.PCA.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whiten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svd_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterated_power</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_oversamples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power_iteration_normalizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.decomposition.PCA.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.decomposition.PCA.__init__" title="msmbuilder.decomposition.PCA.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([n_components, copy, whiten, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model and apply dimensionality reduction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_covariance</span></code>()</p></td>
+<td><p>Compute data covariance with the generative model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_precision</span></code>()</p></td>
+<td><p>Compute data precision matrix with the generative model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(X)</p></td>
+<td><p>Transform data back to its original space.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence)</p></td>
+<td><p>Apply dimensionality reduction to single sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X[, y])</p></td>
+<td><p>Return the average log-likelihood of all samples.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score_samples</span></code>(X)</p></td>
+<td><p>Return the log-likelihood of each sample.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply dimensionality reduction to sequences</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.decomposition.SparseTICA.html" class="btn btn-neutral float-left" title="msmbuilder.decomposition.SparseTICA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../cluster.html" class="btn btn-neutral float-right" title="Clustering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

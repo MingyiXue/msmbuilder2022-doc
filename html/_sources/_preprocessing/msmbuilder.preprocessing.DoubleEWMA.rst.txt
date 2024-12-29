@@ -1,0 +1,33 @@
+﻿msmbuilder.preprocessing.DoubleEWMA
+===================================
+
+.. currentmodule:: msmbuilder.preprocessing
+
+.. autoclass:: DoubleEWMA
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DoubleEWMA.__init__
+      ~DoubleEWMA.fit
+      ~DoubleEWMA.fit_transform
+      ~DoubleEWMA.get_metadata_routing
+      ~DoubleEWMA.get_params
+      ~DoubleEWMA.partial_fit
+      ~DoubleEWMA.partial_transform
+      ~DoubleEWMA.set_params
+      ~DoubleEWMA.set_partial_fit_request
+      ~DoubleEWMA.set_transform_request
+      ~DoubleEWMA.summarize
+      ~DoubleEWMA.transform
+   
+   
+
+   
+   
+   

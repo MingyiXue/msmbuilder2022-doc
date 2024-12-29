@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.decomposition.SparseTICA &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.decomposition.PCA" href="msmbuilder.decomposition.PCA.html" />
+    <link rel="prev" title="msmbuilder.decomposition.tICA" href="msmbuilder.decomposition.tICA.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../decomposition.html">Decomposition</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#tica">tICA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#pca">PCA</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../decomposition.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.decomposition.tICA.html">msmbuilder.decomposition.tICA</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.decomposition.SparseTICA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.decomposition.SparseTICA"><code class="docutils literal notranslate"><span class="pre">SparseTICA</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.decomposition.PCA.html">msmbuilder.decomposition.PCA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#theory">Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#combination-with-msm">Combination with MSM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../decomposition.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../decomposition.html">Decomposition</a></li>
+      <li class="breadcrumb-item active">msmbuilder.decomposition.SparseTICA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_decomposition/msmbuilder.decomposition.SparseTICA.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-decomposition-sparsetica">
+<h1>msmbuilder.decomposition.SparseTICA<a class="headerlink" href="#msmbuilder-decomposition-sparsetica" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.decomposition.SparseTICA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.decomposition.</span></span><span class="sig-name descname"><span class="pre">SparseTICA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lag_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetic_mapping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrinkage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.decomposition.SparseTICA" title="Link to this definition">¶</a></dt>
+<dd><p>Sparse time-structure Independent Component Analysis (tICA).</p>
+<p>Linear dimensionality reduction which finds sparse linear combinations
+of the input features which decorrelate most slowly. These can be
+used for feature selection and/or dimensionality reduction.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This model is currently  experimental, and may undergo significant
+changes or bug fixes in upcoming releases.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike (dense) tICA, the sparse solver isn’t guaranteed to find
+the best global solution. The eigenvalues (timescales) aren’t
+necessarily going to be found from slowest to fastest. Although
+this class sorts by eigenvalue after running the solver, by
+increasing n_components, you could theoretically find more slow
+processes.</p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n_components</strong><span class="classifier">int</span></dt><dd><p>Number of sparse tICs to find.</p>
+</dd>
+<dt><strong>lag_time</strong><span class="classifier">int</span></dt><dd><p>Delay time forward or backward in the input data. The time-lagged
+correlations is computed between datas X[t] and X[t+lag_time].</p>
+</dd>
+<dt><strong>rho</strong><span class="classifier">positive float</span></dt><dd><p>Regularization strength with controls the sparsity of the solutions.
+Higher values of rho gives more sparse tICS with nonozero loadings on
+fewer degrees of freedom. rho=0 corresponds to standard tICA.</p>
+</dd>
+<dt><strong>shrinkage</strong><span class="classifier">float, default=None</span></dt><dd><p>The covariance shrinkage intensity (range 0-1). If shrinkage is not
+specified (the default) it is estimated using an analytic formula
+(the Rao-Blackwellized Ledoit-Wolf estimator) introduced in [5].</p>
+</dd>
+<dt><strong>kinetic_mapping</strong><span class="classifier">bool, default=False</span></dt><dd><dl class="simple">
+<dt>If True, weigh the projections by the tICA eigenvalues, yielding</dt><dd><p>kinetic distances as described in [4].</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>epsilon</strong><span class="classifier">positive float, default=1e-6</span></dt><dd><p>epsilon should be a number very close to zero, which is used to
+construct the approximation to the L_0 penality function. However,
+when it gets <em>too</em> close to zero, the solvers may report feasibility
+problems due to numerical stability issues. 1e-6 is a fairly good
+balance here.</p>
+</dd>
+<dt><strong>tolerance</strong><span class="classifier">positive float</span></dt><dd><p>Convergence criteria for the sparse generalized eigensolver.</p>
+</dd>
+<dt><strong>maxiter</strong><span class="classifier">int</span></dt><dd><p>Maximum number of iterations for the sparse generalized eigensolver.</p>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">bool, default=False</span></dt><dd><p>Print verbose information from the sparse generalized eigensolver.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>components_</strong><span class="classifier">array-like, shape (n_components, n_features)</span></dt><dd><p>Components with maximum autocorrelation.</p>
+</dd>
+<dt><strong>offset_correlation_</strong><span class="classifier">array-like, shape (n_features, n_features)</span></dt><dd><p>Symmetric time-lagged correlation matrix, <cite>C=E[(x_t)^T x_{t+lag}]</cite>.</p>
+</dd>
+<dt><strong>eigenvalues_</strong><span class="classifier">array-like, shape (n_features,)</span></dt><dd><p>Psuedo-eigenvalues of the tICA generalized eigenproblem, in decreasing
+order.</p>
+</dd>
+<dt><strong>eigenvectors_</strong><span class="classifier">array-like, shape (n_components, n_features)</span></dt><dd><p>Sparse psuedo-eigenvectors of the tICA generalized eigenproblem. The
+vectors give a set of “directions” through configuration space along
+which the system relaxes towards equilibrium.</p>
+</dd>
+<dt><strong>means_</strong><span class="classifier">array, shape (n_features,)</span></dt><dd><p>The mean of the data along each feature</p>
+</dd>
+<dt><strong>n_observations_</strong><span class="classifier">int</span></dt><dd><p>Total number of data points fit by the model. Note that the model
+is “reset” by calling <cite>fit()</cite> with new sequences, whereas
+<cite>partial_fit()</cite> updates the fit with new data, and is suitable for
+online learning.</p>
+</dd>
+<dt><strong>n_sequences_</strong><span class="classifier">int</span></dt><dd><p>Total number of sequences fit by the model. Note that the model
+is “reset” by calling <cite>fit()</cite> with new sequences, whereas
+<cite>partial_fit()</cite> updates the fit with new data, and is suitable for</p>
+<blockquote>
+<div><p>online learning.</p>
+</div></blockquote>
+</dd>
+<dt><strong>timescales_</strong><span class="classifier">array-like, shape (n_components,)</span></dt><dd><p>The implied timescales of the tICA model, given by
+-offset / log(eigenvalues)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model with a collection of sequences.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model with X and apply the dimensionality reduction on X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_fit</span></code>(X)</p></td>
+<td><p>Fit the model with X.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(features)</p></td>
+<td><p>Apply the dimensionality reduction on X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(sequences[, y])</p></td>
+<td><p>Score the model on new data using the generalized matrix Rayleigh quotient</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_score_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">score</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Some summary information.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply the dimensionality reduction on X.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="msmbuilder.decomposition.tICA.html#msmbuilder.decomposition.tICA" title="msmbuilder.decomposition.tICA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">msmbuilder.decomposition.tICA</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="r9e771ac23e89-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>McGibbon, R. T. and V. S. Pande “Identification of sparse, slow
+reaction coordinates from molular dynamics simulations” In preparation.</p>
+</div>
+<div class="citation" id="r9e771ac23e89-2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Sriperumbudur, B. K., D. A. Torres, and G. R. Lanckriet.
+“A majorization-minimization approach to the sparse generalized eigenvalue
+problem.” Machine learning 85.1-2 (2011): 3-39.</p>
+</div>
+<div class="citation" id="r9e771ac23e89-3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<p>Mackey, L. “Deflation Methods for Sparse PCA.” NIPS. Vol. 21. 2008.</p>
+</div>
+<div class="citation" id="r9e771ac23e89-4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<p>Noe, F. and Clementi, C. arXiv arXiv:1506.06259 [physics.comp-ph]
+(2015)</p>
+</div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.decomposition.SparseTICA.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lag_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kinetic_mapping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrinkage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.decomposition.SparseTICA.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.decomposition.SparseTICA.__init__" title="msmbuilder.decomposition.SparseTICA.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([n_components, lag_time, rho, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model with a collection of sequences.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model with X and apply the dimensionality reduction on X.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_fit</span></code>(X)</p></td>
+<td><p>Fit the model with X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(features)</p></td>
+<td><p>Apply the dimensionality reduction on X.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(sequences[, y])</p></td>
+<td><p>Score the model on new data using the generalized matrix Rayleigh quotient</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_score_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">score</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Some summary information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply the dimensionality reduction on X.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">components_</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">covariance_</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigenvalues_</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigenvectors_</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">means_</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">offset_correlation_</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score_</span></code></p></td>
+<td><p>Training score of the model, computed as the generalized matrix, Rayleigh quotient, the sum of the first <cite>n_components</cite> eigenvalues</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">timescales_</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.decomposition.tICA.html" class="btn btn-neutral float-left" title="msmbuilder.decomposition.tICA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.decomposition.PCA.html" class="btn btn-neutral float-right" title="msmbuilder.decomposition.PCA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

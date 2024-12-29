@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.featurizer.RawPositionsFeaturizer &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.featurizer.SuperposeFeaturizer" href="msmbuilder.featurizer.SuperposeFeaturizer.html" />
+    <link rel="prev" title="msmbuilder.featurizer.RMSDFeaturizer" href="msmbuilder.featurizer.RMSDFeaturizer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../featurization.html">Featurization</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../featurization.html#featurizations">Featurizations</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.featurizer.AtomPairsFeaturizer.html">msmbuilder.featurizer.AtomPairsFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.featurizer.ContactFeaturizer.html">msmbuilder.featurizer.ContactFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.featurizer.DRIDFeaturizer.html">msmbuilder.featurizer.DRIDFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.featurizer.DihedralFeaturizer.html">msmbuilder.featurizer.DihedralFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.featurizer.GaussianSolventFeaturizer.html">msmbuilder.featurizer.GaussianSolventFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.featurizer.RMSDFeaturizer.html">msmbuilder.featurizer.RMSDFeaturizer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.featurizer.RawPositionsFeaturizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.featurizer.RawPositionsFeaturizer"><code class="docutils literal notranslate"><span class="pre">RawPositionsFeaturizer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.featurizer.SuperposeFeaturizer.html">msmbuilder.featurizer.SuperposeFeaturizer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../featurization.html#alternative-to-featurization">Alternative to Featurization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../featurization.html">Featurization</a></li>
+      <li class="breadcrumb-item active">msmbuilder.featurizer.RawPositionsFeaturizer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_featurization/msmbuilder.featurizer.RawPositionsFeaturizer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-featurizer-rawpositionsfeaturizer">
+<h1>msmbuilder.featurizer.RawPositionsFeaturizer<a class="headerlink" href="#msmbuilder-featurizer-rawpositionsfeaturizer" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.featurizer.RawPositionsFeaturizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.featurizer.</span></span><span class="sig-name descname"><span class="pre">RawPositionsFeaturizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_traj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.featurizer.RawPositionsFeaturizer" title="Link to this definition">¶</a></dt>
+<dd><p>Featurize an MD trajectory into a vector space with the raw
+cartesian coordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>atom_indices</strong><span class="classifier">None or array-like, dtype=int, shape=(n_atoms)</span></dt><dd><p>If specified, only return the coordinates for the atoms
+given by atom_indices. Otherwise return all atoms</p>
+</dd>
+<dt><strong>ref_traj</strong><span class="classifier">None or md.Trajectory</span></dt><dd><p>If specified, superpose each trajectory to the first frame of
+ref_traj before getting positions. If atom_indices is also
+specified, only superpose based on those atoms. The superposition
+will modify each transformed trajectory <em>in place</em>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">describe_features</span></code>(traj)</p></td>
+<td><p>Generic method for describing features.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(X[, y])</p></td>
+<td><p>Fit to data, then transform it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(traj)</p></td>
+<td><p>Featurize an MD trajectory into a vector space with the raw cartesian coordinates.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, traj_list])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, traj_list])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(traj_list[, y])</p></td>
+<td><p>Featurize a several trajectories.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>featurize</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>fit</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.featurizer.RawPositionsFeaturizer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref_traj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.featurizer.RawPositionsFeaturizer.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.featurizer.RawPositionsFeaturizer.__init__" title="msmbuilder.featurizer.RawPositionsFeaturizer.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([atom_indices, ref_traj])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">describe_features</span></code>(traj)</p></td>
+<td><p>Generic method for describing features.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">featurize</span></code>(traj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(traj_list[, y])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(X[, y])</p></td>
+<td><p>Fit to data, then transform it.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(traj)</p></td>
+<td><p>Featurize an MD trajectory into a vector space with the raw cartesian coordinates.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, traj_list])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, traj_list])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(traj_list[, y])</p></td>
+<td><p>Featurize a several trajectories.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.featurizer.RMSDFeaturizer.html" class="btn btn-neutral float-left" title="msmbuilder.featurizer.RMSDFeaturizer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.featurizer.SuperposeFeaturizer.html" class="btn btn-neutral float-right" title="msmbuilder.featurizer.SuperposeFeaturizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

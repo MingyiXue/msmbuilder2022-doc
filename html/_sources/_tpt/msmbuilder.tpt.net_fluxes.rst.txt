@@ -1,0 +1,6 @@
+﻿msmbuilder.tpt.net\_fluxes
+==========================
+
+.. currentmodule:: msmbuilder.tpt
+
+.. autofunction:: net_fluxes

@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Featurization &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="msmbuilder.featurizer.AtomPairsFeaturizer" href="_featurization/msmbuilder.featurizer.AtomPairsFeaturizer.html" />
+    <link rel="prev" title="Ligand Featurization" href="examples/Ligand-Featurization.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Featurization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#featurizations">Featurizations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_featurization/msmbuilder.featurizer.AtomPairsFeaturizer.html">msmbuilder.featurizer.AtomPairsFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_featurization/msmbuilder.featurizer.ContactFeaturizer.html">msmbuilder.featurizer.ContactFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_featurization/msmbuilder.featurizer.DRIDFeaturizer.html">msmbuilder.featurizer.DRIDFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_featurization/msmbuilder.featurizer.DihedralFeaturizer.html">msmbuilder.featurizer.DihedralFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_featurization/msmbuilder.featurizer.GaussianSolventFeaturizer.html">msmbuilder.featurizer.GaussianSolventFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_featurization/msmbuilder.featurizer.RMSDFeaturizer.html">msmbuilder.featurizer.RMSDFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_featurization/msmbuilder.featurizer.RawPositionsFeaturizer.html">msmbuilder.featurizer.RawPositionsFeaturizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_featurization/msmbuilder.featurizer.SuperposeFeaturizer.html">msmbuilder.featurizer.SuperposeFeaturizer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#alternative-to-featurization">Alternative to Featurization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Featurization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/featurization.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="featurization">
+<span id="id1"></span><h1>Featurization<a class="headerlink" href="#featurization" title="Link to this heading">¶</a></h1>
+<p>Many algorithms require that the input data be vectors in a (euclidean)
+vector space. This includes <a class="reference internal" href="_cluster/msmbuilder.cluster.KMeans.html#msmbuilder.cluster.KMeans" title="msmbuilder.cluster.KMeans"><code class="xref py py-class docutils literal notranslate"><span class="pre">KMeans</span></code></a> clustering,
+<a class="reference internal" href="_decomposition/msmbuilder.decomposition.tICA.html#msmbuilder.decomposition.tICA" title="msmbuilder.decomposition.tICA"><code class="xref py py-class docutils literal notranslate"><span class="pre">tICA</span></code></a>, and others.</p>
+<p>Since there’s usually no special rotational or translational reference
+frame in an MD simulation, it’s often desirable to remove rotational and
+translational motion via featurization that is insensitive to rotations and
+translations.</p>
+<section id="featurizations">
+<h2>Featurizations<a class="headerlink" href="#featurizations" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_featurization/msmbuilder.featurizer.AtomPairsFeaturizer.html#msmbuilder.featurizer.AtomPairsFeaturizer" title="msmbuilder.featurizer.AtomPairsFeaturizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AtomPairsFeaturizer</span></code></a>(pair_indices[, ...])</p></td>
+<td><p>Featurizer based on distances between specified pairs of atoms.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_featurization/msmbuilder.featurizer.ContactFeaturizer.html#msmbuilder.featurizer.ContactFeaturizer" title="msmbuilder.featurizer.ContactFeaturizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ContactFeaturizer</span></code></a>([contacts, scheme, ...])</p></td>
+<td><p>Featurizer based on residue-residue distances.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_featurization/msmbuilder.featurizer.DRIDFeaturizer.html#msmbuilder.featurizer.DRIDFeaturizer" title="msmbuilder.featurizer.DRIDFeaturizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DRIDFeaturizer</span></code></a>([atom_indices])</p></td>
+<td><p>Featurizer based on distribution of reciprocal interatomic distances (DRID)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_featurization/msmbuilder.featurizer.DihedralFeaturizer.html#msmbuilder.featurizer.DihedralFeaturizer" title="msmbuilder.featurizer.DihedralFeaturizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DihedralFeaturizer</span></code></a>([types, sincos])</p></td>
+<td><p>Featurizer based on dihedral angles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_featurization/msmbuilder.featurizer.GaussianSolventFeaturizer.html#msmbuilder.featurizer.GaussianSolventFeaturizer" title="msmbuilder.featurizer.GaussianSolventFeaturizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GaussianSolventFeaturizer</span></code></a>(solute_indices, ...)</p></td>
+<td><p>Featurizer on weighted pairwise distance between solute and solvent.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_featurization/msmbuilder.featurizer.RMSDFeaturizer.html#msmbuilder.featurizer.RMSDFeaturizer" title="msmbuilder.featurizer.RMSDFeaturizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMSDFeaturizer</span></code></a>([reference_traj, ...])</p></td>
+<td><p>Featurizer based on RMSD to one or more reference structures.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_featurization/msmbuilder.featurizer.RawPositionsFeaturizer.html#msmbuilder.featurizer.RawPositionsFeaturizer" title="msmbuilder.featurizer.RawPositionsFeaturizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RawPositionsFeaturizer</span></code></a>([atom_indices, ref_traj])</p></td>
+<td><p>Featurize an MD trajectory into a vector space with the raw cartesian coordinates</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_featurization/msmbuilder.featurizer.SuperposeFeaturizer.html#msmbuilder.featurizer.SuperposeFeaturizer" title="msmbuilder.featurizer.SuperposeFeaturizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SuperposeFeaturizer</span></code></a>(atom_indices, reference_traj)</p></td>
+<td><p>Featurizer based on euclidian atom distances to reference structure.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="alternative-to-featurization">
+<h2>Alternative to Featurization<a class="headerlink" href="#alternative-to-featurization" title="Link to this heading">¶</a></h2>
+<p>Many algorithms require vectorizable data. Other algorithms only require a
+pairwise distance metric, e.g. RMSD between two protein conformations. In
+general, you can define a pairwise distance among vectorized data, but you
+cannot embed data into a vector space only from pairwise distance.</p>
+<p>Some <a class="reference internal" href="cluster.html#cluster"><span class="std std-ref">clustering</span></a> methods let you use an arbitrary distance
+metric, including RMSD. In this case, the input to <code class="docutils literal notranslate"><span class="pre">fit()</span></code> may be a list
+of MD trajectories instead of a list of numpy arrays. Clustering methods
+that allow this currently include <a class="reference internal" href="_cluster/msmbuilder.cluster.KCenters.html#msmbuilder.cluster.KCenters" title="msmbuilder.cluster.KCenters"><code class="xref py py-class docutils literal notranslate"><span class="pre">KCenters</span></code></a> and
+<a class="reference internal" href="_cluster/msmbuilder.cluster.KMedoids.html#msmbuilder.cluster.KMedoids" title="msmbuilder.cluster.KMedoids"><code class="xref py py-class docutils literal notranslate"><span class="pre">KMedoids</span></code></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examples/Ligand-Featurization.html" class="btn btn-neutral float-left" title="Ligand Featurization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_featurization/msmbuilder.featurizer.AtomPairsFeaturizer.html" class="btn btn-neutral float-right" title="msmbuilder.featurizer.AtomPairsFeaturizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

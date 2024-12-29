@@ -1,0 +1,33 @@
+﻿msmbuilder.preprocessing.Butterworth
+====================================
+
+.. currentmodule:: msmbuilder.preprocessing
+
+.. autoclass:: Butterworth
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Butterworth.__init__
+      ~Butterworth.fit
+      ~Butterworth.fit_transform
+      ~Butterworth.get_metadata_routing
+      ~Butterworth.get_params
+      ~Butterworth.partial_fit
+      ~Butterworth.partial_transform
+      ~Butterworth.set_params
+      ~Butterworth.set_partial_fit_request
+      ~Butterworth.set_transform_request
+      ~Butterworth.summarize
+      ~Butterworth.transform
+   
+   
+
+   
+   
+   

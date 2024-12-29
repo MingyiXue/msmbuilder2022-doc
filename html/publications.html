@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publications &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="Changelog" href="changelog.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Publications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#accurate-estimation-of-protein-folding-and-unfolding-times-beyond-markov-state-models">Accurate Estimation of Protein Folding and Unfolding Times: Beyond Markov State Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stochastic-steps-in-secondary-active-sugar-transport">Stochastic steps in secondary active sugar transport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conformational-heterogeneity-of-the-calmodulin-binding-interface">Conformational heterogeneity of the calmodulin binding interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optimized-parameter-selection-reveals-trends-in-markov-state-models-for-protein-folding">Optimized parameter selection reveals trends in Markov state models for protein folding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conserve-water-a-method-for-the-analysis-of-solvent-in-molecular-dynamics">Conserve Water: A Method for the Analysis of Solvent in Molecular Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cloud-based-simulations-on-google-exacycle-reveal-ligand-modulation-of-gpcr-activation-pathways">Cloud-based simulations on Google Exacycle reveal ligand modulation of GPCR activation pathways</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#equilibrium-thermodynamics-and-folding-kinetics-of-a-short-fast-folding-beta-hairpin">Equilibrium thermodynamics and folding kinetics of a short, fast-folding, beta-hairpin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#structure-guided-simulations-illuminate-the-mechanism-of-atp-transport-through-vdac1">Structure-guided simulations illuminate the mechanism of ATP transport through VDAC1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#native-states-of-fast-folding-proteins-are-kinetic-traps">Native States of Fast-Folding Proteins Are Kinetic Traps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hierarchical-nystrom-methods-for-constructing-markov-state-models-for-conformational-dynamics">Hierarchical Nyström methods for constructing Markov state models for conformational dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quantitative-comparison-of-alternative-methods-for-coarse-graining-biological-networks">Quantitative comparison of alternative methods for coarse-graining biological networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learning-kinetic-distance-metrics-for-markov-state-models-of-protein-conformational-dynamics">Learning Kinetic Distance Metrics for Markov State Models of Protein Conformational Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#persistent-topology-and-metastable-state-in-conformational-dynamics">Persistent Topology and Metastable State in Conformational Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#atomistic-simulations-of-wimleywhite-pentapeptides-sampling-of-structure-and-dynamics-in-solution">Atomistic Simulations of Wimley–White Pentapeptides: Sampling of Structure and Dynamics in Solution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simple-few-state-models-reveal-hidden-complexity-in-protein-folding">Simple few-state models reveal hidden complexity in protein folding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#investigating-how-peptide-length-and-a-pathogenic-mutation-modify-the-structural-ensemble-of-amyloid-beta-monomer">Investigating How Peptide Length and a Pathogenic Mutation Modify the Structural Ensemble of Amyloid Beta Monomer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#equilibrium-fluctuations-of-a-single-folded-protein-reveal-a-multitude-of-potential-cryptic-allosteric-sites">Equilibrium fluctuations of a single folded protein reveal a multitude of potential cryptic allosteric sites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#improved-coarse-graining-of-markov-state-models-via-explicit-consideration-of-statistical-uncertainty">Improved coarse-graining of Markov state models via explicit consideration of statistical uncertainty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quantifying-hub-like-behavior-in-protein-folding-networks">Quantifying Hub-like Behavior in Protein Folding Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#markov-state-model-reveals-folding-and-functional-dynamics-in-ultra-long-md-trajectories">Markov State Model Reveals Folding and Functional Dynamics in Ultra-Long MD Trajectories</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Publications</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/publications.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="publications">
+<span id="id1"></span><h1>Publications<a class="headerlink" href="#publications" title="Link to this heading">¶</a></h1>
+<p>The following published works use MSMBuilder. To add your publication
+to the list, open an issue on GitHub with the relevant information or
+edit <code class="docutils literal notranslate"><span class="pre">docs/publications.bib</span></code> and submit a pull request.</p>
+<section id="accurate-estimation-of-protein-folding-and-unfolding-times-beyond-markov-state-models">
+<h2>Accurate Estimation of Protein Folding and Unfolding Times: Beyond Markov State Models<a class="headerlink" href="#accurate-estimation-of-protein-folding-and-unfolding-times-beyond-markov-state-models" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Ernesto Suárez; Joshua L. Adelman; Daniel M. Zuckerman</p></li>
+<li><p><em>J. Chem. Theory Comput.</em> <strong>2016</strong>,</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1021/acs.jctc.6b00339">doi: 10.1021/acs.jctc.6b00339</a></p></li>
+</ul>
+</div></blockquote>
+<p>Because standard molecular dynamics (MD) simulations are unable to access time
+scales of interest in complex biomolecular systems, it is common to “stitch
+together” information from multiple shorter trajectories using approximate
+Markov state model (MSM) analysis. However, MSMs may require significant tuning
+and can yield biased results. Here, by analyzing some of the longest protein MD
+data sets available (&gt;100 μs per protein), we show that estimators constructed
+based on exact non-Markovian (NM) principles can yield significantly improved
+mean first-passage times (MFPTs) for protein folding and unfolding. In some
+cases, MSM bias of more than an order of magnitude can be corrected when
+identical trajectory data are reanalyzed by non-Markovian approaches. The NM
+analysis includes “history” information, higher order time correlations
+compared to MSMs, that is available in every MD trajectory. The NM strategy is
+insensitive to fine details of the states used and works well when a fine time-
+discretization (i.e., small “lag time”) is used.</p>
+</section>
+<section id="stochastic-steps-in-secondary-active-sugar-transport">
+<h2>Stochastic steps in secondary active sugar transport<a class="headerlink" href="#stochastic-steps-in-secondary-active-sugar-transport" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Adelman, Joshua L.; Ghezzi, Chiara; Bisignano, Paola; Loo, Donald D. F.; Choe, Seungho; Abramson, Jeff; Rosenberg, John M.; Wright, Ernest M.; Grabe, Michael</p></li>
+<li><p><em>Proc. Natl. Acad. Sci. USA</em> <strong>2016</strong>, 113 E3960–E3966</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1073/pnas.1525378113">doi: 10.1073/pnas.1525378113</a></p></li>
+</ul>
+</div></blockquote>
+<p>Secondary active transporters, such as those that adopt the leucine-transporter
+fold, are found in all domains of life, and they have the unique capability of
+harnessing the energy stored in ion gradients to accumulate small molecules
+essential for life as well as expel toxic and harmful compounds. How these
+proteins couple ion binding and transport to the concomitant flow of substrates
+is a fundamental structural and biophysical question that is beginning to be
+answered at the atomistic level with the advent of high-resolution structures
+of transporters in different structural states. Nonetheless, the dynamic
+character of the transporters, such as ion/substrate binding order and how
+binding triggers conformational change, is not revealed from static structures,
+yet it is critical to understanding their function. Here, we report a series of
+molecular simulations carried out on the sugar transporter vSGLT that lend
+insight into how substrate and ions are released from the inward-facing state
+of the transporter. Our simulations reveal that the order of release is
+stochastic. Functional experiments were designed to test this prediction on the
+human homolog, hSGLT1, and we also found that cytoplasmic release is not
+ordered, but we confirmed that substrate and ion binding from the extracellular
+space is ordered. Our findings unify conflicting published results concerning
+cytoplasmic release of ions and substrate and hint at the possibility that
+other transporters in the superfamily may lack coordination between ions and
+substrate in the inward-facing state.</p>
+</section>
+<section id="conformational-heterogeneity-of-the-calmodulin-binding-interface">
+<h2>Conformational heterogeneity of the calmodulin binding interface<a class="headerlink" href="#conformational-heterogeneity-of-the-calmodulin-binding-interface" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Diwakar Shukla; Ariana Peck; Vijay S. Pande</p></li>
+<li><p><em>Nature Communications</em> <strong>2016</strong>, 7 10910</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1038/ncomms10910">doi: 10.1038/ncomms10910</a></p></li>
+</ul>
+</div></blockquote>
+<p>Calmodulin (CaM) is a ubiquitous Ca2+ sensor and a crucial signalling hub in
+many pathways aberrantly activated in disease. However, the mechanistic basis
+of its ability to bind diverse signalling molecules including G-protein-coupled
+receptors, ion channels and kinases remains poorly understood. Here we harness
+the high resolution of molecular dynamics simulations and the analytical power
+of Markov state models to dissect the molecular underpinnings of CaM binding
+diversity. Our computational model indicates that in the absence of Ca2+, sub-
+states in the folded ensemble of CaM’s C-terminal domain present chemically and
+sterically distinct topologies that may facilitate conformational selection.
+Furthermore, we find that local unfolding is off-pathway for the exchange
+process relevant for peptide binding, in contrast to prior hypotheses that
+unfolding might account for binding diversity. Finally, our model predicts a
+novel binding interface that is well-populated in the Ca2+-bound regime and,
+thus, a candidate for pharmacological intervention.</p>
+</section>
+<section id="optimized-parameter-selection-reveals-trends-in-markov-state-models-for-protein-folding">
+<h2>Optimized parameter selection reveals trends in Markov state models for protein folding<a class="headerlink" href="#optimized-parameter-selection-reveals-trends-in-markov-state-models-for-protein-folding" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Brooke E. Husic; Robert T. McGibbon; Mohammad M. Sultan; Vijay S. Pande</p></li>
+<li><p><em>J. Chem. Phys.</em> <strong>2016</strong>, 145 194103</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1063/1.4967809">doi: 10.1063/1.4967809</a></p></li>
+</ul>
+<p>As molecular dynamics simulations access increasingly longer time scales,</p>
+</div></blockquote>
+<p>complementary advances in the analysis of biomolecular time-series data are
+necessary. Markov state models offer a powerful framework for this analysis by
+describing a system’s states and the transitions between them. A recently
+established variational theorem for Markov state models now enables modelers to
+systematically determine the best way to describe a system’s dynamics. In the
+context of the variational theorem, we analyze ultra-long folding simulations
+for a canonical set of twelve proteins [K. Lindorff-Larsen et al., Science 334,
+517 (2011)] by creating and evaluating many types of Markov state models. We
+present a set of guidelines for constructing Markov state models of protein
+folding; namely, we recommend the use of cross-validation and a kinetically
+motivated dimensionality reduction step for improved descriptions of folding
+dynamics. We also warn that precise kinetics predictions rely on the features
+chosen to describe the system and pose the description of kinetic uncertainty
+across ensembles of models as an open issue.</p>
+</section>
+<section id="conserve-water-a-method-for-the-analysis-of-solvent-in-molecular-dynamics">
+<h2>Conserve Water: A Method for the Analysis of Solvent in Molecular Dynamics<a class="headerlink" href="#conserve-water-a-method-for-the-analysis-of-solvent-in-molecular-dynamics" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Matthew P. Harrigan; Diwakar Shukla; Vijay S. Pande</p></li>
+<li><p><em>J. Chem. Theory Comput.</em> <strong>2015</strong>, 11 1094–1101</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1021/ct5010017">doi: 10.1021/ct5010017</a></p></li>
+</ul>
+</div></blockquote>
+<p>Molecular dynamics with explicit solvent is favored for its ability to more
+correctly simulate aqueous biological processes and has become routine thanks
+to increasingly powerful computational resources. However, analysis techniques
+including Markov state models (MSMs) ignore solvent atoms and focus solely on
+solute coordinates despite solvent being implicated in myriad biological
+phenomena. We present a unified framework called “solvent-shells featurization”
+for including solvent degrees of freedom in analysis and show that this method
+produces better models. We apply this method to simulations of dewetting in the
+two-domain protein BphC to generate a predictive MSM and identify functional
+water molecules. Furthermore, the proposed methodology could be easily extended
+for building MSMs of any systems with indistinguishable components.</p>
+</section>
+<section id="cloud-based-simulations-on-google-exacycle-reveal-ligand-modulation-of-gpcr-activation-pathways">
+<h2>Cloud-based simulations on Google Exacycle reveal ligand modulation of GPCR activation pathways<a class="headerlink" href="#cloud-based-simulations-on-google-exacycle-reveal-ligand-modulation-of-gpcr-activation-pathways" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Kai Kohlhoff; Diwakar Shukla; Morgan Lawrenz; Gregory Bowman; David Konerding; Dan Belov; Russ Altman; Vijay Pande</p></li>
+<li><p><em>Nat. Chem.</em> <strong>2014</strong>, 6 15–21</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1038/nchem.1821">doi: 10.1038/nchem.1821</a></p></li>
+</ul>
+</div></blockquote>
+<p>Simulations can provide tremendous insight into the atomistic details of
+biological mechanisms, but micro- to millisecond timescales are historically
+only accessible on dedicated supercomputers. We demonstrate that cloud
+computing is a viable alternative that brings long-timescale processes within
+reach of a broader community. We used Google’s Exacycle cloud-computing
+platform to simulate two milliseconds of dynamics of a major drug target, the
+G-protein-coupled receptor β2AR. Markov state models aggregate independent
+simulations into a single statistical model that is validated by previous
+computational and experimental results. Moreover, our models provide an
+atomistic description of the activation of a G-protein-coupled receptor and
+reveal multiple activation pathways. Agonists and inverse agonists interact
+differentially with these pathways, with profound implications for drug design.</p>
+</section>
+<section id="equilibrium-thermodynamics-and-folding-kinetics-of-a-short-fast-folding-beta-hairpin">
+<h2>Equilibrium thermodynamics and folding kinetics of a short, fast-folding, beta-hairpin<a class="headerlink" href="#equilibrium-thermodynamics-and-folding-kinetics-of-a-short-fast-folding-beta-hairpin" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Jimenez-Cruz, Camilo A.; Garcia, Angel E.</p></li>
+<li><p><em>Phys. Chem. Chem. Phys.</em> <strong>2014</strong>,</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1039/C3CP54336F">doi: 10.1039/C3CP54336F</a></p></li>
+</ul>
+</div></blockquote>
+<p>Equilibrium thermodynamics of a short beta-hairpin are studied using unbiased
+all-atom replica exchange molecular dynamics simulations in explicit solvent.
+An exploratory analysis of the free energy landscape of the system is provided
+in terms of various structural characteristics, for both the folded and
+unfolded ensembles. We find that the favorable interactions between the ends
+introduced by the tryptophan cap, along with the flexibility of the turn
+region, explain the remarkable stability of the folded state. Charging of the N
+termini results in effective roughening of the free energy landscape and
+stabilization of non-native contacts. Folding-unfolding dynamics are further
+discussed using a set of 2413 independent molecular dynamics simulations, 2 ns
+to 20 ns long, at the melting temperature of the beta-hairpin. A novel method
+for the construction of Markov models consisting of an iterative refinement of
+the discretization in reduced dimensionality is presented and used to generate
+a detailed kinetic network of the system. The hairpin is found to fold
+heterogeneously on sub-microsecond timescales, with the relative position of
+the tryptophan side chains driving the selection of the specific pathway.</p>
+</section>
+<section id="structure-guided-simulations-illuminate-the-mechanism-of-atp-transport-through-vdac1">
+<h2>Structure-guided simulations illuminate the mechanism of ATP transport through VDAC1<a class="headerlink" href="#structure-guided-simulations-illuminate-the-mechanism-of-atp-transport-through-vdac1" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Om P Choudhary; Aviv Paz; Joshua L Adelman; Jacques-Philippe Colletier; Jeff Abramson; Michael Grabe</p></li>
+<li><p><em>Nat. Struct. Mol. Biol.</em> <strong>2014</strong>, 21 626–632</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1038/nsmb.2841">doi: 10.1038/nsmb.2841</a></p></li>
+</ul>
+</div></blockquote>
+<p>The voltage-dependent anion channel (VDAC) mediates the flow of metabolites and
+ions across the outer mitochondrial membrane of all eukaryotic cells. The open
+channel passes millions of ATP molecules per second, whereas the closed state
+exhibits no detectable ATP flux. High-resolution structures of VDAC1 revealed a
+19-stranded β-barrel with an α-helix partially occupying the central pore. To
+understand ATP permeation through VDAC, we solved the crystal structure of
+mouse VDAC1 (mVDAC1) in the presence of ATP, revealing a low-affinity binding
+site. Guided by these coordinates, we initiated hundreds of molecular dynamics
+simulations to construct a Markov state model of ATP permeation. These
+simulations indicate that ATP flows through VDAC through multiple pathways, in
+agreement with our structural data and experimentally determined physiological
+rates.</p>
+</section>
+<section id="native-states-of-fast-folding-proteins-are-kinetic-traps">
+<h2>Native States of Fast-Folding Proteins Are Kinetic Traps<a class="headerlink" href="#native-states-of-fast-folding-proteins-are-kinetic-traps" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Dickson, Alex; Brooks, Charles L.</p></li>
+<li><p><em>J. Am. Chem. Soc.</em> <strong>2013</strong>, 135 4729–4734</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1021/ja311077u">doi: 10.1021/ja311077u</a></p></li>
+</ul>
+</div></blockquote>
+<p>It has been suggested that the native state of a protein acts as a kinetic hub
+that can facilitate transitions between nonnative states. Using recently
+developed tools to quantify mediation probabilities (“hub scores”), we quantify
+hub-like behavior in atomic resolution trajectories for the first time. We use
+a data set of trajectory ensembles for 12 fast-folding proteins previously
+published by D. E. Shaw Research (Lindorff-Larsen, K.; et al. How Fast-Folding
+Proteins Fold. Science2011, 334, 517) with an aggregate simulation time of over
+8.2 ms. We visualize the free-energy landscape of each molecule using
+configuration space networks, and show that dynamic quantities can be
+qualitatively understood from visual inspection of the networks. Modularity
+optimization is used to provide a parameter-free means of tessellating the
+network into a group of communities. Using hub scores, we find that the
+percentage of trajectories that are mediated by the native state is 31% when
+averaged over all molecules, and reaches a maximum of 52% for the homeodomain
+and chignolin. Furthermore, for these mediated transitions, we use Markov
+models to determine whether the native state acts as a facilitator for the
+transition, or as a trap (i.e., an off-pathway detour). Although instances of
+facilitation are found in 4 of the 12 molecules, we conclude that the native
+state acts primarily as a trap, which is consistent with the idea of a funnel-
+like landscape.</p>
+</section>
+<section id="hierarchical-nystrom-methods-for-constructing-markov-state-models-for-conformational-dynamics">
+<h2>Hierarchical Nyström methods for constructing Markov state models for conformational dynamics<a class="headerlink" href="#hierarchical-nystrom-methods-for-constructing-markov-state-models-for-conformational-dynamics" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Yao, Yuan; Cui, Raymond Z.; Bowman, Gregory R.; Silva, Daniel-Adriano; Sun, Jian; Huang, Xuhui</p></li>
+<li><p><em>J. Chem. Phys.</em> <strong>2013</strong>, 138</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1063/1.4802007">doi: 10.1063/1.4802007</a></p></li>
+</ul>
+</div></blockquote>
+<p>Markov state models (MSMs) have become a popular approach for investigating the
+conformational dynamics of proteins and other biomolecules. MSMs are typically
+built from numerous molecular dynamics simulations by dividing the sampled
+configurations into a large number of microstates based on geometric criteria.
+The resulting microstate model can then be coarse-grained into a more
+understandable macrostate model by lumping together rapidly mixing microstates
+into larger, metastable aggregates. However, finite sampling often results in
+the creation of many poorly sampled microstates. During coarse-graining, these
+states are mistakenly identified as being kinetically important because
+transitions to/from them appear to be slow. In this paper, we propose a
+formalism based on an algebraic principle for matrix approximation, i.e., the
+Nyström method, to deal with such poorly sampled microstates. Our scheme builds
+a hierarchy of microstates from high to low populations and progressively
+applies spectral clustering on sets of microstates within each level of the
+hierarchy. It helps spectral clustering identify metastable aggregates with
+highly populated microstates rather than being distracted by lowly populated
+states. We demonstrate the ability of this algorithm to discover the major
+metastable states on two model systems, the alanine dipeptide and trpzip2
+peptide.</p>
+</section>
+<section id="quantitative-comparison-of-alternative-methods-for-coarse-graining-biological-networks">
+<h2>Quantitative comparison of alternative methods for coarse-graining biological networks<a class="headerlink" href="#quantitative-comparison-of-alternative-methods-for-coarse-graining-biological-networks" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Bowman, Gregory R.; Meng, Luming; Huang, Xuhui</p></li>
+<li><p><em>J. Chem. Phys.</em> <strong>2013</strong>, 139</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1063/1.4812768">doi: 10.1063/1.4812768</a></p></li>
+</ul>
+</div></blockquote>
+<p>Markov models and master equations are a powerful means of modeling dynamic
+processes like protein conformational changes. However, these models are often
+difficult to understand because of the enormous number of components and
+connections between them. Therefore, a variety of methods have been developed
+to facilitate understanding by coarse-graining these complex models. Here, we
+employ Bayesian model comparison to determine which of these coarse-graining
+methods provides the models that are most faithful to the original set of
+states. We find that the Bayesian agglomerative clustering engine and the
+hierarchical Nyström expansion graph (HNEG) typically provide the best
+performance. Surprisingly, the original Perron cluster cluster analysis (PCCA)
+method often provides the next best results, outperforming the newer PCCA+
+method and the most probable paths algorithm. We also show that the differences
+between the models are qualitatively significant, rather than being minor
+shifts in the boundaries between states. The performance of the methods
+correlates well with the entropy of the resulting coarse-grainings, suggesting
+that finding states with more similar populations (i.e., avoiding low
+population states that may just be noise) gives better results.</p>
+</section>
+<section id="learning-kinetic-distance-metrics-for-markov-state-models-of-protein-conformational-dynamics">
+<h2>Learning Kinetic Distance Metrics for Markov State Models of Protein Conformational Dynamics<a class="headerlink" href="#learning-kinetic-distance-metrics-for-markov-state-models-of-protein-conformational-dynamics" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>McGibbon, Robert T.; Pande, Vijay S.</p></li>
+<li><p><em>J. Chem. Theory Comput.</em> <strong>2013</strong>, 9 2900–2906</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1021/ct400132h">doi: 10.1021/ct400132h</a></p></li>
+</ul>
+</div></blockquote>
+<p>Statistical modeling of long timescale dynamics with Markov state models (MSMs)
+has been shown to be an effective strategy for building quantitative and
+qualitative insight into protein folding processes. Existing methodologies,
+however, rely on geometric clustering using distance metrics such as root mean
+square deviation (RMSD), assuming that geometric similarity provides an
+adequate basis for the kinetic partitioning of phase space. Here, inspired by
+advances in the machine learning community, we introduce a new approach for
+learning a distance metric explicitly constructed to model kinetic similarity.
+This approach enables the construction of models, especially in the regime of
+high anisotropy in the diffusion constant, with fewer states than was
+previously possible. Application of this technique to the analysis of two
+ultralong molecular dynamics simulations of the FiP35 WW domain identifies
+discrete near-native relaxation dynamics in the millisecond regime that were
+not resolved in previous analyses.</p>
+</section>
+<section id="persistent-topology-and-metastable-state-in-conformational-dynamics">
+<h2>Persistent Topology and Metastable State in Conformational Dynamics<a class="headerlink" href="#persistent-topology-and-metastable-state-in-conformational-dynamics" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Chang, Huang-Wei; Bacallado, Sergio; Pande, Vijay S.; Carlsson, Gunnar E.</p></li>
+<li><p><em>PLoS ONE</em> <strong>2013</strong>, 8 e58699</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1371/journal.pone.0058699">doi: 10.1371/journal.pone.0058699</a></p></li>
+</ul>
+</div></blockquote>
+<p>The large amount of molecular dynamics simulation data produced by modern
+computational models brings big opportunities and challenges to researchers.
+Clustering algorithms play an important role in understanding biomolecular
+kinetics from the simulation data, especially under the Markov state model
+framework. However, the ruggedness of the free energy landscape in a
+biomolecular system makes common clustering algorithms very sensitive to
+perturbations of the data. Here, we introduce a data-exploratory tool which
+provides an overview of the clustering structure under different parameters.
+The proposed Multi-Persistent Clustering analysis combines insights from recent
+studies on the dynamics of systems with dominant metastable states with the
+concept of multi-dimensional persistence in computational topology. We propose
+to explore the clustering structure of the data based on its persistence on
+scale and density. The analysis provides a systematic way to discover clusters
+that are robust to perturbations of the data. The dominant states of the system
+can be chosen with confidence. For the clusters on the borderline, the user can
+choose to do more simulation or make a decision based on their structural
+characteristics. Furthermore, our multi-resolution analysis gives users
+information about the relative potential of the clusters and their hierarchical
+relationship. The effectiveness of the proposed method is illustrated in three
+biomolecules: alanine dipeptide, Villin headpiece, and the FiP35 WW domain.</p>
+</section>
+<section id="atomistic-simulations-of-wimleywhite-pentapeptides-sampling-of-structure-and-dynamics-in-solution">
+<h2>Atomistic Simulations of Wimley–White Pentapeptides: Sampling of Structure and Dynamics in Solution<a class="headerlink" href="#atomistic-simulations-of-wimleywhite-pentapeptides-sampling-of-structure-and-dynamics-in-solution" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Singh, Gurpreet; Tieleman, D. Peter</p></li>
+<li><p><em>J. Chem. Theory Comput.</em> <strong>2013</strong>, 9 1657–1666</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1021/ct3008217">doi: 10.1021/ct3008217</a></p></li>
+</ul>
+</div></blockquote>
+<p>Wimley–White pentapeptides (Ac-WLXLL) can be used as a model system to study
+lipid–protein interactions as they bind to lipid/water interfaces, like many
+antimicrobial peptides, and thermodynamic experimental data on their
+interactions with lipids are available, making them useful for both force field
+and method testing and development. Here we present a detailed simulation study
+of Wimley–White (WW) peptides in bulk water to investigate sampling,
+conformations, and differences due to the different X residue with an eye to
+future simulations at the lipid/water interface where sampling problems so far
+have hindered free energy calculations to reproduce the experimental
+thermodynamic data. We investigate the conformational preferences and slowest
+relaxation time of WW peptides in bulk water by building Markov State Models
+(MSM) from Molecular Dynamics (MD) simulation data. We show that clustering
+based on binning of backbone $phi$, $psi$ dihedrals in combination with the
+community detection algorithm of Blondel et al. provides a quick way of
+building MSM from large data sets. Our results show that in some cases, implied
+times even in these small peptides range from 224 to 547 ns. The implications
+of these slow transitions on determining the potential of mean force profiles
+of peptide interactions with a lipid bilayer are discussed.</p>
+</section>
+<section id="simple-few-state-models-reveal-hidden-complexity-in-protein-folding">
+<h2>Simple few-state models reveal hidden complexity in protein folding<a class="headerlink" href="#simple-few-state-models-reveal-hidden-complexity-in-protein-folding" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Beauchamp, Kyle A.; McGibbon, Robert; Lin, Yu-Shan; Pande, Vijay S.</p></li>
+<li><p><em>Proc. Natl. Acad. Sci. U.S.A.</em> <strong>2012</strong>, 109 17807–17813</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1073/pnas.1201810109">doi: 10.1073/pnas.1201810109</a></p></li>
+</ul>
+</div></blockquote>
+<p>Markov state models constructed from molecular dynamics simulations have
+recently shown success at modeling protein folding kinetics. Here we introduce
+two methods, flux PCCA+ (FPCCA+) and sliding constraint rate estimation (SCRE),
+that allow accurate rate models from protein folding simulations. We apply
+these techniques to fourteen massive simulation datasets generated by Anton and
+<a class="reference external" href="mailto:Folding&#37;&#52;&#48;home">Folding<span>&#64;</span>home</a>. Our protocol quantitatively identifies the suitability of
+describing each system using two-state kinetics and predicts experimentally
+detectable deviations from two-state behavior. An analysis of the villin
+headpiece and FiP35 WW domain detects multiple native substates that are
+consistent with experimental data. Applying the same protocol to GTT, NTL9, and
+protein G suggests that some beta containing proteins can form long-lived
+native-like states with small register shifts. Even the simplest protein
+systems show folding and functional dynamics involving three or more states.</p>
+</section>
+<section id="investigating-how-peptide-length-and-a-pathogenic-mutation-modify-the-structural-ensemble-of-amyloid-beta-monomer">
+<h2>Investigating How Peptide Length and a Pathogenic Mutation Modify the Structural Ensemble of Amyloid Beta Monomer<a class="headerlink" href="#investigating-how-peptide-length-and-a-pathogenic-mutation-modify-the-structural-ensemble-of-amyloid-beta-monomer" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Yu-Shan Lin; Gregory R. Bowman; Kyle A. Beauchamp; Vijay S. Pande</p></li>
+<li><p><em>Biophys. J.</em> <strong>2012</strong>, 102 315–324</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1016/j.bpj.2011.12.002">doi: 10.1016/j.bpj.2011.12.002</a></p></li>
+</ul>
+</div></blockquote>
+<p>The aggregation of amyloid beta (Aβ) peptides plays an important role in the
+development of Alzheimer’s disease. Despite extensive effort, it has been
+difficult to characterize the secondary and tertiary structure of the Aβ
+monomer, the starting point for aggregation, due to its hydrophobicity and high
+aggregation propensity. Here, we employ extensive molecular dynamics
+simulations with atomistic protein and water models to determine structural
+ensembles for Aβ42, Aβ40, and Aβ42-E22K (the Italian mutant) monomers in
+solution. Sampling of a total of &gt;700 microseconds in all-atom detail with
+explicit solvent enables us to observe the effects of peptide length and a
+pathogenic mutation on the disordered Aβ monomer structural ensemble. Aβ42 and
+Aβ40 have crudely similar characteristics but reducing the peptide length from
+42 to 40 residues reduces β-hairpin formation near the C-terminus. The
+pathogenic Italian E22K mutation induces helix formation in the region of
+residues 20–24. This structural alteration may increase helix-helix
+interactions between monomers, resulting in altered mechanism and kinetics of
+Aβ oligomerization.</p>
+</section>
+<section id="equilibrium-fluctuations-of-a-single-folded-protein-reveal-a-multitude-of-potential-cryptic-allosteric-sites">
+<h2>Equilibrium fluctuations of a single folded protein reveal a multitude of potential cryptic allosteric sites<a class="headerlink" href="#equilibrium-fluctuations-of-a-single-folded-protein-reveal-a-multitude-of-potential-cryptic-allosteric-sites" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Bowman, Gregory R.; Geissler, Phillip L.</p></li>
+<li><p><em>Proc. Natl. Acad. Sci. U.S.A.</em> <strong>2012</strong>, 109 11681–11686</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1073/pnas.1209309109">doi: 10.1073/pnas.1209309109</a></p></li>
+</ul>
+</div></blockquote>
+<p>Cryptic allosteric sites—transient pockets in a folded protein that are
+invisible to conventional experiments but can alter enzymatic activity via
+allosteric communication with the active site—are a promising opportunity for
+facilitating drug design by greatly expanding the repertoire of available drug
+targets. Unfortunately, identifying these sites is difficult, typically
+requiring resource-intensive screening of large libraries of small molecules.
+Here, we demonstrate that Markov state models built from extensive computer
+simulations (totaling hundreds of microseconds of dynamics) can identify
+prospective cryptic sites from the equilibrium fluctuations of three medically
+relevant proteins—β-lactamase, interleukin-2, and RNase H—even in the absence
+of any ligand. As in previous studies, our methods reveal a surprising variety
+of conformations—including bound-like configurations—that implies a role for
+conformational selection in ligand binding. Moreover, our analyses lead to a
+number of unique insights. First, direct comparison of simulations with and
+without the ligand reveals that there is still an important role for an induced
+fit during ligand binding to cryptic sites and suggests new conformations for
+docking. Second, correlations between amino acid sidechains can convey
+allosteric signals even in the absence of substantial backbone motions. Most
+importantly, our extensive sampling reveals a multitude of potential cryptic
+sites—consisting of transient pockets coupled to the active site—even in a
+single protein. Based on these observations, we propose that cryptic allosteric
+sites may be even more ubiquitous than previously thought and that our methods
+should be a valuable means of guiding the search for such sites.</p>
+</section>
+<section id="improved-coarse-graining-of-markov-state-models-via-explicit-consideration-of-statistical-uncertainty">
+<h2>Improved coarse-graining of Markov state models via explicit consideration of statistical uncertainty<a class="headerlink" href="#improved-coarse-graining-of-markov-state-models-via-explicit-consideration-of-statistical-uncertainty" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Bowman, Gregory R.</p></li>
+<li><p><em>J. Chem. Phys.</em> <strong>2012</strong>, 137</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1063/1.4755751">doi: 10.1063/1.4755751</a></p></li>
+</ul>
+</div></blockquote>
+<p>Markov state models (MSMs)–or discrete-time master equation models–are a
+powerful way of modeling the structure and function of molecular systems like
+proteins. Unfortunately, MSMs with sufficiently many states to make a
+quantitative connection with experiments (often tens of thousands of states
+even for small systems) are generally too complicated to understand. Here, I
+present a Bayesian agglomerative clustering engine (BACE) for coarse-graining
+such Markovmodels, thereby reducing their complexity and making them more
+comprehensible. An important feature of this algorithm is its ability to
+explicitly account for statistical uncertainty in model parameters that arises
+from finite sampling. This advance builds on a number of recent works
+highlighting the importance of accounting for uncertainty in the analysis of
+MSMs and provides significant advantages over existing methods for coarse-
+graining Markov state models. The closed-form expression I derive here for
+determining which states to merge is equivalent to the generalized Jensen-
+Shannon divergence, an important measure from information theory that is
+related to the relative entropy. Therefore, the method has an appealing
+information theoretic interpretation in terms of minimizing information loss.
+The bottom-up nature of the algorithm likely makes it particularly well suited
+for constructing mesoscale models. I also present an extremely efficient
+expression for Bayesian model comparison that can be used to identify the most
+meaningful levels of the hierarchy of models from BACE.</p>
+</section>
+<section id="quantifying-hub-like-behavior-in-protein-folding-networks">
+<h2>Quantifying Hub-like Behavior in Protein Folding Networks<a class="headerlink" href="#quantifying-hub-like-behavior-in-protein-folding-networks" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Dickson, Alex; Brooks, Charles L.</p></li>
+<li><p><em>J. Chem. Theory Comput.</em> <strong>2012</strong>, 8 3044–3052</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1021/ct300537s">doi: 10.1021/ct300537s</a></p></li>
+</ul>
+</div></blockquote>
+<p>The free energy landscape of a protein is a function of many interdependent
+degrees of freedom. For this reason, conceptual constructs (e.g., funnels) have
+been useful to visualize these landscapes. One relatively new construct is the
+idea of a hub-like native state that is the final destination of many
+noninterconverting folding pathways. This is in contrast to the idea of a
+single predominant folding pathway connecting the native state to a rapidly
+interconverting ensemble of unfolded states. The key quantity to distinguish
+between these two ideas is the connectivity of the unfolded ensemble. We
+present a metric to determine this connectivity for a given network, which can
+be calculated either from continuous folding trajectories, or a Markov model.
+The metric determines how often a region of space is used as an intermediate on
+transition paths that connect two other regions of space, and we use it here to
+determine how often two parts of the unfolded ensemble are connected directly
+versus how often these transitions are mediated by the native state.</p>
+</section>
+<section id="markov-state-model-reveals-folding-and-functional-dynamics-in-ultra-long-md-trajectories">
+<h2>Markov State Model Reveals Folding and Functional Dynamics in Ultra-Long MD Trajectories<a class="headerlink" href="#markov-state-model-reveals-folding-and-functional-dynamics-in-ultra-long-md-trajectories" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Lane, Thomas J.; Bowman, Gregory R.; Beauchamp, Kyle; Voelz, Vincent A.; Pande, Vijay S.</p></li>
+<li><p><em>J. Am. Chem. Soc.</em> <strong>2011</strong>, 133 18413–18419</p></li>
+<li><p><a class="reference external" href="http://dx.doi.org/10.1021/ja207470h">doi: 10.1021/ja207470h</a></p></li>
+</ul>
+</div></blockquote>
+<p>Two strategies have been recently employed to push molecular simulation to
+long, biologically relevant time scales: projection-based analysis of results
+from specialized hardware producing a small number of ultralong trajectories
+and the statistical interpretation of massive parallel sampling performed with
+Markov state models (MSMs). Here, we assess the MSM as an analysis method by
+constructing a Markov model from ultralong trajectories, specifically two
+previously reported 100 $mu$s trajectories of the FiP35 WW domain ( Shaw, D.
+E. Science 2010, 330, 341-346 ). We find that the MSM approach yields novel
+insights. It discovers new statistically significant folding pathways, in which
+either beta-hairpin of the WW domain can form first. The rates of this process
+approach experimental values in a direct quantitative comparison (time scales
+of 5.0 $mu$ s and 100 ns), within a factor of $sim$2. Finally, the hub-like
+topology of the MSM and identification of a holo conformation predicts how WW
+domains may function through a conformational selection mechanism.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="changelog.html" class="btn btn-neutral float-left" title="Changelog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

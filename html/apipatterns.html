@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Patterns &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Writing Plugins" href="plugins.html" />
+    <link rel="prev" title="msmbuilder.io.TemplateProject" href="_io/msmbuilder.io.TemplateProject.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Patterns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hyperparameters">Hyperparameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fit">Fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transform">Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipelines">Pipelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Patterns</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/apipatterns.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-patterns">
+<span id="apipatterns"></span><h1>API Patterns<a class="headerlink" href="#api-patterns" title="Link to this heading">¶</a></h1>
+<p>Models in msmbuilder inherit from base classes in <a class="reference external" href="http://scikit-learn.org/stable/">scikit-learn</a>, and follow a similar API. Like
+sklearn, each type of model is a python class. Models are “fit” to data,
+and can then “transform” data into a different representation. Unlike
+sklearn, the data here is a <em>list</em> (or <a class="reference internal" href="datasets.html#datasets"><span class="std std-ref">dataset</span></a>) of time-series
+arrays or trajectories.</p>
+<section id="hyperparameters">
+<h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Link to this heading">¶</a></h2>
+<p>Hyperparameters are passed in via
+the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method and set as instance attributes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">msmbuilder.decomposition</span> <span class="kn">import</span> <span class="n">tICA</span>
+<span class="n">tica</span> <span class="o">=</span> <span class="n">tICA</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">tica</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="fit">
+<h2>Fit<a class="headerlink" href="#fit" title="Link to this heading">¶</a></h2>
+<p>The estimation of model parameters is done in <code class="docutils literal notranslate"><span class="pre">fit()</span></code>. In msmbuilder, the
+<code class="docutils literal notranslate"><span class="pre">fit()</span></code> method always accepts a <code class="docutils literal notranslate"><span class="pre">list</span></code> or
+<a class="reference internal" href="datasets.html#msmbuilder.dataset.dataset" title="msmbuilder.dataset.dataset"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataset()</span></code></a> of 2-dimensional arrays as input data,
+where each array represents a single timeseries (trajectory) and has a
+shape of <code class="docutils literal notranslate"><span class="pre">(length_of_trajectory,</span> <span class="pre">n_features)</span></code>. Some models can also
+accept a list of MD trajectories (<code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code>) as opposed to a
+list of arrays.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;traj-1-features.npy&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;traj-2-featues.npy&#39;</span><span class="p">)]</span>
+<span class="k">assert</span> <span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">features</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span>
+
+<span class="n">clusterer</span> <span class="o">=</span> <span class="n">KCenters</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">clusterer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is different from sklearn. In sklearn, estimators take a <strong>single</strong>
+2D array as input in <code class="docutils literal notranslate"><span class="pre">fit()</span></code>. Here we use a list of arrays or
+trajectories.  However, for many models, it’s still quite easy to go
+between sklearn-style input and msmbuilder-style input, as shown in
+the following code block.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">msmbuilder.cluster</span>
+<span class="kn">import</span> <span class="nn">sklearn.cluster</span>
+
+<span class="n">X_sklearn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>  <span class="c1"># sklearn style input: (n_samples, n_features)</span>
+<span class="n">X_msmb</span> <span class="o">=</span> <span class="p">[</span><span class="n">X_sklearn</span><span class="p">]</span>  <span class="c1"># MSMBuilder style input: list of (n_samples, n_features)</span>
+
+<span class="n">clusterer_sklearn</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">clusterer_sklearn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_sklearn</span><span class="p">)</span>
+
+<span class="n">clusterer_msmb</span> <span class="o">=</span> <span class="n">msmbuilder</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">clusterer_msmb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_msmb</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some models like <code class="xref py py-class docutils literal notranslate"><span class="pre">tICA</span></code> only require a single pass over the
+data. In this case, use the <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> method, which can incrementally
+learn the model one trajectory at a time and be more memory-efficient.</p>
+</section>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<p>Parameters of the model which are <strong>learned or estimated</strong> during <code class="docutils literal notranslate"><span class="pre">fit()</span></code>
+are always set as instance attributes that are named with a trailing
+underscore. This is merely a convention, and not a special Python syntax.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tica</span> <span class="o">=</span> <span class="n">tICA</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">tica</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="c1"># timescales is an estimated quantity, so it ends in an underscore</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tica</span><span class="o">.</span><span class="n">timescales_</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="transform">
+<h2>Transform<a class="headerlink" href="#transform" title="Link to this heading">¶</a></h2>
+<p>Many models also implement a <code class="docutils literal notranslate"><span class="pre">transform()</span></code> method, which converts an
+input dataset to an alternative representation. For example, the
+<code class="docutils literal notranslate"><span class="pre">transform</span></code> method of <a class="reference internal" href="featurization.html#featurization"><span class="std std-ref">featurizers</span></a> takes as input a
+list of trajectories and returns a list of 2D feature arrays.
+<a class="reference internal" href="cluster.html#cluster"><span class="std std-ref">Clustering</span></a> takes a list of 2D feature arrays and returns
+a list of 1D sequences.</p>
+</section>
+<section id="pipelines">
+<h2>Pipelines<a class="headerlink" href="#pipelines" title="Link to this heading">¶</a></h2>
+<p>The models in msmbuilder are designed to work together as part of a
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline" title="(in scikit-learn v1.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">msmbuilder.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">msmbuilder.msm</span> <span class="kn">import</span> <span class="n">MarkovStateModel</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">100</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">&#39;msm&#39;</span><span class="p">,</span> <span class="n">MarkovStateModel</span><span class="p">())</span>
+<span class="p">])</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_io/msmbuilder.io.TemplateProject.html" class="btn btn-neutral float-left" title="msmbuilder.io.TemplateProject" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plugins.html" class="btn btn-neutral float-right" title="Writing Plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

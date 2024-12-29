@@ -1,0 +1,6 @@
+﻿msmbuilder.io.load\_trajs
+=========================
+
+.. currentmodule:: msmbuilder.io
+
+.. autofunction:: load_trajs

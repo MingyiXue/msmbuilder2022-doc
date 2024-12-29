@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.cluster.SpectralClustering &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Markov state models (MSMs)" href="../msm.html" />
+    <link rel="prev" title="msmbuilder.cluster.MiniBatchKMeans" href="msmbuilder.cluster.MiniBatchKMeans.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../cluster.html">Clustering</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cluster.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KCenters.html">msmbuilder.cluster.KCenters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KMeans.html">msmbuilder.cluster.KMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KMedoids.html">msmbuilder.cluster.KMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMedoids.html">msmbuilder.cluster.MiniBatchKMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.RegularSpatial.html">msmbuilder.cluster.RegularSpatial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.LandmarkAgglomerative.html">msmbuilder.cluster.LandmarkAgglomerative</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.AffinityPropagation.html">msmbuilder.cluster.AffinityPropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.GMM.html">msmbuilder.cluster.GMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MeanShift.html">msmbuilder.cluster.MeanShift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMeans.html">msmbuilder.cluster.MiniBatchKMeans</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.cluster.SpectralClustering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.cluster.SpectralClustering"><code class="docutils literal notranslate"><span class="pre">SpectralClustering</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../cluster.html">Clustering</a></li>
+      <li class="breadcrumb-item active">msmbuilder.cluster.SpectralClustering</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_cluster/msmbuilder.cluster.SpectralClustering.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-cluster-spectralclustering">
+<h1>msmbuilder.cluster.SpectralClustering<a class="headerlink" href="#msmbuilder-cluster-spectralclustering" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.cluster.SpectralClustering">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.cluster.</span></span><span class="sig-name descname"><span class="pre">SpectralClustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affinity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rbf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kmeans'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.SpectralClustering" title="Link to this definition">¶</a></dt>
+<dd><p>Apply clustering to a projection of the normalized Laplacian.</p>
+<p>In practice Spectral Clustering is very useful when the structure of
+the individual clusters is highly non-convex, or more generally when
+a measure of the center and spread of the cluster is not a suitable
+description of the complete cluster, such as when clusters are
+nested circles on the 2D plane.</p>
+<p>If the affinity matrix is the adjacency matrix of a graph, this method
+can be used to find normalized graph cuts <a class="reference internal" href="#r539d2e2a1f24-1" id="id1">[1]</a>, <a class="reference internal" href="#r539d2e2a1f24-2" id="id2">[2]</a>.</p>
+<p>When calling <code class="docutils literal notranslate"><span class="pre">fit</span></code>, an affinity matrix is constructed using either
+a kernel function such the Gaussian (aka RBF) kernel with Euclidean
+distance <code class="docutils literal notranslate"><span class="pre">d(X,</span> <span class="pre">X)</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">d</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">X</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or a k-nearest neighbors connectivity matrix.</p>
+<p>Alternatively, a user-provided affinity matrix can be specified by
+setting <code class="docutils literal notranslate"><span class="pre">affinity='precomputed'</span></code>.</p>
+<p>Read more in the <a class="reference external" href="https://scikit-learn.org/stable/modules/clustering.html#spectral-clustering" title="(in scikit-learn v1.6)"><span class="xref std std-ref">User Guide</span></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>n_clusters</strong><span class="classifier">int, default=8</span></dt><dd><p>The dimension of the projection subspace.</p>
+</dd>
+<dt><strong>eigen_solver</strong><span class="classifier">{‘arpack’, ‘lobpcg’, ‘amg’}, default=None</span></dt><dd><p>The eigenvalue decomposition strategy to use. AMG requires pyamg
+to be installed. It can be faster on very large, sparse problems,
+but may also lead to instabilities. If None, then <code class="docutils literal notranslate"><span class="pre">'arpack'</span></code> is
+used. See <a class="reference internal" href="#r539d2e2a1f24-4" id="id3">[4]</a> for more details regarding <cite>‘lobpcg’</cite>.</p>
+</dd>
+<dt><strong>n_components</strong><span class="classifier">int, default=None</span></dt><dd><p>Number of eigenvectors to use for the spectral embedding. If None,
+defaults to <cite>n_clusters</cite>.</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int, RandomState instance, default=None</span></dt><dd><p>A pseudo random number generator used for the initialization
+of the lobpcg eigenvectors decomposition when <cite>eigen_solver ==
+‘amg’</cite>, and for the K-Means initialization. Use an int to make
+the results deterministic across calls (See
+<a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-random_state" title="(in scikit-learn v1.6)"><span class="xref std std-term">Glossary</span></a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using <cite>eigen_solver == ‘amg’</cite>,
+it is necessary to also fix the global numpy seed with
+<cite>np.random.seed(int)</cite> to get deterministic results. See
+<a class="reference external" href="https://github.com/pyamg/pyamg/issues/139">https://github.com/pyamg/pyamg/issues/139</a> for further
+information.</p>
+</div>
+</dd>
+<dt><strong>n_init</strong><span class="classifier">int, default=10</span></dt><dd><p>Number of time the k-means algorithm will be run with different
+centroid seeds. The final results will be the best output of n_init
+consecutive runs in terms of inertia. Only used if
+<code class="docutils literal notranslate"><span class="pre">assign_labels='kmeans'</span></code>.</p>
+</dd>
+<dt><strong>gamma</strong><span class="classifier">float, default=1.0</span></dt><dd><p>Kernel coefficient for rbf, poly, sigmoid, laplacian and chi2 kernels.
+Ignored for <code class="docutils literal notranslate"><span class="pre">affinity='nearest_neighbors'</span></code>, <code class="docutils literal notranslate"><span class="pre">affinity='precomputed'</span></code>
+or <code class="docutils literal notranslate"><span class="pre">affinity='precomputed_nearest_neighbors'</span></code>.</p>
+</dd>
+<dt><strong>affinity</strong><span class="classifier">str or callable, default=’rbf’</span></dt><dd><dl class="simple">
+<dt>How to construct the affinity matrix.</dt><dd><ul class="simple">
+<li><p>‘nearest_neighbors’: construct the affinity matrix by computing a
+graph of nearest neighbors.</p></li>
+<li><p>‘rbf’: construct the affinity matrix using a radial basis function
+(RBF) kernel.</p></li>
+<li><p>‘precomputed’: interpret <code class="docutils literal notranslate"><span class="pre">X</span></code> as a precomputed affinity matrix,
+where larger values indicate greater similarity between instances.</p></li>
+<li><p>‘precomputed_nearest_neighbors’: interpret <code class="docutils literal notranslate"><span class="pre">X</span></code> as a sparse graph
+of precomputed distances, and construct a binary affinity matrix
+from the <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> nearest neighbors of each instance.</p></li>
+<li><p>one of the kernels supported by
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.pairwise_kernels.html#sklearn.metrics.pairwise.pairwise_kernels" title="(in scikit-learn v1.6)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairwise_kernels()</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Only kernels that produce similarity scores (non-negative values that
+increase with similarity) should be used. This property is not checked
+by the clustering algorithm.</p>
+</dd>
+<dt><strong>n_neighbors</strong><span class="classifier">int, default=10</span></dt><dd><p>Number of neighbors to use when constructing the affinity matrix using
+the nearest neighbors method. Ignored for <code class="docutils literal notranslate"><span class="pre">affinity='rbf'</span></code>.</p>
+</dd>
+<dt><strong>eigen_tol</strong><span class="classifier">float, default=”auto”</span></dt><dd><p>Stopping criterion for eigen decomposition of the Laplacian matrix.
+If <cite>eigen_tol=”auto”</cite> then the passed tolerance will depend on the
+<cite>eigen_solver</cite>:</p>
+<ul class="simple">
+<li><p>If <cite>eigen_solver=”arpack”</cite>, then <cite>eigen_tol=0.0</cite>;</p></li>
+<li><p>If <cite>eigen_solver=”lobpcg”</cite> or <cite>eigen_solver=”amg”</cite>, then
+<cite>eigen_tol=None</cite> which configures the underlying <cite>lobpcg</cite> solver to
+automatically resolve the value according to their heuristics. See,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.sparse.linalg.lobpcg()</span></code> for details.</p></li>
+</ul>
+<p>Note that when using <cite>eigen_solver=”lobpcg”</cite> or <cite>eigen_solver=”amg”</cite>
+values of <cite>tol&lt;1e-5</cite> may lead to convergence issues and should be
+avoided.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.2: </span>Added ‘auto’ option.</p>
+</div>
+</dd>
+<dt><strong>assign_labels</strong><span class="classifier">{‘kmeans’, ‘discretize’, ‘cluster_qr’}, default=’kmeans’</span></dt><dd><p>The strategy for assigning labels in the embedding space. There are two
+ways to assign labels after the Laplacian embedding. k-means is a
+popular choice, but it can be sensitive to initialization.
+Discretization is another approach which is less sensitive to random
+initialization <a class="reference internal" href="#r539d2e2a1f24-3" id="id4">[3]</a>.
+The cluster_qr method <a class="reference internal" href="#r539d2e2a1f24-5" id="id5">[5]</a> directly extract clusters from eigenvectors
+in spectral clustering. In contrast to k-means and discretization, cluster_qr
+has no tuning parameters and runs no iterations, yet may outperform
+k-means and discretization in terms of both quality and speed.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.1: </span>Added new labeling method ‘cluster_qr’.</p>
+</div>
+</dd>
+<dt><strong>degree</strong><span class="classifier">float, default=3</span></dt><dd><p>Degree of the polynomial kernel. Ignored by other kernels.</p>
+</dd>
+<dt><strong>coef0</strong><span class="classifier">float, default=1</span></dt><dd><p>Zero coefficient for polynomial and sigmoid kernels.
+Ignored by other kernels.</p>
+</dd>
+<dt><strong>kernel_params</strong><span class="classifier">dict of str to any, default=None</span></dt><dd><p>Parameters (keyword arguments) and values for kernel passed as
+callable object. Ignored by other kernels.</p>
+</dd>
+<dt><strong>n_jobs</strong><span class="classifier">int, default=None</span></dt><dd><p>The number of parallel jobs to run when <cite>affinity=’nearest_neighbors’</cite>
+or <cite>affinity=’precomputed_nearest_neighbors’</cite>. The neighbors search
+will be done in parallel.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-n_jobs" title="(in scikit-learn v1.6)"><span class="xref std std-term">Glossary</span></a>
+for more details.</p>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">bool, default=False</span></dt><dd><p>Verbosity mode.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>affinity_matrix_</strong><span class="classifier">array-like of shape (n_samples, n_samples)</span></dt><dd><p>Affinity matrix used for clustering. Available only after calling
+<code class="docutils literal notranslate"><span class="pre">fit</span></code>.</p>
+</dd>
+<dt><strong>labels_</strong><span class="classifier">list of arrays, each of shape [sequence_length, ]</span></dt><dd><p>The label of each point is an integer in [0, n_clusters).</p>
+</dd>
+<dt><strong>n_features_in_</strong><span class="classifier">int</span></dt><dd><p>Number of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+<dt><strong>feature_names_in_</strong><span class="classifier">ndarray of shape (<cite>n_features_in_</cite>,)</span></dt><dd><p>Names of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>. Defined only when <cite>X</cite>
+has feature names that are all strings.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the  clustering on the data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y])</p></td>
+<td><p>Performs clustering on X and returns cluster labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans" title="(in scikit-learn v1.6)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.cluster.KMeans</span></code></a></dt><dd><p>K-Means clustering.</p>
+</dd>
+<dt><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="(in scikit-learn v1.6)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.cluster.DBSCAN</span></code></a></dt><dd><p>Density-Based Spatial Clustering of Applications with Noise.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>A distance matrix for which 0 indicates identical elements and high values
+indicate very dissimilar elements can be transformed into an affinity /
+similarity matrix that is well-suited for the algorithm by
+applying the Gaussian (aka RBF, heat) kernel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">dist_matrix</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">delta</span></code> is a free parameter representing the width of the Gaussian
+kernel.</p>
+<p>An alternative is to take a symmetric version of the k-nearest neighbors
+connectivity matrix of the points.</p>
+<p>If the pyamg package is installed, it is used: this greatly
+speeds up computation.</p>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="r539d2e2a1f24-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.1109/34.868688">Normalized cuts and image segmentation, 2000
+Jianbo Shi, Jitendra Malik</a></p>
+</div>
+<div class="citation" id="r539d2e2a1f24-2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.1007/s11222-007-9033-z">A Tutorial on Spectral Clustering, 2007
+Ulrike von Luxburg</a></p>
+</div>
+<div class="citation" id="r539d2e2a1f24-3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">3</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://people.eecs.berkeley.edu/~jordan/courses/281B-spring04/readings/yu-shi.pdf">Multiclass spectral clustering, 2003
+Stella X. Yu, Jianbo Shi</a></p>
+</div>
+<div class="citation" id="r539d2e2a1f24-4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">4</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.1137/S1064827500366124">Toward the Optimal Preconditioned Eigensolver:
+Locally Optimal Block Preconditioned Conjugate Gradient Method, 2001
+A. V. Knyazev
+SIAM Journal on Scientific Computing 23, no. 2, pp. 517-541.</a></p>
+</div>
+<div class="citation" id="r539d2e2a1f24-5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://doi.org/10.1093/imaiai/iay008">Simple, direct, and efficient multi-way spectral clustering, 2019
+Anil Damle, Victor Minden, Lexing Ying</a></p>
+</div>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">SpectralClustering</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clustering</span> <span class="o">=</span> <span class="n">SpectralClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">assign_labels</span><span class="o">=</span><span class="s1">&#39;discretize&#39;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clustering</span><span class="o">.</span><span class="n">labels_</span>
+<span class="go">array([1, 1, 1, 0, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clustering</span>
+<span class="go">SpectralClustering(assign_labels=&#39;discretize&#39;, n_clusters=2,</span>
+<span class="go">    random_state=0)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.cluster.SpectralClustering.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affinity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rbf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kmeans'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.SpectralClustering.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.cluster.SpectralClustering.__init__" title="msmbuilder.cluster.SpectralClustering.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([n_clusters, eigen_solver, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the  clustering on the data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y])</p></td>
+<td><p>Performs clustering on X and returns cluster labels.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.cluster.MiniBatchKMeans.html" class="btn btn-neutral float-left" title="msmbuilder.cluster.MiniBatchKMeans" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../msm.html" class="btn btn-neutral float-right" title="Markov state models (MSMs)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

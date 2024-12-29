@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.preprocessing.PolynomialFeatures &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Decomposition" href="../decomposition.html" />
+    <link rel="prev" title="msmbuilder.preprocessing.StandardScaler" href="msmbuilder.preprocessing.StandardScaler.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../preprocessing.html">Preprocessing</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../preprocessing.html#preprocessors">Preprocessors</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Binarizer.html">msmbuilder.preprocessing.Binarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Butterworth.html">msmbuilder.preprocessing.Butterworth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.EWMA.html">msmbuilder.preprocessing.EWMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.DoubleEWMA.html">msmbuilder.preprocessing.DoubleEWMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Imputer.html">msmbuilder.preprocessing.Imputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.KernelCenterer.html">msmbuilder.preprocessing.KernelCenterer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.LabelBinarizer.html">msmbuilder.preprocessing.LabelBinarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.MultiLabelBinarizer.html">msmbuilder.preprocessing.MultiLabelBinarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.MinMaxScaler.html">msmbuilder.preprocessing.MinMaxScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.MaxAbsScaler.html">msmbuilder.preprocessing.MaxAbsScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Normalizer.html">msmbuilder.preprocessing.Normalizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.RobustScaler.html">msmbuilder.preprocessing.RobustScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.StandardScaler.html">msmbuilder.preprocessing.StandardScaler</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.preprocessing.PolynomialFeatures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.preprocessing.PolynomialFeatures"><code class="docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../preprocessing.html">Preprocessing</a></li>
+      <li class="breadcrumb-item active">msmbuilder.preprocessing.PolynomialFeatures</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_preprocessing/msmbuilder.preprocessing.PolynomialFeatures.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-preprocessing-polynomialfeatures">
+<h1>msmbuilder.preprocessing.PolynomialFeatures<a class="headerlink" href="#msmbuilder-preprocessing-polynomialfeatures" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.preprocessing.PolynomialFeatures">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.preprocessing.</span></span><span class="sig-name descname"><span class="pre">PolynomialFeatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.preprocessing.PolynomialFeatures" title="Link to this definition">¶</a></dt>
+<dd><p>Generate polynomial and interaction features.</p>
+<p>Generate a new feature matrix consisting of all polynomial combinations
+of the features with degree less than or equal to the specified degree.
+For example, if an input sample is two dimensional and of the form
+[a, b], the degree-2 polynomial features are [1, a, b, a^2, ab, b^2].</p>
+<p>Read more in the <a class="reference external" href="https://scikit-learn.org/stable/modules/preprocessing.html#polynomial-features" title="(in scikit-learn v1.6)"><span class="xref std std-ref">User Guide</span></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>degree</strong><span class="classifier">int or tuple (min_degree, max_degree), default=2</span></dt><dd><p>If a single int is given, it specifies the maximal degree of the
+polynomial features. If a tuple <cite>(min_degree, max_degree)</cite> is passed,
+then <cite>min_degree</cite> is the minimum and <cite>max_degree</cite> is the maximum
+polynomial degree of the generated features. Note that <cite>min_degree=0</cite>
+and <cite>min_degree=1</cite> are equivalent as outputting the degree zero term is
+determined by <cite>include_bias</cite>.</p>
+</dd>
+<dt><strong>interaction_only</strong><span class="classifier">bool, default=False</span></dt><dd><p>If <cite>True</cite>, only interaction features are produced: features that are
+products of at most <cite>degree</cite> <em>distinct</em> input features, i.e. terms with
+power of 2 or higher of the same input feature are excluded:</p>
+<ul class="simple">
+<li><p>included: <cite>x[0]</cite>, <cite>x[1]</cite>, <cite>x[0] * x[1]</cite>, etc.</p></li>
+<li><p>excluded: <cite>x[0] ** 2</cite>, <cite>x[0] ** 2 * x[1]</cite>, etc.</p></li>
+</ul>
+</dd>
+<dt><strong>include_bias</strong><span class="classifier">bool, default=True</span></dt><dd><p>If <cite>True</cite> (default), then include a bias column, the feature in which
+all polynomial powers are zero (i.e. a column of ones - acts as an
+intercept term in a linear model).</p>
+</dd>
+<dt><strong>order</strong><span class="classifier">{‘C’, ‘F’}, default=’C’</span></dt><dd><p>Order of output array in the dense case. <cite>‘F’</cite> order is faster to
+compute, but may slow down subsequent estimators.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.21.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">powers_</span></code><span class="classifier">ndarray of shape (<cite>n_output_features_</cite>, <cite>n_features_in_</cite>)</span></dt><dd><p>Exponent for each of the inputs in the output.</p>
+</dd>
+<dt><strong>n_features_in_</strong><span class="classifier">int</span></dt><dd><p>Number of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+<dt><strong>feature_names_in_</strong><span class="classifier">ndarray of shape (<cite>n_features_in_</cite>,)</span></dt><dd><p>Names of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>. Defined only when <cite>X</cite>
+has feature names that are all strings.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0.</span></p>
+</div>
+</dd>
+<dt><strong>n_output_features_</strong><span class="classifier">int</span></dt><dd><p>The total number of polynomial output features. The number of output
+features is computed by iterating over all suitably sized combinations
+of input features.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(X[, y])</p></td>
+<td><p>Fit Preprocessing to X.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model and apply preprocessing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_fit</span></code>(sequence[, y])</p></td>
+<td><p>Fit Preprocessing to X. Parameters ---------- sequence : array-like, [sequence_length, n_features]     A multivariate timeseries. y : None     Ignored Returns ------- self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence)</p></td>
+<td><p>Apply preprocessing to single sequence</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_partial_fit_request</span></code>(*[, sequence])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply preprocessing to sequences</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">SplineTransformer</span></code></dt><dd><p>Transformer that generates univariate B-spline bases for features.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Be aware that the number of features in the output array scales
+polynomially in the number of features of the input array, and
+exponentially in the degree. High degrees can cause overfitting.</p>
+<p>See <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html#sphx-glr-auto-examples-linear-model-plot-polynomial-interpolation-py" title="(in scikit-learn v1.6)"><span class="xref std std-ref">examples/linear_model/plot_polynomial_interpolation.py</span></a></p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [2, 3],</span>
+<span class="go">       [4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[ 1.,  0.,  1.,  0.,  0.,  1.],</span>
+<span class="go">       [ 1.,  2.,  3.,  4.,  6.,  9.],</span>
+<span class="go">       [ 1.,  4.,  5., 16., 20., 25.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">interaction_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[ 1.,  0.,  1.,  0.],</span>
+<span class="go">       [ 1.,  2.,  3.,  6.],</span>
+<span class="go">       [ 1.,  4.,  5., 20.]])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.preprocessing.PolynomialFeatures.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.preprocessing.PolynomialFeatures.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.preprocessing.PolynomialFeatures.__init__" title="msmbuilder.preprocessing.PolynomialFeatures.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([degree, interaction_only, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(X[, y])</p></td>
+<td><p>Fit Preprocessing to X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model and apply preprocessing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_fit</span></code>(sequence[, y])</p></td>
+<td><p>Fit Preprocessing to X. Parameters ---------- sequence : array-like, [sequence_length, n_features]     A multivariate timeseries. y : None     Ignored Returns ------- self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence)</p></td>
+<td><p>Apply preprocessing to single sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_partial_fit_request</span></code>(*[, sequence])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply preprocessing to sequences</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">powers_</span></code></p></td>
+<td><p>Exponent for each of the inputs in the output.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.preprocessing.StandardScaler.html" class="btn btn-neutral float-left" title="msmbuilder.preprocessing.StandardScaler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../decomposition.html" class="btn btn-neutral float-right" title="Decomposition" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

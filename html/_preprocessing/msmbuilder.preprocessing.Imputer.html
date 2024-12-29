@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.preprocessing.Imputer &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.preprocessing.KernelCenterer" href="msmbuilder.preprocessing.KernelCenterer.html" />
+    <link rel="prev" title="msmbuilder.preprocessing.DoubleEWMA" href="msmbuilder.preprocessing.DoubleEWMA.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../preprocessing.html">Preprocessing</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../preprocessing.html#preprocessors">Preprocessors</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Binarizer.html">msmbuilder.preprocessing.Binarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Butterworth.html">msmbuilder.preprocessing.Butterworth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.EWMA.html">msmbuilder.preprocessing.EWMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.DoubleEWMA.html">msmbuilder.preprocessing.DoubleEWMA</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.preprocessing.Imputer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.preprocessing.Imputer"><code class="docutils literal notranslate"><span class="pre">Imputer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.KernelCenterer.html">msmbuilder.preprocessing.KernelCenterer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.LabelBinarizer.html">msmbuilder.preprocessing.LabelBinarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.MultiLabelBinarizer.html">msmbuilder.preprocessing.MultiLabelBinarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.MinMaxScaler.html">msmbuilder.preprocessing.MinMaxScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.MaxAbsScaler.html">msmbuilder.preprocessing.MaxAbsScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Normalizer.html">msmbuilder.preprocessing.Normalizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.RobustScaler.html">msmbuilder.preprocessing.RobustScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.StandardScaler.html">msmbuilder.preprocessing.StandardScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.PolynomialFeatures.html">msmbuilder.preprocessing.PolynomialFeatures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../preprocessing.html">Preprocessing</a></li>
+      <li class="breadcrumb-item active">msmbuilder.preprocessing.Imputer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_preprocessing/msmbuilder.preprocessing.Imputer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-preprocessing-imputer">
+<h1>msmbuilder.preprocessing.Imputer<a class="headerlink" href="#msmbuilder-preprocessing-imputer" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.preprocessing.Imputer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.preprocessing.</span></span><span class="sig-name descname"><span class="pre">Imputer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_indicator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_empty_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.preprocessing.Imputer" title="Link to this definition">¶</a></dt>
+<dd><p>Univariate imputer for completing missing values with simple strategies.</p>
+<p>Replace missing values using a descriptive statistic (e.g. mean, median, or
+most frequent) along each column, or using a constant value.</p>
+<p>Read more in the <a class="reference external" href="https://scikit-learn.org/stable/modules/impute.html#impute" title="(in scikit-learn v1.6)"><span class="xref std std-ref">User Guide</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.20: </span><cite>SimpleImputer</cite> replaces the previous <cite>sklearn.preprocessing.Imputer</cite>
+estimator which is now removed.</p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>missing_values</strong><span class="classifier">int, float, str, np.nan, None or pandas.NA, default=np.nan</span></dt><dd><p>The placeholder for the missing values. All occurrences of
+<cite>missing_values</cite> will be imputed. For pandas’ dataframes with
+nullable integer dtypes with missing values, <cite>missing_values</cite>
+can be set to either <cite>np.nan</cite> or <cite>pd.NA</cite>.</p>
+</dd>
+<dt><strong>strategy</strong><span class="classifier">str or Callable, default=’mean’</span></dt><dd><p>The imputation strategy.</p>
+<ul class="simple">
+<li><p>If “mean”, then replace missing values using the mean along
+each column. Can only be used with numeric data.</p></li>
+<li><p>If “median”, then replace missing values using the median along
+each column. Can only be used with numeric data.</p></li>
+<li><p>If “most_frequent”, then replace missing using the most frequent
+value along each column. Can be used with strings or numeric data.
+If there is more than one such value, only the smallest is returned.</p></li>
+<li><p>If “constant”, then replace missing values with fill_value. Can be
+used with strings or numeric data.</p></li>
+<li><p>If an instance of Callable, then replace missing values using the
+scalar statistic returned by running the callable over a dense 1d
+array containing non-missing values of each column.</p></li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.20: </span>strategy=”constant” for fixed value imputation.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.5: </span>strategy=callable for custom value imputation.</p>
+</div>
+</dd>
+<dt><strong>fill_value</strong><span class="classifier">str or numerical value, default=None</span></dt><dd><p>When strategy == “constant”, <cite>fill_value</cite> is used to replace all
+occurrences of missing_values. For string or object data types,
+<cite>fill_value</cite> must be a string.
+If <cite>None</cite>, <cite>fill_value</cite> will be 0 when imputing numerical
+data and “missing_value” for strings or object data types.</p>
+</dd>
+<dt><strong>copy</strong><span class="classifier">bool, default=True</span></dt><dd><p>If True, a copy of X will be created. If False, imputation will
+be done in-place whenever possible. Note that, in the following cases,
+a new copy will always be made, even if <cite>copy=False</cite>:</p>
+<ul class="simple">
+<li><p>If <cite>X</cite> is not an array of floating values;</p></li>
+<li><p>If <cite>X</cite> is encoded as a CSR matrix;</p></li>
+<li><p>If <cite>add_indicator=True</cite>.</p></li>
+</ul>
+</dd>
+<dt><strong>add_indicator</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, a <code class="xref py py-class docutils literal notranslate"><span class="pre">MissingIndicator</span></code> transform will stack onto output
+of the imputer’s transform. This allows a predictive estimator
+to account for missingness despite imputation. If a feature has no
+missing values at fit/train time, the feature won’t appear on
+the missing indicator even if there are missing values at
+transform/test time.</p>
+</dd>
+<dt><strong>keep_empty_features</strong><span class="classifier">bool, default=False</span></dt><dd><p>If True, features that consist exclusively of missing values when
+<cite>fit</cite> is called are returned in results when <cite>transform</cite> is called.
+The imputed value is always <cite>0</cite> except when <cite>strategy=”constant”</cite>
+in which case <cite>fill_value</cite> will be used instead.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.2.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.6: </span>Currently, when <cite>keep_empty_feature=False</cite> and <cite>strategy=”constant”</cite>,
+empty features are not dropped. This behaviour will change in version
+1.8. Set <cite>keep_empty_feature=True</cite> to preserve this behaviour.</p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>statistics_</strong><span class="classifier">array of shape (n_features,)</span></dt><dd><p>The imputation fill value for each feature.
+Computing statistics can result in <cite>np.nan</cite> values.
+During <code class="xref py py-meth docutils literal notranslate"><span class="pre">transform()</span></code>, features corresponding to <cite>np.nan</cite>
+statistics will be discarded.</p>
+</dd>
+<dt><strong>indicator_</strong><span class="classifier"><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.impute.MissingIndicator.html#sklearn.impute.MissingIndicator" title="(in scikit-learn v1.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MissingIndicator</span></code></a></span></dt><dd><p>Indicator used to add binary indicators for missing values.
+<cite>None</cite> if <cite>add_indicator=False</cite>.</p>
+</dd>
+<dt><strong>n_features_in_</strong><span class="classifier">int</span></dt><dd><p>Number of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+<dt><strong>feature_names_in_</strong><span class="classifier">ndarray of shape (<cite>n_features_in_</cite>,)</span></dt><dd><p>Names of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>. Defined only when <cite>X</cite>
+has feature names that are all strings.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(X[, y])</p></td>
+<td><p>Fit Preprocessing to X.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model and apply preprocessing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(X)</p></td>
+<td><p>Convert the data back to the original representation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_fit</span></code>(sequence[, y])</p></td>
+<td><p>Fit Preprocessing to X. Parameters ---------- sequence : array-like, [sequence_length, n_features]     A multivariate timeseries. y : None     Ignored Returns ------- self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence)</p></td>
+<td><p>Apply preprocessing to single sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_partial_fit_request</span></code>(*[, sequence])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply preprocessing to sequences</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">IterativeImputer</span></code></dt><dd><p>Multivariate imputer that estimates values to impute for each feature with missing values from all the others.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KNNImputer</span></code></dt><dd><p>Multivariate imputer that estimates missing features using nearest samples.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Columns which only contained missing values at <code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code> are discarded
+upon <code class="xref py py-meth docutils literal notranslate"><span class="pre">transform()</span></code> if strategy is not <cite>“constant”</cite>.</p>
+<p>In a prediction context, simple imputation usually performs poorly when
+associated with a weak learner. However, with a powerful learner, it can
+lead to as good or better performance than complex imputation such as
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.impute.IterativeImputer.html#sklearn.impute.IterativeImputer" title="(in scikit-learn v1.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IterativeImputer</span></code></a> or <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.impute.KNNImputer.html#sklearn.impute.KNNImputer" title="(in scikit-learn v1.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">KNNImputer</span></code></a>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imp_mean</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">missing_values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imp_mean</span><span class="o">.</span><span class="n">fit</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="go">SimpleImputer()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">imp_mean</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="go">[[ 7.   2.   3. ]</span>
+<span class="go"> [ 4.   3.5  6. ]</span>
+<span class="go"> [10.   3.5  9. ]]</span>
+</pre></div>
+</div>
+<p>For a more detailed example see
+<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/impute/plot_missing_values.html#sphx-glr-auto-examples-impute-plot-missing-values-py" title="(in scikit-learn v1.6)"><span>Imputing missing values before building an estimator</span></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.preprocessing.Imputer.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">nan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_indicator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_empty_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.preprocessing.Imputer.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.preprocessing.Imputer.__init__" title="msmbuilder.preprocessing.Imputer.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*[, missing_values, strategy, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(X[, y])</p></td>
+<td><p>Fit Preprocessing to X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model and apply preprocessing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(X)</p></td>
+<td><p>Convert the data back to the original representation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_fit</span></code>(sequence[, y])</p></td>
+<td><p>Fit Preprocessing to X. Parameters ---------- sequence : array-like, [sequence_length, n_features]     A multivariate timeseries. y : None     Ignored Returns ------- self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence)</p></td>
+<td><p>Apply preprocessing to single sequence</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_partial_fit_request</span></code>(*[, sequence])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply preprocessing to sequences</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.preprocessing.DoubleEWMA.html" class="btn btn-neutral float-left" title="msmbuilder.preprocessing.DoubleEWMA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.preprocessing.KernelCenterer.html" class="btn btn-neutral float-right" title="msmbuilder.preprocessing.KernelCenterer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

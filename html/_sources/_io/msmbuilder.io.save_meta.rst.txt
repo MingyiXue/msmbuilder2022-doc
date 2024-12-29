@@ -1,0 +1,6 @@
+﻿msmbuilder.io.save\_meta
+========================
+
+.. currentmodule:: msmbuilder.io
+
+.. autofunction:: save_meta

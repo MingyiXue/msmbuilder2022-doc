@@ -1,0 +1,41 @@
+﻿msmbuilder.preprocessing.PolynomialFeatures
+===========================================
+
+.. currentmodule:: msmbuilder.preprocessing
+
+.. autoclass:: PolynomialFeatures
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PolynomialFeatures.__init__
+      ~PolynomialFeatures.fit
+      ~PolynomialFeatures.fit_transform
+      ~PolynomialFeatures.get_feature_names_out
+      ~PolynomialFeatures.get_metadata_routing
+      ~PolynomialFeatures.get_params
+      ~PolynomialFeatures.partial_fit
+      ~PolynomialFeatures.partial_transform
+      ~PolynomialFeatures.set_output
+      ~PolynomialFeatures.set_params
+      ~PolynomialFeatures.set_partial_fit_request
+      ~PolynomialFeatures.set_transform_request
+      ~PolynomialFeatures.summarize
+      ~PolynomialFeatures.transform
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PolynomialFeatures.powers_
+   
+   

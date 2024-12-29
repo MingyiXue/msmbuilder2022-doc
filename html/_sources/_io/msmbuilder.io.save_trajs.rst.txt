@@ -1,0 +1,6 @@
+﻿msmbuilder.io.save\_trajs
+=========================
+
+.. currentmodule:: msmbuilder.io
+
+.. autofunction:: save_trajs

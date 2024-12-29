@@ -1,0 +1,6 @@
+﻿msmbuilder.io.load\_meta
+========================
+
+.. currentmodule:: msmbuilder.io
+
+.. autofunction:: load_meta

@@ -1,0 +1,216 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preprocessing &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="msmbuilder.preprocessing.Binarizer" href="_preprocessing/msmbuilder.preprocessing.Binarizer.html" />
+    <link rel="prev" title="msmbuilder.feature_selection.VarianceThreshold" href="_feature_selection/msmbuilder.feature_selection.VarianceThreshold.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preprocessors">Preprocessors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.Binarizer.html">msmbuilder.preprocessing.Binarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.Butterworth.html">msmbuilder.preprocessing.Butterworth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.EWMA.html">msmbuilder.preprocessing.EWMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.DoubleEWMA.html">msmbuilder.preprocessing.DoubleEWMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.Imputer.html">msmbuilder.preprocessing.Imputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.KernelCenterer.html">msmbuilder.preprocessing.KernelCenterer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.LabelBinarizer.html">msmbuilder.preprocessing.LabelBinarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.MultiLabelBinarizer.html">msmbuilder.preprocessing.MultiLabelBinarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.MinMaxScaler.html">msmbuilder.preprocessing.MinMaxScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.MaxAbsScaler.html">msmbuilder.preprocessing.MaxAbsScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.Normalizer.html">msmbuilder.preprocessing.Normalizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.RobustScaler.html">msmbuilder.preprocessing.RobustScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.StandardScaler.html">msmbuilder.preprocessing.StandardScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.PolynomialFeatures.html">msmbuilder.preprocessing.PolynomialFeatures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Preprocessing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/preprocessing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="preprocessing">
+<span id="id1"></span><h1>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">¶</a></h1>
+<p>Preprocessing of a dataset is a common requirement for many machine learning
+estimators and may involve scaling, centering, normalization, smoothing,
+binarization, and imputation methods.</p>
+<section id="preprocessors">
+<h2>Preprocessors<a class="headerlink" href="#preprocessors" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.Binarizer.html#msmbuilder.preprocessing.Binarizer" title="msmbuilder.preprocessing.Binarizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Binarizer</span></code></a>(*[, threshold, copy])</p></td>
+<td><p>Binarize data (set feature values to 0 or 1) according to a threshold.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.Butterworth.html#msmbuilder.preprocessing.Butterworth" title="msmbuilder.preprocessing.Butterworth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Butterworth</span></code></a>([width, order, analog])</p></td>
+<td><p>Smooth time-series data using a low-pass, zero-delay Butterworth filter.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.EWMA.html#msmbuilder.preprocessing.EWMA" title="msmbuilder.preprocessing.EWMA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EWMA</span></code></a>([com, span, halflife, min_periods, ...])</p></td>
+<td><p>Smooth time-series data using an exponentially-weighted moving average filter</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.DoubleEWMA.html#msmbuilder.preprocessing.DoubleEWMA" title="msmbuilder.preprocessing.DoubleEWMA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DoubleEWMA</span></code></a>([com, span, halflife, ...])</p></td>
+<td><p>Smooth time-series data using forward and backward exponentially-weighted moving average filters</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.Imputer.html#msmbuilder.preprocessing.Imputer" title="msmbuilder.preprocessing.Imputer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Imputer</span></code></a>(*[, missing_values, strategy, ...])</p></td>
+<td><p>Univariate imputer for completing missing values with simple strategies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.KernelCenterer.html#msmbuilder.preprocessing.KernelCenterer" title="msmbuilder.preprocessing.KernelCenterer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KernelCenterer</span></code></a>()</p></td>
+<td><p>Center an arbitrary kernel matrix <span class="math notranslate nohighlight">\(K\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.LabelBinarizer.html#msmbuilder.preprocessing.LabelBinarizer" title="msmbuilder.preprocessing.LabelBinarizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LabelBinarizer</span></code></a>(*[, neg_label, pos_label, ...])</p></td>
+<td><p>Binarize labels in a one-vs-all fashion.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.MultiLabelBinarizer.html#msmbuilder.preprocessing.MultiLabelBinarizer" title="msmbuilder.preprocessing.MultiLabelBinarizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiLabelBinarizer</span></code></a>(*[, classes, sparse_output])</p></td>
+<td><p>Transform between iterable of iterables and a multilabel format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.MinMaxScaler.html#msmbuilder.preprocessing.MinMaxScaler" title="msmbuilder.preprocessing.MinMaxScaler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MinMaxScaler</span></code></a>([feature_range, copy, clip])</p></td>
+<td><p>Transform features by scaling each feature to a given range.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.MaxAbsScaler.html#msmbuilder.preprocessing.MaxAbsScaler" title="msmbuilder.preprocessing.MaxAbsScaler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code></a>(*[, copy])</p></td>
+<td><p>Scale each feature by its maximum absolute value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.Normalizer.html#msmbuilder.preprocessing.Normalizer" title="msmbuilder.preprocessing.Normalizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Normalizer</span></code></a>([norm, copy])</p></td>
+<td><p>Normalize samples individually to unit norm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.RobustScaler.html#msmbuilder.preprocessing.RobustScaler" title="msmbuilder.preprocessing.RobustScaler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RobustScaler</span></code></a>(*[, with_centering, ...])</p></td>
+<td><p>Scale features using statistics that are robust to outliers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.StandardScaler.html#msmbuilder.preprocessing.StandardScaler" title="msmbuilder.preprocessing.StandardScaler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StandardScaler</span></code></a>(*[, copy, with_mean, with_std])</p></td>
+<td><p>Standardize features by removing the mean and scaling to unit variance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_preprocessing/msmbuilder.preprocessing.PolynomialFeatures.html#msmbuilder.preprocessing.PolynomialFeatures" title="msmbuilder.preprocessing.PolynomialFeatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code></a>([degree, ...])</p></td>
+<td><p>Generate polynomial and interaction features.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_feature_selection/msmbuilder.feature_selection.VarianceThreshold.html" class="btn btn-neutral float-left" title="msmbuilder.feature_selection.VarianceThreshold" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_preprocessing/msmbuilder.preprocessing.Binarizer.html" class="btn btn-neutral float-right" title="msmbuilder.preprocessing.Binarizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

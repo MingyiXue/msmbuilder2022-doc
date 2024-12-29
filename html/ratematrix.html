@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Continuous-time MSMs &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="msmbuilder.msm.ContinuousTimeMSM" href="_ratematrix/msmbuilder.msm.ContinuousTimeMSM.html" />
+    <link rel="prev" title="msmbuilder.tpt.mfpts" href="_tpt/msmbuilder.tpt.mfpts.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Continuous-time MSMs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#theory">Theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#uncertainties">Uncertainties</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithms">Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_ratematrix/msmbuilder.msm.ContinuousTimeMSM.html">msmbuilder.msm.ContinuousTimeMSM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Continuous-time MSMs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ratematrix.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="continuous-time-msms">
+<span id="ratematrix"></span><h1>Continuous-time MSMs<a class="headerlink" href="#continuous-time-msms" title="Link to this heading">¶</a></h1>
+<p><a class="reference internal" href="_msm/msmbuilder.msm.MarkovStateModel.html#msmbuilder.msm.MarkovStateModel" title="msmbuilder.msm.MarkovStateModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MarkovStateModel</span></code></a> estimates a series of
+transition <em>probabilities</em> among states that depend on the discrete
+lag-time. Physically, we are probably more interested in a sparse set of
+transition <em>rates</em> in and out of states, estimated by
+<a class="reference internal" href="_ratematrix/msmbuilder.msm.ContinuousTimeMSM.html#msmbuilder.msm.ContinuousTimeMSM" title="msmbuilder.msm.ContinuousTimeMSM"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContinuousTimeMSM</span></code></a>.</p>
+<section id="theory">
+<h2>Theory<a class="headerlink" href="#theory" title="Link to this heading">¶</a></h2>
+<p>Consider an <cite>n</cite>-state time-homogeneous Markov process, <span class="math notranslate nohighlight">\(X(t)\)</span>. At
+time <span class="math notranslate nohighlight">\(t\)</span>, the <span class="math notranslate nohighlight">\(n\)</span>-vector <span class="math notranslate nohighlight">\(P(t) = Pr[ X(t) = i ]\)</span> is the
+probability that the system is in each of the <span class="math notranslate nohighlight">\(n\)</span> states. These
+probabilities evolve forward in time, governed by an <span class="math notranslate nohighlight">\(n \times n\)</span>
+transition rate matrix <span class="math notranslate nohighlight">\(K\)</span></p>
+<div class="math notranslate nohighlight">
+\[dP(t)/dt = P(t) \cdot K\]</div>
+<p>The solution is</p>
+<div class="math notranslate nohighlight">
+\[P(t) = \exp(tK) \cdot P(0)\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\exp(tK)\)</span> is the matrix exponential. Written differently, the
+state-to-state lag-<span class="math notranslate nohighlight">\(\tau\)</span> transition probabilities are</p>
+<div class="math notranslate nohighlight">
+\[Pr[ X(t+\tau) = j \;|\; X(t) = i ] = \exp(\tau K)_{ij}\]</div>
+<p>For this model, we observe the evolution of one or more chains,
+<span class="math notranslate nohighlight">\(X(t)\)</span> at a regular interval, <span class="math notranslate nohighlight">\(\tau\)</span>. Let <span class="math notranslate nohighlight">\(C_{ij}\)</span> be the
+number of times the chain was observed at state <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>
+and at state <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t+\tau\)</span> (the number of observed
+transition counts). Suppose that <span class="math notranslate nohighlight">\(K\)</span> depends on a parameter vector,
+<span class="math notranslate nohighlight">\(\theta\)</span>. The log-likelihood is</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\theta) = \sum_{ij} \left[
+    C_{ij} \log\left(\left[\exp(\tau K(\theta))\right]_{ij}\right)\right]\]</div>
+<p>The <a class="reference internal" href="_ratematrix/msmbuilder.msm.ContinuousTimeMSM.html#msmbuilder.msm.ContinuousTimeMSM" title="msmbuilder.msm.ContinuousTimeMSM"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContinuousTimeMSM</span></code></a> model finds a rate matrix that fits the data
+by maximizing this likelihood expression.  Specifically, it uses L-BFGS-B
+to find a maximum likelihood estimate (MLE) rate matrix,
+<span class="math notranslate nohighlight">\(\hat{\theta}\)</span> and <span class="math notranslate nohighlight">\(K(\hat{\theta})\)</span>.</p>
+<section id="uncertainties">
+<h3>Uncertainties<a class="headerlink" href="#uncertainties" title="Link to this heading">¶</a></h3>
+<p>Analytical estimates of the asymptotic standard deviation in estimated
+parameters like the stationary distribution, rate matrix, eigenvalues, and
+relaxation timescales can be computed by calling methods on the
+<a class="reference internal" href="_ratematrix/msmbuilder.msm.ContinuousTimeMSM.html#msmbuilder.msm.ContinuousTimeMSM" title="msmbuilder.msm.ContinuousTimeMSM"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContinuousTimeMSM</span></code></a> object. See [1] for more detail.</p>
+</section>
+</section>
+<section id="algorithms">
+<h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_ratematrix/msmbuilder.msm.ContinuousTimeMSM.html#msmbuilder.msm.ContinuousTimeMSM" title="msmbuilder.msm.ContinuousTimeMSM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ContinuousTimeMSM</span></code></a>([lag_time, n_timescales, ...])</p></td>
+<td><p>Reversible first order master equation model</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>McGibbon, R. T. and V. S. Pande, “Efficient maximum likelihood parameterization
+of continuous-time Markov processes.” J. Chem. Phys. 143 034109 (2015) <a class="reference external" href="http://dx.doi.org/10.1063/1.4926516">http://dx.doi.org/10.1063/1.4926516</a></p>
+</aside>
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Kalbfleisch, J. D., and Jerald F. Lawless. “The analysis of panel data
+under a Markov assumption.” J. Am. Stat. Assoc. 80.392 (1985): 863-871.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_tpt/msmbuilder.tpt.mfpts.html" class="btn btn-neutral float-left" title="msmbuilder.tpt.mfpts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_ratematrix/msmbuilder.msm.ContinuousTimeMSM.html" class="btn btn-neutral float-right" title="msmbuilder.msm.ContinuousTimeMSM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

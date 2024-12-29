@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markov state models (MSMs) &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="msmbuilder.msm.MarkovStateModel" href="_msm/msmbuilder.msm.MarkovStateModel.html" />
+    <link rel="prev" title="msmbuilder.cluster.SpectralClustering" href="_cluster/msmbuilder.cluster.SpectralClustering.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Markov state models (MSMs)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#algorithms">Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_msm/msmbuilder.msm.MarkovStateModel.html">msmbuilder.msm.MarkovStateModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_msm/msmbuilder.msm.BayesianMarkovStateModel.html">msmbuilder.msm.BayesianMarkovStateModel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#maximum-likelihood-and-bayesian-estimation">Maximum Likelihood and Bayesian Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tradeoffs-and-parameter-selection">Tradeoffs and Parameter Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Markov state models (MSMs)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/msm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="markov-state-models-msms">
+<span id="msm"></span><h1>Markov state models (MSMs)<a class="headerlink" href="#markov-state-models-msms" title="Link to this heading">¶</a></h1>
+<p>Markov state models (MSMs) are a class of models for modeling the
+long-timescale dynamics of molecular systems. They model the dynamics of a
+system as a series of memoryless, probabilistic jumps between a set of
+states. Practically, the model consists of (1) a set of conformational
+states, and (2) a matrix of transition probabilities between each pair of
+states.</p>
+<p>In MSMBuilder, you can use <a class="reference internal" href="_msm/msmbuilder.msm.MarkovStateModel.html#msmbuilder.msm.MarkovStateModel" title="msmbuilder.msm.MarkovStateModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MarkovStateModel</span></code></a> to build MSMs from
+“labeled” trajectories – that is, sequences of integers that are the
+result of <a class="reference internal" href="cluster.html#cluster"><span class="std std-ref">clustering</span></a>.</p>
+<section id="algorithms">
+<h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_msm/msmbuilder.msm.MarkovStateModel.html#msmbuilder.msm.MarkovStateModel" title="msmbuilder.msm.MarkovStateModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkovStateModel</span></code></a>([lag_time, n_timescales, ...])</p></td>
+<td><p>Reversible Markov State Model</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_msm/msmbuilder.msm.BayesianMarkovStateModel.html#msmbuilder.msm.BayesianMarkovStateModel" title="msmbuilder.msm.BayesianMarkovStateModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BayesianMarkovStateModel</span></code></a>([lag_time, ...])</p></td>
+<td><p>Bayesian reversible Markov state model.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="maximum-likelihood-and-bayesian-estimation">
+<h2>Maximum Likelihood and Bayesian Estimation<a class="headerlink" href="#maximum-likelihood-and-bayesian-estimation" title="Link to this heading">¶</a></h2>
+<p>There are two steps in constructing an MSM</p>
+<ol class="arabic">
+<li><p>Count the number of observed transitions between states. That is,
+construct <span class="math notranslate nohighlight">\(\mathbf{C}\)</span> such that <span class="math notranslate nohighlight">\(C_{ij}\)</span> is the number of
+observed transitions from state <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> to state
+<span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t+\tau\)</span>, summed over all times <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Estimate the transition probability matrix, <span class="math notranslate nohighlight">\(\mathbf{T}\)</span></p>
+<div class="math notranslate nohighlight">
+\[T_{ij} = P( s_{t+\tau} = j | s_t = i)\]</div>
+<p>where <span class="math notranslate nohighlight">\(S = (s_t)\)</span> is a trajectory in state-index space of length
+<span class="math notranslate nohighlight">\(N\)</span>, and <span class="math notranslate nohighlight">\(s_t \in \{1, \ldots, k\}\)</span> the state-index of the
+trajectory at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+</li>
+</ol>
+<p>The probability that a given transition probability matrix would generate
+some observed trajectory (the likelihood) is</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\mathbf{T}) = P(S | \mathbf{T}) =
+\prod_{t=0}^{N-\tau} T_{s_t, s_{t+\tau}} = \prod_{i,j}^{k} T_{ij}^{C_{ij}}.\]</div>
+<p>Assuming a prior distribution on <span class="math notranslate nohighlight">\(T\)</span> of the form
+<span class="math notranslate nohighlight">\(P(T)=\prod_{ij} T_{ij}^{B_{ij}}\)</span>, we then have a posterior
+distribution</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{T} | S) \propto \prod_{i,j}^{k} T_{ij}^{B_{ij} + C_{ij}}.\]</div>
+<p>MSMBuilder implements two MSM estimators.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="_msm/msmbuilder.msm.MarkovStateModel.html#msmbuilder.msm.MarkovStateModel" title="msmbuilder.msm.MarkovStateModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">MarkovStateModel</span></code></a> performs maximum likelihood estimation.  It
+estimates a single transition matrix, <span class="math notranslate nohighlight">\(\mathbf{T}\)</span>, to maximimize
+<span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{T})\)</span>.</p></li>
+<li><p><a class="reference internal" href="_msm/msmbuilder.msm.BayesianMarkovStateModel.html#msmbuilder.msm.BayesianMarkovStateModel" title="msmbuilder.msm.BayesianMarkovStateModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesianMarkovStateModel</span></code></a> uses Metropolis Markov chain Monte
+Carlo to (approximately) draw a sample of transition matrices from the
+posterior distribution <span class="math notranslate nohighlight">\(P(\mathbf{T} | S)\)</span>. This sampler is
+described in Metzner et al. <a class="footnote-reference brackets" href="#f5" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> This can be used to estimate the
+sampling uncertainty in functions of the transition matrix (e.g.
+relaxation timescales).</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The uncertainty in the transition matrix (and functions of the
+transition matrix) that can be estimated from
+<a class="reference internal" href="_msm/msmbuilder.msm.BayesianMarkovStateModel.html#msmbuilder.msm.BayesianMarkovStateModel" title="msmbuilder.msm.BayesianMarkovStateModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesianMarkovStateModel</span></code></a> do not <strong>fully</strong> account for all
+sources of error. In particular, the discretization induced by
+clustering produces a negative bias on  the eigenvalues of the
+transition matrix – they asymptotically underestimate the eigenvalues
+of the propagator / transfer operator in the limit of infinite sampling.
+<a class="footnote-reference brackets" href="#f6" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> See section 3D (Quantifying the discretization error) of Prinz et
+al. for more discussion on the discretization error. <a class="footnote-reference brackets" href="#f1" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+</div>
+</section>
+<section id="tradeoffs-and-parameter-selection">
+<h2>Tradeoffs and Parameter Selection<a class="headerlink" href="#tradeoffs-and-parameter-selection" title="Link to this heading">¶</a></h2>
+<p>The most important tradeoff with MSMs is a <a class="reference external" href="http://en.wikipedia.org/wiki/Bias%E2%80%93variance_dilemma">bias-variance dilemma</a> on the
+number of states. We know analytically that the expected value of the
+relaxation timescales is below the true value when using a finite number of
+states, and that the magnitude of this bias decreases as the number of
+states goes up. On the other hand, the statistical error in the MSM
+(variance) goes up as the number of states increases with a fixed data set,
+because there are fewer transitions (data) per element of the transition
+probability matrix.</p>
+<p>There are no existing algorithms in the MSM literature which fully balance
+these competing sources of error in an automatic and practical way,
+although some partially satisfactory algorithms are available. <a class="footnote-reference brackets" href="#f3" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>
+<a class="footnote-reference brackets" href="#f4" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">1</a><span class="fn-bracket">]</span></span>
+<p>Prinz, J.-H., et al. <a class="reference external" href="http://dx.doi.org/10.1063/1.3565032">Markov models of molecular kinetics: Generation and validation</a> J. Chem. Phys. 134.17 (2011): 174105.</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Pande, V. S., K. A. Beauchamp, and G. R. Bowman. <a class="reference external" href="http://dx.doi.org/10.1016/j.ymeth.2010.06.002">Everything you wanted to know about Markov State Models but were afraid to ask</a> Methods 52.1 (2010): 99-105.</p>
+</aside>
+<aside class="footnote brackets" id="f3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">3</a><span class="fn-bracket">]</span></span>
+<p>McGibbon, R. T., C. R. Schwantes, and Vijay S. Pande. <a class="reference external" href="http://dx.doi.org/10.1021/jp411822r">Statistical Model Selection for Markov Models of Biomolecular Dynamics.</a> J. Phys. Chem. B (2014).</p>
+</aside>
+<aside class="footnote brackets" id="f4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">4</a><span class="fn-bracket">]</span></span>
+<p>Kellogg, E. H., O. F. Lange, and D. Baker. <a class="reference external" href="http://dx.doi.org//10.1021/jp3044303">Evaluation and optimization of discrete state models of protein folding.</a> J. Phys. Chem. B 116.37 (2012): 11405-11413.</p>
+</aside>
+<aside class="footnote brackets" id="f5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">5</a><span class="fn-bracket">]</span></span>
+<p>Metzner, P., F. Noe, and C. Schutte. <a class="reference external" href="http://journals.aps.org/pre/abstract/10.1103/PhysRevE.80.021106">Estimating the sampling error: Distribution of transition matrices and functions of transition matrices for given trajectory data.</a> Phys. Rev. E 80.2 (2009): 021106.</p>
+</aside>
+<aside class="footnote brackets" id="f6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">6</a><span class="fn-bracket">]</span></span>
+<p>Nuske, F., et al. <a class="reference external" href="http://pubs.acs.org/doi/abs/10.1021/ct4009156">Variational approach to molecular kinetics.</a> J. Chem. Theory Comput.10.4 (2014): 1739-1752.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_cluster/msmbuilder.cluster.SpectralClustering.html" class="btn btn-neutral float-left" title="msmbuilder.cluster.SpectralClustering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_msm/msmbuilder.msm.MarkovStateModel.html" class="btn btn-neutral float-right" title="msmbuilder.msm.MarkovStateModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

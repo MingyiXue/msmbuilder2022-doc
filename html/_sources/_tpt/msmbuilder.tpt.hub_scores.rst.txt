@@ -1,0 +1,6 @@
+﻿msmbuilder.tpt.hub\_scores
+==========================
+
+.. currentmodule:: msmbuilder.tpt
+
+.. autofunction:: hub_scores

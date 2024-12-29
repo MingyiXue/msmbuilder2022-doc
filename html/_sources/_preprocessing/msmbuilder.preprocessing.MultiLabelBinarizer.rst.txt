@@ -1,0 +1,35 @@
+﻿msmbuilder.preprocessing.MultiLabelBinarizer
+============================================
+
+.. currentmodule:: msmbuilder.preprocessing
+
+.. autoclass:: MultiLabelBinarizer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MultiLabelBinarizer.__init__
+      ~MultiLabelBinarizer.fit
+      ~MultiLabelBinarizer.fit_transform
+      ~MultiLabelBinarizer.get_metadata_routing
+      ~MultiLabelBinarizer.get_params
+      ~MultiLabelBinarizer.inverse_transform
+      ~MultiLabelBinarizer.partial_fit
+      ~MultiLabelBinarizer.partial_transform
+      ~MultiLabelBinarizer.set_output
+      ~MultiLabelBinarizer.set_params
+      ~MultiLabelBinarizer.set_partial_fit_request
+      ~MultiLabelBinarizer.set_transform_request
+      ~MultiLabelBinarizer.summarize
+      ~MultiLabelBinarizer.transform
+   
+   
+
+   
+   
+   

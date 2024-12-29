@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.msm.ContinuousTimeMSM &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hidden Markov models (HMMs)" href="../hmm.html" />
+    <link rel="prev" title="Continuous-time MSMs" href="../ratematrix.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ratematrix.html#theory">Theory</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ratematrix.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.msm.ContinuousTimeMSM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.msm.ContinuousTimeMSM"><code class="docutils literal notranslate"><span class="pre">ContinuousTimeMSM</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../ratematrix.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../ratematrix.html">Continuous-time MSMs</a></li>
+      <li class="breadcrumb-item active">msmbuilder.msm.ContinuousTimeMSM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_ratematrix/msmbuilder.msm.ContinuousTimeMSM.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-msm-continuoustimemsm">
+<h1>msmbuilder.msm.ContinuousTimeMSM<a class="headerlink" href="#msmbuilder-msm-continuoustimemsm" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.msm.ContinuousTimeMSM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.msm.</span></span><span class="sig-name descname"><span class="pre">ContinuousTimeMSM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lag_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_timescales</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ergodic_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'log'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.msm.ContinuousTimeMSM" title="Link to this definition">¶</a></dt>
+<dd><p>Reversible first order master equation model</p>
+<p>This model fits a continuous-time Markov model (master equation) from
+discrete-time integer labeled timeseries. The key estimated attribute,
+<code class="docutils literal notranslate"><span class="pre">ratemat_</span></code>, is a matrix containing the estimated first order rate
+constants between the states. See [1] for details.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>lag_time</strong><span class="classifier">int</span></dt><dd><p>The lag time used to count the number of state to state transition
+events.</p>
+</dd>
+<dt><strong>n_timescales</strong><span class="classifier">int, optional</span></dt><dd><p>Number of implied timescales to calculate.</p>
+</dd>
+<dt><strong>ergodic_cutoff</strong><span class="classifier">int, default=1</span></dt><dd><p>Only the maximal strongly ergodic subgraph of the data is used to build
+an MSM. Ergodicity is determined by ensuring that each state is
+accessible from each other state via one or more paths involving edges
+with a number of observed directed counts greater than or equal to
+<code class="docutils literal notranslate"><span class="pre">ergodic_cutoff</span></code>. Not that by setting <code class="docutils literal notranslate"><span class="pre">ergodic_cutoff</span></code> to 0, this
+trimming is effectively turned off.</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, default=True</span></dt><dd><p>Count transitions using a window of length <code class="docutils literal notranslate"><span class="pre">lag_time</span></code>, which is slid
+along the sequences 1 unit at a time, yielding transitions which contain
+more data but cannot be assumed to be statistically independent. Otherwise,
+the sequences are simply subsampled at an interval of <code class="docutils literal notranslate"><span class="pre">lag_time</span></code>.</p>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">bool, default=False</span></dt><dd><p>Verbosity level</p>
+</dd>
+<dt><strong>guess</strong><span class="classifier">{‘log’, ‘pseudo’, array}, default=’log’</span></dt><dd><p>Method for determining the initial guess rate matrix, as input to the
+optimizer.</p>
+<dl class="simple">
+<dt>‘log’:</dt><dd><p>Initialize from matrix log of the MLE transition matrix</p>
+</dd>
+<dt>‘pseudo’:</dt><dd><p>Initialize from the pseudo-generator, using the 1st order taylor
+expansion of the matrix exponential.</p>
+</dd>
+</dl>
+<p>Otherwise, supply your own (<a href="#id2"><span class="problematic" id="id3">n_states_</span></a> x <a href="#id4"><span class="problematic" id="id5">n_states_</span></a>) numpy array as a
+guess rate matrix.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>n_states_</strong><span class="classifier">int</span></dt><dd><p>The number of states</p>
+</dd>
+<dt><strong>ratemat_</strong><span class="classifier">np.ndarray, shape=(<a href="#id6"><span class="problematic" id="id7">n_states_</span></a>, <a href="#id8"><span class="problematic" id="id9">n_state_</span></a>)</span></dt><dd><p>The estimated state-to-state transition rates.</p>
+</dd>
+<dt><strong>transmat_</strong><span class="classifier">np.ndarray, shape=(<a href="#id10"><span class="problematic" id="id11">n_states_</span></a>, <a href="#id12"><span class="problematic" id="id13">n_state_</span></a>)</span></dt><dd><p>The estimated state-to-state transition probabilities over an interval
+of 1 time unit.</p>
+</dd>
+<dt><strong>timescales_</strong><span class="classifier">array of shape=(n_timescales,)</span></dt><dd><p>Estimated relaxation timescales of the model.</p>
+</dd>
+<dt><strong>populations_</strong><span class="classifier">np.ndarray, shape=(<a href="#id14"><span class="problematic" id="id15">n_states_</span></a>,)</span></dt><dd><p>Estimated stationary probability distribution over the states.</p>
+</dd>
+<dt><strong>countsmat_</strong><span class="classifier">array_like, shape = (<a href="#id16"><span class="problematic" id="id17">n_states_</span></a>, <a href="#id18"><span class="problematic" id="id19">n_states_</span></a>)</span></dt><dd><p>Number of transition counts between states, at a time delay of <code class="docutils literal notranslate"><span class="pre">lag_time</span></code>
+countsmat_[i, j] is counted during <cite>fit()</cite>.</p>
+</dd>
+<dt><strong>optimizer_state_</strong><span class="classifier">object</span></dt><dd><p>Contains information about the optimization termination.</p>
+</dd>
+<dt><strong>mapping_</strong><span class="classifier">dict</span></dt><dd><p>Mapping between “input” labels and internal state indices used by the
+counts and transition matrix for this Markov state model. Input states
+need not necessarily be integers in (0, …, <a href="#id20"><span class="problematic" id="id21">n_states_</span></a> - 1), for
+example. The semantics of <code class="docutils literal notranslate"><span class="pre">mapping_[i]</span> <span class="pre">=</span> <span class="pre">j</span></code> is that state <code class="docutils literal notranslate"><span class="pre">i</span></code> from
+the “input space” is represented by the index <code class="docutils literal notranslate"><span class="pre">j</span></code> in this MSM.</p>
+</dd>
+<dt><strong>theta_</strong><span class="classifier">array of shape n*(n+1)/2 or shorter</span></dt><dd><p>Optimized set of parameters for the model.</p>
+</dd>
+<dt><strong>information_</strong><span class="classifier">np.ndarray, shape=(len(<a href="#id22"><span class="problematic" id="id23">theta_</span></a>), len(<a href="#id24"><span class="problematic" id="id25">theta_</span></a>))</span></dt><dd><p>Approximate inverse of the hessian of the model log-likelihood
+evaluated at <code class="docutils literal notranslate"><span class="pre">theta_</span></code>.</p>
+</dd>
+<dt><strong>eigenvalues_</strong><span class="classifier">array of shape=(n_timescales+1)</span></dt><dd><p>Largest eigenvalues of the rate matrix.</p>
+</dd>
+<dt><strong>left_eigenvectors_</strong><span class="classifier">array of shape=(n_timescales+1)</span></dt><dd><p>Dominant left eigenvectors of the rate matrix.</p>
+</dd>
+<dt><strong>right_eigenvectors_</strong><span class="classifier">array of shape=(n_timescales+1)</span></dt><dd><p>Dominant right eigenvectors of the rate matrix,</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_samples</span></code>(sequences, n_samples[, ...])</p></td>
+<td><p>Sample conformations for a sequences of states.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(X[, y])</p></td>
+<td><p>Fit to data, then transform it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(sequences)</p></td>
+<td><p>Transform a list of sequences from internal indexing into labels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence[, mode])</p></td>
+<td><p>Transform a sequence to internal indexing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_discrete</span></code>([state, n_steps, random_state])</p></td>
+<td><p>Generate a random sequence of states by propagating the model using discrete time steps given by the model lagtime.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../_gmrq/msmbuilder.msm.ContinuousTimeMSM.score.html#msmbuilder.msm.ContinuousTimeMSM.score" title="msmbuilder.msm.ContinuousTimeMSM.score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code></a>(sequences[, y])</p></td>
+<td><p>Score the model on new data using the generalized matrix Rayleigh quotient</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inverse_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_score_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">score</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, mode, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences[, mode])</p></td>
+<td><p>Transform a list of sequences to internal indexing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_K</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the rate matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_eigenvalues</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the model eigenvalues</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_pi</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the stationary distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_timescales</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the model relaxation timescales.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>fit</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../_msm/msmbuilder.msm.MarkovStateModel.html#msmbuilder.msm.MarkovStateModel" title="msmbuilder.msm.MarkovStateModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkovStateModel</span></code></a></dt><dd><p>discrete-time analog</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="rd48f92b08c9d-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>R. T. McGibbon and V. S. Pande, Efficient maximum likelihood
+parameterization of continuous-time Markov processes.” J. Chem. Phys.
+143, 034109 (2015) <a class="reference external" href="http://dx.doi.org/10.1063/1.4926516">http://dx.doi.org/10.1063/1.4926516</a></p>
+</div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.msm.ContinuousTimeMSM.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lag_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_timescales</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ergodic_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'log'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.msm.ContinuousTimeMSM.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.msm.ContinuousTimeMSM.__init__" title="msmbuilder.msm.ContinuousTimeMSM.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([lag_time, n_timescales, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_samples</span></code>(sequences, n_samples[, ...])</p></td>
+<td><p>Sample conformations for a sequences of states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(X[, y])</p></td>
+<td><p>Fit to data, then transform it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(sequences)</p></td>
+<td><p>Transform a list of sequences from internal indexing into labels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence[, mode])</p></td>
+<td><p>Transform a sequence to internal indexing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_discrete</span></code>([state, n_steps, random_state])</p></td>
+<td><p>Generate a random sequence of states by propagating the model using discrete time steps given by the model lagtime.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../_gmrq/msmbuilder.msm.ContinuousTimeMSM.score.html#msmbuilder.msm.ContinuousTimeMSM.score" title="msmbuilder.msm.ContinuousTimeMSM.score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code></a>(sequences[, y])</p></td>
+<td><p>Score the model on new data using the generalized matrix Rayleigh quotient</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inverse_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_score_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">score</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, mode, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences[, mode])</p></td>
+<td><p>Transform a list of sequences to internal indexing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_K</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the rate matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_eigenvalues</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the model eigenvalues</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_pi</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the stationary distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_timescales</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the model relaxation timescales.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score_</span></code></p></td>
+<td><p>Training score of the model, computed as the generalized matrix, Rayleigh quotient, the sum of the first <cite>n_components</cite> eigenvalues</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ratematrix.html" class="btn btn-neutral float-left" title="Continuous-time MSMs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../hmm.html" class="btn btn-neutral float-right" title="Hidden Markov models (HMMs)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

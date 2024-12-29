@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.msm.MarkovStateModel &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.msm.BayesianMarkovStateModel" href="msmbuilder.msm.BayesianMarkovStateModel.html" />
+    <link rel="prev" title="Markov state models (MSMs)" href="../msm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster.html">Clustering</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../msm.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.msm.MarkovStateModel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.msm.MarkovStateModel"><code class="docutils literal notranslate"><span class="pre">MarkovStateModel</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.msm.BayesianMarkovStateModel.html">msmbuilder.msm.BayesianMarkovStateModel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../msm.html#maximum-likelihood-and-bayesian-estimation">Maximum Likelihood and Bayesian Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../msm.html#tradeoffs-and-parameter-selection">Tradeoffs and Parameter Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../msm.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../msm.html">Markov state models (MSMs)</a></li>
+      <li class="breadcrumb-item active">msmbuilder.msm.MarkovStateModel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_msm/msmbuilder.msm.MarkovStateModel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-msm-markovstatemodel">
+<h1>msmbuilder.msm.MarkovStateModel<a class="headerlink" href="#msmbuilder-msm-markovstatemodel" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.msm.MarkovStateModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.msm.</span></span><span class="sig-name descname"><span class="pre">MarkovStateModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lag_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_timescales</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reversible_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ergodic_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'on'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prior_counts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.msm.MarkovStateModel" title="Link to this definition">¶</a></dt>
+<dd><p>Reversible Markov State Model</p>
+<p>This model fits a first-order Markov model to a dataset of integer-valued
+timeseries. The key estimated attribute, <code class="docutils literal notranslate"><span class="pre">transmat_</span></code> is a matrix
+containing the estimated probability of transitioning between pairs
+of states in the duration specified by <code class="docutils literal notranslate"><span class="pre">lag_time</span></code>.</p>
+<p>Unless otherwise specified, the model is constrained to be reversible
+(satisfy detailed balance), which is appropriate for equilibrium chemical
+systems.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>lag_time</strong><span class="classifier">int</span></dt><dd><p>The lag time of the model</p>
+</dd>
+<dt><strong>n_timescales</strong><span class="classifier">int, optional</span></dt><dd><p>The number of dynamical timescales to calculate when diagonalizing
+the transition matrix. If not specified, it will compute n_states - 1</p>
+</dd>
+<dt><strong>reversible_type</strong><span class="classifier">{‘mle’, ‘transpose’, None}</span></dt><dd><p>Method by which the reversibility of the transition matrix
+is enforced. ‘mle’ uses a maximum likelihood method that is
+solved by numerical optimization, and ‘transpose’
+uses a more restrictive (but less computationally complex)
+direct symmetrization of the expected number of counts.</p>
+</dd>
+<dt><strong>ergodic_cutoff</strong><span class="classifier">float or {‘on’, ‘off’}, default=’on’</span></dt><dd><p>Only the maximal strongly ergodic subgraph of the data is used to build
+an MSM. Ergodicity is determined by ensuring that each state is
+accessible from each other state via one or more paths involving edges
+with a number of observed directed counts greater than or equal to
+<code class="docutils literal notranslate"><span class="pre">ergodic_cutoff</span></code>. By setting <code class="docutils literal notranslate"><span class="pre">ergodic_cutoff</span></code> to 0 or
+‘off’, this trimming is turned off. Setting it to ‘on’ sets the
+cutoff to the minimal possible count value.</p>
+</dd>
+<dt><strong>prior_counts</strong><span class="classifier">float, optional</span></dt><dd><p>Add a number of “pseudo counts” to each entry in the counts matrix
+after ergodic trimming.  When prior_counts == 0 (default), the assigned
+transition probability between two states with no observed transitions
+will be zero, whereas when prior_counts &gt; 0, even this unobserved
+transitions will be given nonzero probability.</p>
+</dd>
+<dt><strong>sliding_window</strong><span class="classifier">bool, optional</span></dt><dd><p>Count transitions using a window of length <code class="docutils literal notranslate"><span class="pre">lag_time</span></code>, which is slid
+along the sequences 1 unit at a time, yielding transitions which
+contain more data but cannot be assumed to be statistically
+independent. Otherwise, the sequences are simply subsampled at an
+interval of <code class="docutils literal notranslate"><span class="pre">lag_time</span></code>.</p>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">bool</span></dt><dd><p>Enable verbose printout</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>n_states_</strong><span class="classifier">int</span></dt><dd><p>The number of states in the model</p>
+</dd>
+<dt><strong>mapping_</strong><span class="classifier">dict</span></dt><dd><p>Mapping between “input” labels and internal state indices used by the
+counts and transition matrix for this Markov state model. Input states
+need not necessarily be integers in (0, …, <a href="#id3"><span class="problematic" id="id4">n_states_</span></a> - 1), for
+example. The semantics of <code class="docutils literal notranslate"><span class="pre">mapping_[i]</span> <span class="pre">=</span> <span class="pre">j</span></code> is that state <code class="docutils literal notranslate"><span class="pre">i</span></code> from
+the “input space” is represented by the index <code class="docutils literal notranslate"><span class="pre">j</span></code> in this MSM.</p>
+</dd>
+<dt><strong>countsmat_</strong><span class="classifier">array_like, shape = (<a href="#id5"><span class="problematic" id="id6">n_states_</span></a>, <a href="#id7"><span class="problematic" id="id8">n_states_</span></a>)</span></dt><dd><p>Number of transition counts between states. countsmat_[i, j] is counted
+during <cite>fit()</cite>. The indices <cite>i</cite> and <cite>j</cite> are the “internal” indices
+described above. No correction for reversibility is made to this
+matrix.</p>
+</dd>
+<dt><strong>transmat_</strong><span class="classifier">array_like, shape = (<a href="#id9"><span class="problematic" id="id10">n_states_</span></a>, <a href="#id11"><span class="problematic" id="id12">n_states_</span></a>)</span></dt><dd><p>Maximum likelihood estimate of the reversible transition matrix.
+The indices <cite>i</cite> and <cite>j</cite> are the “internal” indices described above.</p>
+</dd>
+<dt><strong>populations_</strong><span class="classifier">array, shape = (<a href="#id13"><span class="problematic" id="id14">n_states_</span></a>,)</span></dt><dd><p>The equilibrium population (stationary eigenvector) of <a href="#id15"><span class="problematic" id="id16">transmat_</span></a></p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_samples</span></code>(sequences, n_samples[, ...])</p></td>
+<td><p>Sample conformations for a sequences of states.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigtransform</span></code>(sequences[, right, mode])</p></td>
+<td><p>Transform a list of sequences by projecting the sequences onto the first <cite>n_timescales</cite> dynamical eigenvectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Estimate model parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(X[, y])</p></td>
+<td><p>Fit to data, then transform it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(sequences)</p></td>
+<td><p>Transform a list of sequences from internal indexing into labels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence[, mode])</p></td>
+<td><p>Transform a sequence to internal indexing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_discrete</span></code>([state, n_steps, random_state])</p></td>
+<td><p>Generate a random sequence of states by propagating the model using discrete time steps given by the model lagtime.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../_gmrq/msmbuilder.msm.MarkovStateModel.score.html#msmbuilder.msm.MarkovStateModel.score" title="msmbuilder.msm.MarkovStateModel.score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code></a>(sequences[, y])</p></td>
+<td><p>Score the model on new data using the generalized matrix Rayleigh quotient</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score_ll</span></code>(sequences)</p></td>
+<td><p>log of the likelihood of sequences with respect to the model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inverse_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_score_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">score</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, mode, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences[, mode])</p></td>
+<td><p>Transform a list of sequences to internal indexing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_eigenvalues</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the model eigenvalues.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_timescales</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the model implied timescales.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>sample</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="r13587292dadd-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Prinz, Jan-Hendrik, et al. “Markov models of molecular kinetics:
+Generation and validation.” J Chem. Phys. 134.17 (2011): 174105.</p>
+</div>
+<div class="citation" id="r13587292dadd-2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Pande, V. S., K. A. Beauchamp, and G. R. Bowman. “Everything you
+wanted to know about Markov State Models but were afraid to ask”
+Methods 52.1 (2010): 99-105.</p>
+</div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.msm.MarkovStateModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lag_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_timescales</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reversible_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mle'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ergodic_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'on'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prior_counts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sliding_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.msm.MarkovStateModel.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.msm.MarkovStateModel.__init__" title="msmbuilder.msm.MarkovStateModel.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([lag_time, n_timescales, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_samples</span></code>(sequences, n_samples[, ...])</p></td>
+<td><p>Sample conformations for a sequences of states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigtransform</span></code>(sequences[, right, mode])</p></td>
+<td><p>Transform a list of sequences by projecting the sequences onto the first <cite>n_timescales</cite> dynamical eigenvectors.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Estimate model parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(X[, y])</p></td>
+<td><p>Fit to data, then transform it.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(sequences)</p></td>
+<td><p>Transform a list of sequences from internal indexing into labels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence[, mode])</p></td>
+<td><p>Transform a sequence to internal indexing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample</span></code>([state, n_steps, random_state])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_discrete</span></code>([state, n_steps, random_state])</p></td>
+<td><p>Generate a random sequence of states by propagating the model using discrete time steps given by the model lagtime.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../_gmrq/msmbuilder.msm.MarkovStateModel.score.html#msmbuilder.msm.MarkovStateModel.score" title="msmbuilder.msm.MarkovStateModel.score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code></a>(sequences[, y])</p></td>
+<td><p>Score the model on new data using the generalized matrix Rayleigh quotient</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score_ll</span></code>(sequences)</p></td>
+<td><p>log of the likelihood of sequences with respect to the model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inverse_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_score_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">score</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, mode, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences[, mode])</p></td>
+<td><p>Transform a list of sequences to internal indexing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_eigenvalues</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the model eigenvalues.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">uncertainty_timescales</span></code>()</p></td>
+<td><p>Estimate of the element-wise asymptotic standard deviation in the model implied timescales.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigenvalues_</span></code></p></td>
+<td><p>Eigenvalues of the transition matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">left_eigenvectors_</span></code></p></td>
+<td><p>Left eigenvectors, <span class="math notranslate nohighlight">\(\Phi\)</span>, of the transition matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">right_eigenvectors_</span></code></p></td>
+<td><p>Right eigenvectors, <span class="math notranslate nohighlight">\(\Psi\)</span>, of the transition matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score_</span></code></p></td>
+<td><p>Training score of the model, computed as the generalized matrix, Rayleigh quotient, the sum of the first <cite>n_components</cite> eigenvalues</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_labels_</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">timescales_</span></code></p></td>
+<td><p>Implied relaxation timescales of the model.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../msm.html" class="btn btn-neutral float-left" title="Markov state models (MSMs)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.msm.BayesianMarkovStateModel.html" class="btn btn-neutral float-right" title="msmbuilder.msm.BayesianMarkovStateModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

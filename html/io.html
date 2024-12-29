@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I/O &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="msmbuilder.io.load_trajs" href="_io/msmbuilder.io.load_trajs.html" />
+    <link rel="prev" title="Datasets" href="datasets.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">I/O</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dictionary-of-trajectories">Dictionary of trajectories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mapping-keys-to-filenames">Mapping keys to filenames</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#msmbuilder.io.io.default_key_to_path"><code class="docutils literal notranslate"><span class="pre">default_key_to_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#estimators">Estimators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saving-and-loading">Saving and loading</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.load_trajs.html">msmbuilder.io.load_trajs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.save_trajs.html">msmbuilder.io.save_trajs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.load_meta.html">msmbuilder.io.load_meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.save_meta.html">msmbuilder.io.save_meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.backup.html">msmbuilder.io.backup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.render_meta.html">msmbuilder.io.render_meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.load_generic.html">msmbuilder.io.load_generic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.save_generic.html">msmbuilder.io.save_generic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.itertrajs.html">msmbuilder.io.itertrajs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.preload_tops.html">msmbuilder.io.preload_tops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.preload_top.html">msmbuilder.io.preload_top</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gathering-metadata">Gathering Metadata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.gather_metadata.html">msmbuilder.io.gather_metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.GenericParser.html">msmbuilder.io.GenericParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.NumberedRunsParser.html">msmbuilder.io.NumberedRunsParser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.HierarchyParser.html">msmbuilder.io.HierarchyParser</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#project-templates">Project Templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_io/msmbuilder.io.TemplateProject.html">msmbuilder.io.TemplateProject</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">I/O</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/io.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="i-o">
+<span id="io"></span><h1>I/O<a class="headerlink" href="#i-o" title="Link to this heading">¶</a></h1>
+<p>A new, comprehensive way of doing data input and output has been introduced
+in MSMBuidler 3.6. The previous <a class="reference internal" href="datasets.html#datasets"><span class="std std-ref">dataset</span></a> method will still be supported
+and may be appropriate in certain cases, especially if your data can’t all
+fit in memory.</p>
+<section id="dictionary-of-trajectories">
+<h2>Dictionary of trajectories<a class="headerlink" href="#dictionary-of-trajectories" title="Link to this heading">¶</a></h2>
+<p>MSMBuilder learns from and transforms a collection of sequences. While the time-ordering
+of each sequence is important, the order of the sequences themselves has no special
+meaning. For I/O, we treat collections of sequences as a dictionary mapping between arbitrary
+keys and the sequences (which are probably 2D numpy arrays). Because our sequences
+are time-series, we call them “trajectories”, although they may not be in normal
+Cartesian space.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">io</span></code> module
+assumes a python dictionary. Ideally, we would use our dictionary keys
+as filenames for individual sequences saved as individual <code class="docutils literal notranslate"><span class="pre">.npy</span></code> files
+on disk. In practice, python dictionaries can be any python object and filenames
+must be unique strings. The <code class="docutils literal notranslate"><span class="pre">io</span></code> module have a mapping from python-object keys
+to  filenames. It’s important to note that
+the converse (going from filename to python object) does not need to be codified.
+That’s because (in contrast to the <a class="reference internal" href="datasets.html#datasets"><span class="std std-ref">dataset</span></a> approach) we persist the set
+of keys in a separate metadata file. This file is saved using python’s <code class="docutils literal notranslate"><span class="pre">pickle</span></code>
+protocol and can contain arbitrary python objects <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>We don’t just serialize the whole python dictionary of sequences using
+<code class="docutils literal notranslate"><span class="pre">pickle</span></code>, because it chokes on big numpy arrays.</p>
+</aside>
+</aside>
+</section>
+<section id="mapping-keys-to-filenames">
+<h2>Mapping keys to filenames<a class="headerlink" href="#mapping-keys-to-filenames" title="Link to this heading">¶</a></h2>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">msmbuilder.io</span></code> can handle mapping of “normal” dictionary keys
+to filenames. This should work well with strings, integers, or tuples of the above.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="msmbuilder.io.io.default_key_to_path">
+<span class="sig-prename descclassname"><span class="pre">msmbuilder.io.io.</span></span><span class="sig-name descname"><span class="pre">default_key_to_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dfmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ffmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}.npy'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.io.io.default_key_to_path" title="Link to this definition">¶</a></dt>
+<dd><p>Turn an arbitrary python object into a filename</p>
+<p>This uses string formatting, so make sure your keys map
+to unique strings. If the key is a tuple, it will join each
+element of the tuple with ‘/’, resulting in a filesystem
+hierarchy of files.</p>
+</dd></dl>
+
+</section>
+<section id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Link to this heading">¶</a></h2>
+<p>Per-sequence information should be persisted in a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.
+They <code class="docutils literal notranslate"><span class="pre">index</span></code> of the dataframe should be they keys used in the trajectory.
+This dataframe is required for the saving and loading functions, as it serves
+as the canonical list of keys.</p>
+</section>
+<section id="estimators">
+<h2>Estimators<a class="headerlink" href="#estimators" title="Link to this heading">¶</a></h2>
+<p>Estimators are persisted using the generic <code class="docutils literal notranslate"><span class="pre">pickle</span></code> protocol.</p>
+</section>
+<section id="saving-and-loading">
+<h2>Saving and loading<a class="headerlink" href="#saving-and-loading" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_io/msmbuilder.io.load_trajs.html#msmbuilder.io.load_trajs" title="msmbuilder.io.load_trajs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_trajs</span></code></a>(fn[, meta, key_to_path])</p></td>
+<td><p>Load trajectory-like data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_io/msmbuilder.io.save_trajs.html#msmbuilder.io.save_trajs" title="msmbuilder.io.save_trajs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_trajs</span></code></a>(trajs, fn, meta[, key_to_path])</p></td>
+<td><p>Save trajectory-like data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_io/msmbuilder.io.load_meta.html#msmbuilder.io.load_meta" title="msmbuilder.io.load_meta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_meta</span></code></a>([meta_fn])</p></td>
+<td><p>Load metadata associated with a project.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_io/msmbuilder.io.save_meta.html#msmbuilder.io.save_meta" title="msmbuilder.io.save_meta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_meta</span></code></a>(meta[, meta_fn])</p></td>
+<td><p>Save metadata associated with a project.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_io/msmbuilder.io.backup.html#msmbuilder.io.backup" title="msmbuilder.io.backup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backup</span></code></a>(fn)</p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">fn</span></code> exists, rename it and issue a warning</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_io/msmbuilder.io.render_meta.html#msmbuilder.io.render_meta" title="msmbuilder.io.render_meta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">render_meta</span></code></a>(meta[, fn, title, pandas_kwargs])</p></td>
+<td><p>Render a metadata dataframe as an html webpage for inspection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_io/msmbuilder.io.load_generic.html#msmbuilder.io.load_generic" title="msmbuilder.io.load_generic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_generic</span></code></a>(fn)</p></td>
+<td><p>Load Python objects, including msmbuilder Estimators.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_io/msmbuilder.io.save_generic.html#msmbuilder.io.save_generic" title="msmbuilder.io.save_generic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_generic</span></code></a>(obj, fn)</p></td>
+<td><p>Save Python objects, including msmbuilder Estimators.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_io/msmbuilder.io.itertrajs.html#msmbuilder.io.itertrajs" title="msmbuilder.io.itertrajs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">itertrajs</span></code></a>(meta[, stride])</p></td>
+<td><p>Load one mdtraj trajectory at a time and yield it.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_io/msmbuilder.io.preload_tops.html#msmbuilder.io.preload_tops" title="msmbuilder.io.preload_tops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">preload_tops</span></code></a>(meta)</p></td>
+<td><p>Load all topology files into memory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_io/msmbuilder.io.preload_top.html#msmbuilder.io.preload_top" title="msmbuilder.io.preload_top"><code class="xref py py-obj docutils literal notranslate"><span class="pre">preload_top</span></code></a>(meta)</p></td>
+<td><p>Load one topology file into memory.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gathering-metadata">
+<h2>Gathering Metadata<a class="headerlink" href="#gathering-metadata" title="Link to this heading">¶</a></h2>
+<p>Gathering trajectory metadata should come at the start of an MSM project
+after you have collected and pre-processed your molecular dynamics trajectories.
+We provide utilities for parsing metadata for common ways of organizing a set
+of molecular dynamics trajectories</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_io/msmbuilder.io.gather_metadata.html#msmbuilder.io.gather_metadata" title="msmbuilder.io.gather_metadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gather_metadata</span></code></a>(fn_glob, parser)</p></td>
+<td><p>Given a glob and a parser object, create a metadata dataframe.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_io/msmbuilder.io.GenericParser.html#msmbuilder.io.GenericParser" title="msmbuilder.io.GenericParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericParser</span></code></a>(fn_re, group_names, ...)</p></td>
+<td><p>Parse trajectories in a fully configurable manner</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_io/msmbuilder.io.NumberedRunsParser.html#msmbuilder.io.NumberedRunsParser" title="msmbuilder.io.NumberedRunsParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NumberedRunsParser</span></code></a>([traj_fmt, top_fn, step_ps])</p></td>
+<td><p>Parse trajectories that are numbered with integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_io/msmbuilder.io.HierarchyParser.html#msmbuilder.io.HierarchyParser" title="msmbuilder.io.HierarchyParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HierarchyParser</span></code></a>([levels, n_levels, top_fn, ...])</p></td>
+<td><p>Parse a hierarchical index from files nested in directories</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="project-templates">
+<h2>Project Templates<a class="headerlink" href="#project-templates" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">msmb</span> <span class="pre">TempalteProject</span></code> command-line command generates a set of example
+scripts to serve as a framework for an MSM project. You can use this
+functionality programatically.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_io/msmbuilder.io.TemplateProject.html#msmbuilder.io.TemplateProject" title="msmbuilder.io.TemplateProject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TemplateProject</span></code></a>([root, step, ipynb, display])</p></td>
+<td><p>A class to be used for wrapping on the command line.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The templates are stored in <code class="docutils literal notranslate"><span class="pre">msmbuilder/project_templates</span></code>. They are jinja2
+templates.</p>
+<blockquote>
+<div><ul>
+<li><p>Python files can optionally be converted into IPython notebooks during template rendering.
+Indicate where cell breaks should happen with <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Description</span> <span class="pre">goes</span> <span class="pre">here</span></code></p></li>
+<li><p>The hierarchy of the template project is <em>not</em> read from the <code class="docutils literal notranslate"><span class="pre">msmbuilder/project_templates</span></code>
+source filesystem hierarchy. It’s explicitly listed as a Python expression in <code class="docutils literal notranslate"><span class="pre">msmbuilder.io</span></code>.
+If you add a new template file, make sure you list it in <code class="docutils literal notranslate"><span class="pre">msmbuilder.io</span></code> or it will not be rendered.</p></li>
+<li><p>Templates can contain yaml “front matter”. For some reason, jinja2 doesn’t support this, so it is
+parsed explicitly by MSMBuilder. Include the yaml as the last element in the file’s docstring under
+a numpydoc heading “Meta”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Meta</span>
+<span class="o">----</span>
+<span class="n">depends</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">meta</span><span class="o">.</span><span class="n">pandas</span><span class="o">.</span><span class="n">pickl</span>
+<span class="n">arbitrary_key</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">arbitrary</span> <span class="n">data</span>
+</pre></div>
+</div>
+</li>
+<li><p>MSMBuilder defines some variables for use in your templates including <code class="docutils literal notranslate"><span class="pre">{{header}}</span></code> and <code class="docutils literal notranslate"><span class="pre">{{date}}</span></code>.
+For a complete list, check the rendering code.</p></li>
+<li><p>Plotting scripts should include the following macros <strong>before</strong> any imports:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ? include &quot;plot_header.template&quot;</span>
+<span class="c1"># ? from &quot;plot_macros.template&quot; import xdg_open with context</span>
+</pre></div>
+</div>
+<p>This will set up matplotlib to use the correct backend. Add:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># {{xdg_open(&#39;filename.pdf&#39;)}}</span>
+</pre></div>
+</div>
+<p>to have a call to xdg-open inserted based on user configuration.</p>
+</li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="datasets.html" class="btn btn-neutral float-left" title="Datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_io/msmbuilder.io.load_trajs.html" class="btn btn-neutral float-right" title="msmbuilder.io.load_trajs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

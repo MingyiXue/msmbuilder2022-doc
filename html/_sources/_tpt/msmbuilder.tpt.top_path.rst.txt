@@ -1,0 +1,6 @@
+﻿msmbuilder.tpt.top\_path
+========================
+
+.. currentmodule:: msmbuilder.tpt
+
+.. autofunction:: top_path

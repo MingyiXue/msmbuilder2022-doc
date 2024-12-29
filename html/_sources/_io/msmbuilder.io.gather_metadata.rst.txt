@@ -1,0 +1,6 @@
+﻿msmbuilder.io.gather\_metadata
+==============================
+
+.. currentmodule:: msmbuilder.io
+
+.. autofunction:: gather_metadata

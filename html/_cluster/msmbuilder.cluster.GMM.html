@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.cluster.GMM &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.cluster.MeanShift" href="msmbuilder.cluster.MeanShift.html" />
+    <link rel="prev" title="msmbuilder.cluster.AffinityPropagation" href="msmbuilder.cluster.AffinityPropagation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../cluster.html">Clustering</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cluster.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KCenters.html">msmbuilder.cluster.KCenters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KMeans.html">msmbuilder.cluster.KMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KMedoids.html">msmbuilder.cluster.KMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMedoids.html">msmbuilder.cluster.MiniBatchKMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.RegularSpatial.html">msmbuilder.cluster.RegularSpatial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.LandmarkAgglomerative.html">msmbuilder.cluster.LandmarkAgglomerative</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.AffinityPropagation.html">msmbuilder.cluster.AffinityPropagation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.cluster.GMM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.cluster.GMM"><code class="docutils literal notranslate"><span class="pre">GMM</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MeanShift.html">msmbuilder.cluster.MeanShift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMeans.html">msmbuilder.cluster.MiniBatchKMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.SpectralClustering.html">msmbuilder.cluster.SpectralClustering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../cluster.html">Clustering</a></li>
+      <li class="breadcrumb-item active">msmbuilder.cluster.GMM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_cluster/msmbuilder.cluster.GMM.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-cluster-gmm">
+<h1>msmbuilder.cluster.GMM<a class="headerlink" href="#msmbuilder-cluster-gmm" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.cluster.GMM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.cluster.</span></span><span class="sig-name descname"><span class="pre">GMM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_covar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kmeans'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">means_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precisions_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warm_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.GMM" title="Link to this definition">¶</a></dt>
+<dd><p>Gaussian Mixture.</p>
+<p>Representation of a Gaussian mixture model probability distribution.
+This class allows to estimate the parameters of a Gaussian mixture
+distribution.</p>
+<p>Read more in the <a class="reference external" href="https://scikit-learn.org/stable/modules/mixture.html#gmm" title="(in scikit-learn v1.6)"><span class="xref std std-ref">User Guide</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.18.</span></p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>n_components</strong><span class="classifier">int, default=1</span></dt><dd><p>The number of mixture components.</p>
+</dd>
+<dt><strong>covariance_type</strong><span class="classifier">{‘full’, ‘tied’, ‘diag’, ‘spherical’}, default=’full’</span></dt><dd><p>String describing the type of covariance parameters to use.
+Must be one of:</p>
+<ul class="simple">
+<li><p>‘full’: each component has its own general covariance matrix.</p></li>
+<li><p>‘tied’: all components share the same general covariance matrix.</p></li>
+<li><p>‘diag’: each component has its own diagonal covariance matrix.</p></li>
+<li><p>‘spherical’: each component has its own single variance.</p></li>
+</ul>
+</dd>
+<dt><strong>tol</strong><span class="classifier">float, default=1e-3</span></dt><dd><p>The convergence threshold. EM iterations will stop when the
+lower bound average gain is below this threshold.</p>
+</dd>
+<dt><strong>reg_covar</strong><span class="classifier">float, default=1e-6</span></dt><dd><p>Non-negative regularization added to the diagonal of covariance.
+Allows to assure that the covariance matrices are all positive.</p>
+</dd>
+<dt><strong>max_iter</strong><span class="classifier">int, default=100</span></dt><dd><p>The number of EM iterations to perform.</p>
+</dd>
+<dt><strong>n_init</strong><span class="classifier">int, default=1</span></dt><dd><p>The number of initializations to perform. The best results are kept.</p>
+</dd>
+<dt><strong>init_params</strong><span class="classifier">{‘kmeans’, ‘k-means++’, ‘random’, ‘random_from_data’},     default=’kmeans’</span></dt><dd><p>The method used to initialize the weights, the means and the
+precisions.
+String must be one of:</p>
+<ul class="simple">
+<li><p>‘kmeans’ : responsibilities are initialized using kmeans.</p></li>
+<li><p>‘k-means++’ : use the k-means++ method to initialize.</p></li>
+<li><p>‘random’ : responsibilities are initialized randomly.</p></li>
+<li><p>‘random_from_data’ : initial means are randomly selected data points.</p></li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version v1.1: </span><cite>init_params</cite> now accepts ‘random_from_data’ and ‘k-means++’ as
+initialization methods.</p>
+</div>
+</dd>
+<dt><strong>weights_init</strong><span class="classifier">array-like of shape (n_components, ), default=None</span></dt><dd><p>The user-provided initial weights.
+If it is None, weights are initialized using the <cite>init_params</cite> method.</p>
+</dd>
+<dt><strong>means_init</strong><span class="classifier">array-like of shape (n_components, n_features), default=None</span></dt><dd><p>The user-provided initial means,
+If it is None, means are initialized using the <cite>init_params</cite> method.</p>
+</dd>
+<dt><strong>precisions_init</strong><span class="classifier">array-like, default=None</span></dt><dd><p>The user-provided initial precisions (inverse of the covariance
+matrices).
+If it is None, precisions are initialized using the ‘init_params’
+method.
+The shape depends on ‘covariance_type’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">n_components</span><span class="p">,)</span>                        <span class="k">if</span> <span class="s1">&#39;spherical&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>               <span class="k">if</span> <span class="s1">&#39;tied&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>             <span class="k">if</span> <span class="s1">&#39;diag&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;full&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int, RandomState instance or None, default=None</span></dt><dd><p>Controls the random seed given to the method chosen to initialize the
+parameters (see <cite>init_params</cite>).
+In addition, it controls the generation of random samples from the
+fitted distribution (see the method <cite>sample</cite>).
+Pass an int for reproducible output across multiple function calls.
+See <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-random_state" title="(in scikit-learn v1.6)"><span class="xref std std-term">Glossary</span></a>.</p>
+</dd>
+<dt><strong>warm_start</strong><span class="classifier">bool, default=False</span></dt><dd><p>If ‘warm_start’ is True, the solution of the last fitting is used as
+initialization for the next call of fit(). This can speed up
+convergence when fit is called several times on similar problems.
+In that case, ‘n_init’ is ignored and only a single initialization
+occurs upon the first call.
+See <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-warm_start" title="(in scikit-learn v1.6)"><span class="xref std std-term">the Glossary</span></a>.</p>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">int, default=0</span></dt><dd><p>Enable verbose output. If 1 then it prints the current
+initialization and each iteration step. If greater than 1 then
+it prints also the log probability and the time needed
+for each step.</p>
+</dd>
+<dt><strong>verbose_interval</strong><span class="classifier">int, default=10</span></dt><dd><p>Number of iteration done before the next print.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>weights_</strong><span class="classifier">array-like of shape (n_components,)</span></dt><dd><p>The weights of each mixture components.</p>
+</dd>
+<dt><strong>means_</strong><span class="classifier">array-like of shape (n_components, n_features)</span></dt><dd><p>The mean of each mixture component.</p>
+</dd>
+<dt><strong>covariances_</strong><span class="classifier">array-like</span></dt><dd><p>The covariance of each mixture component.
+The shape depends on <cite>covariance_type</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">n_components</span><span class="p">,)</span>                        <span class="k">if</span> <span class="s1">&#39;spherical&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>               <span class="k">if</span> <span class="s1">&#39;tied&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>             <span class="k">if</span> <span class="s1">&#39;diag&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;full&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>precisions_</strong><span class="classifier">array-like</span></dt><dd><p>The precision matrices for each component in the mixture. A precision
+matrix is the inverse of a covariance matrix. A covariance matrix is
+symmetric positive definite so the mixture of Gaussian can be
+equivalently parameterized by the precision matrices. Storing the
+precision matrices instead of the covariance matrices makes it more
+efficient to compute the log-likelihood of new samples at test time.
+The shape depends on <cite>covariance_type</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">n_components</span><span class="p">,)</span>                        <span class="k">if</span> <span class="s1">&#39;spherical&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>               <span class="k">if</span> <span class="s1">&#39;tied&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>             <span class="k">if</span> <span class="s1">&#39;diag&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;full&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>precisions_cholesky_</strong><span class="classifier">array-like</span></dt><dd><p>The cholesky decomposition of the precision matrices of each mixture
+component. A precision matrix is the inverse of a covariance matrix.
+A covariance matrix is symmetric positive definite so the mixture of
+Gaussian can be equivalently parameterized by the precision matrices.
+Storing the precision matrices instead of the covariance matrices makes
+it more efficient to compute the log-likelihood of new samples at test
+time. The shape depends on <cite>covariance_type</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">n_components</span><span class="p">,)</span>                        <span class="k">if</span> <span class="s1">&#39;spherical&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>               <span class="k">if</span> <span class="s1">&#39;tied&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>             <span class="k">if</span> <span class="s1">&#39;diag&#39;</span><span class="p">,</span>
+<span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;full&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>converged_</strong><span class="classifier">bool</span></dt><dd><p>True when convergence of the best fit of EM was reached, False otherwise.</p>
+</dd>
+<dt><strong>n_iter_</strong><span class="classifier">int</span></dt><dd><p>Number of step used by the best fit of EM to reach the convergence.</p>
+</dd>
+<dt><strong>lower_bound_</strong><span class="classifier">float</span></dt><dd><p>Lower bound value on the log-likelihood (of the training data with
+respect to the model) of the best fit of EM.</p>
+</dd>
+<dt><strong>n_features_in_</strong><span class="classifier">int</span></dt><dd><p>Number of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+<dt><strong>feature_names_in_</strong><span class="classifier">ndarray of shape (<cite>n_features_in_</cite>,)</span></dt><dd><p>Names of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>. Defined only when <cite>X</cite>
+has feature names that are all strings.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">aic</span></code>(X)</p></td>
+<td><p>Akaike information criterion for the current model on the input X.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bic</span></code>(X)</p></td>
+<td><p>Bayesian information criterion for the current model on the input X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the  clustering on the data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y])</p></td>
+<td><p>Performs clustering on X and returns cluster labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_proba</span></code>(X)</p></td>
+<td><p>Evaluate the components' density for each sample.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample</span></code>([n_samples])</p></td>
+<td><p>Generate random samples from the fitted Gaussian distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X[, y])</p></td>
+<td><p>Compute the per-sample average log-likelihood of the given data X.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score_samples</span></code>(X)</p></td>
+<td><p>Compute the log-likelihood of each sample.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">BayesianGaussianMixture</span></code></dt><dd><p>Gaussian mixture model fit with a variational inference.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.mixture</span> <span class="kn">import</span> <span class="n">GaussianMixture</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gm</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gm</span><span class="o">.</span><span class="n">means_</span>
+<span class="go">array([[10.,  2.],</span>
+<span class="go">       [ 1.,  2.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gm</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="go">array([1, 0])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.cluster.GMM.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_covar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'kmeans'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">means_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precisions_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warm_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.GMM.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.cluster.GMM.__init__" title="msmbuilder.cluster.GMM.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([n_components, covariance_type, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">aic</span></code>(X)</p></td>
+<td><p>Akaike information criterion for the current model on the input X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bic</span></code>(X)</p></td>
+<td><p>Bayesian information criterion for the current model on the input X.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the  clustering on the data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y])</p></td>
+<td><p>Performs clustering on X and returns cluster labels.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_proba</span></code>(X)</p></td>
+<td><p>Evaluate the components' density for each sample.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample</span></code>([n_samples])</p></td>
+<td><p>Generate random samples from the fitted Gaussian distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X[, y])</p></td>
+<td><p>Compute the per-sample average log-likelihood of the given data X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score_samples</span></code>(X)</p></td>
+<td><p>Compute the log-likelihood of each sample.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.cluster.AffinityPropagation.html" class="btn btn-neutral float-left" title="msmbuilder.cluster.AffinityPropagation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.cluster.MeanShift.html" class="btn btn-neutral float-right" title="msmbuilder.cluster.MeanShift" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

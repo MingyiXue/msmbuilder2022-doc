@@ -1,0 +1,33 @@
+﻿msmbuilder.preprocessing.EWMA
+=============================
+
+.. currentmodule:: msmbuilder.preprocessing
+
+.. autoclass:: EWMA
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~EWMA.__init__
+      ~EWMA.fit
+      ~EWMA.fit_transform
+      ~EWMA.get_metadata_routing
+      ~EWMA.get_params
+      ~EWMA.partial_fit
+      ~EWMA.partial_transform
+      ~EWMA.set_params
+      ~EWMA.set_partial_fit_request
+      ~EWMA.set_transform_request
+      ~EWMA.summarize
+      ~EWMA.transform
+   
+   
+
+   
+   
+   

@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decomposition &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="msmbuilder.decomposition.tICA" href="_decomposition/msmbuilder.decomposition.tICA.html" />
+    <link rel="prev" title="msmbuilder.preprocessing.PolynomialFeatures" href="_preprocessing/msmbuilder.preprocessing.PolynomialFeatures.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Decomposition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tica">tICA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pca">PCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithms">Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_decomposition/msmbuilder.decomposition.tICA.html">msmbuilder.decomposition.tICA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_decomposition/msmbuilder.decomposition.SparseTICA.html">msmbuilder.decomposition.SparseTICA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_decomposition/msmbuilder.decomposition.PCA.html">msmbuilder.decomposition.PCA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#theory">Theory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">PCA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">tICA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hyperparameters">Hyperparameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drawbacks">Drawbacks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#combination-with-msm">Combination with MSM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Decomposition</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/decomposition.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="decomposition">
+<span id="id1"></span><h1>Decomposition<a class="headerlink" href="#decomposition" title="Link to this heading">¶</a></h1>
+<section id="tica">
+<h2>tICA<a class="headerlink" href="#tica" title="Link to this heading">¶</a></h2>
+<figure class="align-right" id="id10">
+<img alt="_images/tica_vs_pca.png" src="_images/tica_vs_pca.png" />
+<figcaption>
+<p><span class="caption-text">tICA compared to PCA (courtesy of C. R. Schwantes)</span><a class="headerlink" href="#id10" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Time-structure independent components analysis (tICA) is a method for
+finding the slowest-relaxing degrees of freedom in a time series data set
+which can be formed from linear combinations from a set of input degrees of
+freedom.</p>
+<p>tICA can be used as a dimensionality reduction method and, in that capacity,
+is somewhat similar to PCA.  However whereas PCA finds high-variance
+linear combinations of the input degrees of freedom, tICA finds
+high-autocorrelation linear combinations of the input degrees of freedom.</p>
+<p>The tICA method has one obvious drawback: its solution is
+a linear combination of all input degrees of freedom, and their
+relative weights are typically non-zero. This makes each independent component
+difficult to interpret in an algorithmic fashion because
+it could comprise hundreds or thousands of different metrics.
+Because an important property of reaction coordinates is their
+role in facilitating physical interpretation of the underlying molecular
+system, we consider it desirable to reduce the number of
+explicitly used variables. SparseTICA <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> attempts to resolve this
+interpretability issue by using a sparse approximation to
+the eigenvalue problem found in tICA and returning independent components
+composed of only the most relevant degrees of freedom.</p>
+<p>Another limitation of tICA is that it is constrained to finding linear
+correlations between input coordinates. The KernelTICA method <a class="footnote-reference brackets" href="#f5" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>
+provides a natural extension to nonlinear functions by utilizing the kernel
+trick and represents a substantial improvement in estimating the
+eigenfunctions of the transfer operator directly.</p>
+</section>
+<section id="pca">
+<h2>PCA<a class="headerlink" href="#pca" title="Link to this heading">¶</a></h2>
+<p>Principal component analysis (PCA) is a method for finding the most
+highly varying degrees of freedom in a data set (not necessarily a time
+series). PCA is useful as a dimensionality reduction method.</p>
+</section>
+<section id="algorithms">
+<h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_decomposition/msmbuilder.decomposition.tICA.html#msmbuilder.decomposition.tICA" title="msmbuilder.decomposition.tICA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tICA</span></code></a>([n_components, lag_time, shrinkage, ...])</p></td>
+<td><p>Time-structure Independent Component Analysis (tICA)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_decomposition/msmbuilder.decomposition.SparseTICA.html#msmbuilder.decomposition.SparseTICA" title="msmbuilder.decomposition.SparseTICA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SparseTICA</span></code></a>([n_components, lag_time, rho, ...])</p></td>
+<td><p>Sparse time-structure Independent Component Analysis (tICA).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_decomposition/msmbuilder.decomposition.PCA.html#msmbuilder.decomposition.PCA" title="msmbuilder.decomposition.PCA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PCA</span></code></a>([n_components, copy, whiten, ...])</p></td>
+<td><p>Principal component analysis (PCA).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="theory">
+<h2>Theory<a class="headerlink" href="#theory" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>PCA<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>PCA tries to find projection vectors that maximize their
+explained variance, subject to them being uncorrelated and having length
+one. In the end, these maximal variance projections correspond to the
+solutions of the following eigenvalue problem:</p>
+<div class="math notranslate nohighlight">
+\[\Sigma v = \lambda v\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Sigma\)</span> is the covariance matrix given by:</p>
+<div class="math notranslate nohighlight">
+\[\Sigma_{ij} = \mathbb{E}\Big[ X_i(t) X_j(t) \Big]\]</div>
+<p>The problem with using PCA to define a reduced space for biomolecular
+dynamics, however, is
+that high-variance degrees of freedom need not be slow (for instance
+consider a floppy protein tail that varies wildly vs. a single dihedral
+angle that is required to rotate for a protein to fold). What we really
+want is to design projections that can best differentiate between slowly
+equilibrating populations, which is precisely where tICA comes in.</p>
+</section>
+<section id="id5">
+<h3>tICA<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>In tICA, the goal is to find projection vectors that maximize their
+autocorrelation function, subject to them being uncorrelated and having
+unit variance. It is easy to show <a class="footnote-reference brackets" href="#f1" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> that the solution to the tICA
+problem are the solutions to this generalized eigenvalue problem (which is
+closely related to the PCA eigenvalue problem):</p>
+<div class="math notranslate nohighlight">
+\[C^{(\Delta t)} v = \lambda \Sigma v\]</div>
+<p>where <span class="math notranslate nohighlight">\(C^{(\Delta t)}\)</span> is the time lag correlation matrix defined
+by:</p>
+<div class="math notranslate nohighlight">
+\[C^{(\Delta t)}_{ij} = \mathbb{E}\Big[ X_i(t) X_j(t+\Delta t) \Big]\]</div>
+<p>Given this solution, we can use the tICA method to define a reduced
+dimensionality representation of each <span class="math notranslate nohighlight">\(\mathbf{X}(t)\)</span> by
+projecting the vector onto the slowest <span class="math notranslate nohighlight">\(n\)</span> tICs.</p>
+</section>
+<section id="hyperparameters">
+<h3>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Link to this heading">¶</a></h3>
+<p>There are two parameters introduced in the tICA method. The first is
+<span class="math notranslate nohighlight">\(\Delta t\)</span>, which is used in the calculation of the time-lag
+correlation matrix (<span class="math notranslate nohighlight">\(C^{(\Delta t)}\)</span>). The second is <span class="math notranslate nohighlight">\(n\)</span>,
+which is the number of tICs to project onto when calculating distances
+between conformations. You can use <a class="reference internal" href="gmrq.html#gmrq"><span class="std std-ref">the GMRQ score</span></a> to choose
+these parameters. Typical values are of order nanoseconds and tens,
+respectively.</p>
+</section>
+<section id="drawbacks">
+<h3>Drawbacks<a class="headerlink" href="#drawbacks" title="Link to this heading">¶</a></h3>
+<p>Since part of the process of using tICA is a dimensionality reduction,
+there is always the opportunity to throw out important pieces of
+information. By throwing out the faster degrees of freedom, we can better
+estimate the slowest timescales; but this comes with the trade-off of not
+representing the fast timescales correctly.</p>
+</section>
+</section>
+<section id="combination-with-msm">
+<h2>Combination with MSM<a class="headerlink" href="#combination-with-msm" title="Link to this heading">¶</a></h2>
+<p>While the tICs are themselves approximations to the dominant eigenfunctions
+of the propagator / transfer operator, the approach taken in <a class="footnote-reference brackets" href="#f1" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and
+<a class="footnote-reference brackets" href="#f2" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> is to “stack” tICA with <a class="reference internal" href="msm.html#msm"><span class="std std-ref">MSMs</span></a>. For example, in <a class="footnote-reference brackets" href="#f2" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>,
+Perez-Hernandez et al.  first measured the 66 atom-atom distances between a
+set of atoms in each frame of their MD trajectories, and then used tICA to
+find the slowest 1, 4, and 10 linear combinations of these degrees of
+freedom and transform the 66-dimensional dataset into a 1, 4, or
+10-dimensional dataset. Then, they applied
+<a class="reference internal" href="_cluster/msmbuilder.cluster.KMeans.html#msmbuilder.cluster.KMeans" title="msmbuilder.cluster.KMeans"><code class="xref py py-class docutils literal notranslate"><span class="pre">KMeans</span></code></a> to the resulting data and built an MSM.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id7">2</a>)</span>
+<p>Schwantes, Christian R., and Vijay S. Pande. <a class="reference external" href="http://dx.doi.org/10.1021/ct300878a">Improvements in Markov State Model Construction Reveal Many Non-Native Interactions in the Folding of NTL9</a> J. Chem Theory Comput. 9.4 (2013): 2000-2009.</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id8">2</a>,<a role="doc-backlink" href="#id9">3</a>)</span>
+<p>Perez-Hernandez, Guillermo, et al. <a class="reference external" href="http://dx.doi.org/10.1063/1.4811489">Identification of slow molecular order parameters for Markov model construction</a> J Chem. Phys (2013): 015102.</p>
+</aside>
+<aside class="footnote brackets" id="f3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<p>Naritomi, Yusuke, and Sotaro Fuchigami. <a class="reference external" href="http://dx.doi.org/10.1063/1.3554380">Slow dynamics in protein fluctuations revealed by time-structure based independent component analysis: The case of domain motions</a> J. Chem. Phys. 134.6 (2011): 065101.</p>
+</aside>
+<aside class="footnote brackets" id="f4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<p>McGibbon, R. T. &amp; Pande, V. S. <a class="reference external" href="http://arxiv.org/abs/1602.08776">Identification of simple reaction coordinates from complex dynamics</a> ArXiv 16 (2016).</p>
+</aside>
+<aside class="footnote brackets" id="f5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">5</a><span class="fn-bracket">]</span></span>
+<p>Schwantes, Christian R., and Vijay S. Pande. <a class="reference external" href="http://dx.doi.org/10.1021/ct5007357">Modeling Molecular Kinetics with tICA and the Kernel Trick</a> J. Chem Theory Comput. 11.2 (2015): 600–608.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_preprocessing/msmbuilder.preprocessing.PolynomialFeatures.html" class="btn btn-neutral float-left" title="msmbuilder.preprocessing.PolynomialFeatures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_decomposition/msmbuilder.decomposition.tICA.html" class="btn btn-neutral float-right" title="msmbuilder.decomposition.tICA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

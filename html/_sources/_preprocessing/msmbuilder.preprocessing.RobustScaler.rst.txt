@@ -1,0 +1,36 @@
+﻿msmbuilder.preprocessing.RobustScaler
+=====================================
+
+.. currentmodule:: msmbuilder.preprocessing
+
+.. autoclass:: RobustScaler
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RobustScaler.__init__
+      ~RobustScaler.fit
+      ~RobustScaler.fit_transform
+      ~RobustScaler.get_feature_names_out
+      ~RobustScaler.get_metadata_routing
+      ~RobustScaler.get_params
+      ~RobustScaler.inverse_transform
+      ~RobustScaler.partial_fit
+      ~RobustScaler.partial_transform
+      ~RobustScaler.set_output
+      ~RobustScaler.set_params
+      ~RobustScaler.set_partial_fit_request
+      ~RobustScaler.set_transform_request
+      ~RobustScaler.summarize
+      ~RobustScaler.transform
+   
+   
+
+   
+   
+   

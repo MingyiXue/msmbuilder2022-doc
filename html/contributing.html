@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Publications" href="publications.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#users">Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developers">Developers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tests">Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contributing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/contributing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">¶</a></h1>
+<p>MSMBuilder is a collaborative project and we welcome all contributions.</p>
+<section id="users">
+<h2>Users<a class="headerlink" href="#users" title="Link to this heading">¶</a></h2>
+<p>If you find a bug or have a question, consider opening an <a class="reference external" href="https://github.com/msmbuilder/msmbuilder/issues">issue</a>. We’re mainly grad
+student researchers, not software developers or support staff, so have
+patience if someone doesn’t respond immediately. Don’t be afraid to “bump”
+a thread if it’s been a couple days.</p>
+<p>If you are an MSMBuilder user, we encourage you to “watch” the issue
+tracker. The developers will often solicit feedback about design decisions
+and features. Your input is important! You can also contribute by answering
+other users’ questions.</p>
+</section>
+<section id="developers">
+<h2>Developers<a class="headerlink" href="#developers" title="Link to this heading">¶</a></h2>
+<p>To contribute a bug-fix or improvement, submit a pull request. Make sure
+the changed code is <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">pep8</a>
+compliant. Add a simple test case that would have failed but now passes
+with your contribution. Make a note of the change in the <a class="reference internal" href="changelog.html#changelog"><span class="std std-ref">changelog</span></a>
+by editing <code class="docutils literal notranslate"><span class="pre">docs/changelog.rst</span></code>. If you need help or clarification on any
+of these points, open a pull request and we’ll be more than happy to help.</p>
+<p>To contribute a new feature, submit a pull request. The code should be
+<a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">pep8</a> compliant. Include a
+suite of tests to (1) verify your feature is working as intended and (2)
+will not be broken in the future. Describe the feature in the
+<a class="reference internal" href="changelog.html#changelog"><span class="std std-ref">changelog</span></a> by editing <code class="docutils literal notranslate"><span class="pre">docs/changelog.rst</span></code>. Provide literature
+citations if applicable. We encourage you to add an example IPython notebook
+that demonstrates your new feature. It should run quickly and make a pretty
+plot. This is a great way to advertise your new feature.
+If you need help or clarification on any of these points, open a pull
+request and we’ll be more than happy to help.</p>
+<section id="tests">
+<h3>Tests<a class="headerlink" href="#tests" title="Link to this heading">¶</a></h3>
+<p>We use unit testing to make sure things work properly to start with, and
+don’t get broken in the future.  Tests are organized into files roughly
+corresponding to <code class="docutils literal notranslate"><span class="pre">msmbuilder</span></code> modules in <code class="docutils literal notranslate"><span class="pre">msmbuilder/tests/test_*.py</span></code>.
+Each test script contains a number of short, self-contained functions
+beginning with the name <code class="docutils literal notranslate"><span class="pre">test_</span></code>. You can add new tests to an existing
+file, or create a new file if it’s appropriate. The new tests will
+automatically get discovered and run by our continuous integration (CI)
+workers. Don’t use relative imports in the tests. Don’t use docstrings in
+the tests. <code class="docutils literal notranslate"><span class="pre">nose</span></code> (our test runner) will use the docstrings as the name
+of the test, and this is often not what we want. Include pseudo-docstrings
+as ordinary comments at the top of each function and name the test function
+descriptively</p>
+<p>To run the tests, install msmbuilder (<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code> or
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">develop</span></code>) and then run <code class="docutils literal notranslate"><span class="pre">nosetests</span> <span class="pre">msmbuilder</span></code>
+<strong>outside of the source directory</strong>. It won’t import the right thing if you
+run from the source directory.</p>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<p>Contribute an example IPython notebook by putting it in the <code class="docutils literal notranslate"><span class="pre">examples/</span></code>
+directory. We’ll probably format it and do the incantations to make it show
+up in the published docs. Clear all outputs before committing the notebook
+in git.</p>
+<p>To include an example notebook in the docs (contributors other than
+core-developers ignore this): Create <code class="docutils literal notranslate"><span class="pre">docs/examples/Notebook-Name.rst</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Notebook</span> <span class="n">Pretty</span> <span class="n">Title</span>
+<span class="o">=====================</span>
+
+<span class="o">..</span> <span class="n">notebook</span><span class="p">::</span> <span class="n">Notebook</span><span class="o">-</span><span class="n">Name</span>
+</pre></div>
+</div>
+<p>And add <code class="docutils literal notranslate"><span class="pre">Notebook-Name</span></code> to the toctree in <code class="docutils literal notranslate"><span class="pre">docs/examples/index.rst</span></code>.
+The rendering code is in <code class="docutils literal notranslate"><span class="pre">docs/sphinxext/notebook_sphinxext.py</span></code>.
+Presumably, we could streamline this process so you only have to deposit a
+notebook in <code class="docutils literal notranslate"><span class="pre">examples/</span></code> and it will automatically get added to the docs.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="publications.html" class="btn btn-neutral float-left" title="Publications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

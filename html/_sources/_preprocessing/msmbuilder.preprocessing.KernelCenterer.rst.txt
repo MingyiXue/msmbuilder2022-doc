@@ -1,0 +1,35 @@
+﻿msmbuilder.preprocessing.KernelCenterer
+=======================================
+
+.. currentmodule:: msmbuilder.preprocessing
+
+.. autoclass:: KernelCenterer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~KernelCenterer.__init__
+      ~KernelCenterer.fit
+      ~KernelCenterer.fit_transform
+      ~KernelCenterer.get_feature_names_out
+      ~KernelCenterer.get_metadata_routing
+      ~KernelCenterer.get_params
+      ~KernelCenterer.partial_fit
+      ~KernelCenterer.partial_transform
+      ~KernelCenterer.set_output
+      ~KernelCenterer.set_params
+      ~KernelCenterer.set_partial_fit_request
+      ~KernelCenterer.set_transform_request
+      ~KernelCenterer.summarize
+      ~KernelCenterer.transform
+   
+   
+
+   
+   
+   

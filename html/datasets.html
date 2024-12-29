@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datasets &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="I/O" href="io.html" />
+    <link rel="prev" title="msmbuilder.hmm.VonMisesHMM" href="_hmm/msmbuilder.hmm.VonMisesHMM.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Datasets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#datasets-on-disk">Datasets on Disk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trajectory-datasets-read-only">Trajectory Datasets - Read only</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provenance-information">Provenance Information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#msmbuilder.dataset.dataset"><code class="docutils literal notranslate"><span class="pre">dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#msmbuilder.utils.dump"><code class="docutils literal notranslate"><span class="pre">dump()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#msmbuilder.utils.load"><code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Datasets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/datasets.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="datasets">
+<span id="id1"></span><h1>Datasets<a class="headerlink" href="#datasets" title="Link to this heading">¶</a></h1>
+<p>MSMBuilder prior to version 3.6 relied on the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> utility for
+trajectory loading and intermediate data persistence.
+The two types of objects to be persisted on disk are datasets and models.</p>
+<section id="id2">
+<h2>Datasets<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">dataset</span></code> is a collection of timeseries, or “sequences”.
+Each timeseries usually represents a single molecular
+dynamics trajectory, and may be represented in a number of different
+formats</p>
+<ul class="simple">
+<li><p>A sequence may be an instance of <code class="docutils literal notranslate"><span class="pre">mdtraj.Trajectory</span></code>, a molecular
+dynamics trajectory object.</p></li>
+<li><p>A sequence may be a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> 2D array with shape <code class="docutils literal notranslate"><span class="pre">n_frames</span> <span class="pre">x</span>
+<span class="pre">n_features</span></code>, representing the projection of each frame in molecular
+dynamics trajectory into some vector space of dimension
+<span class="math notranslate nohighlight">\(\mathbb{R}^{n_{features}}\)</span>. The leading dimension of length
+<code class="docutils literal notranslate"><span class="pre">n_frames</span></code> indexes over the timeseries. For example,
+<a class="reference internal" href="featurization.html#featurization"><span class="std std-ref">featurization</span></a> takes a list of trajectories and returns a
+list of feature arrays.</p></li>
+<li><p>A sequence may be an integer-valued 1D array with shape <code class="docutils literal notranslate"><span class="pre">n_frames</span></code>.
+For example, <a class="reference internal" href="cluster.html#cluster"><span class="std std-ref">clustering</span></a> takes a list of feature arrays and
+returns a list of sequences of state indices.</p></li>
+</ul>
+<section id="datasets-on-disk">
+<h3>Datasets on Disk<a class="headerlink" href="#datasets-on-disk" title="Link to this heading">¶</a></h3>
+<p>MSMBuilder can read and write datasets to and from disk in two
+formats: <code class="docutils literal notranslate"><span class="pre">hdf5</span></code> and <code class="docutils literal notranslate"><span class="pre">dir-npy</span></code>. From the Python API, you must choose
+which format to write. The command-line application chooses the most
+sensible option for you.</p>
+<p>With HDF5, the dataset containing all of the trajectories is contained in a
+single file on disk. This is generally the most convenient, but can be
+unwieldy for large datasets. The transformed output of <code class="docutils literal notranslate"><span class="pre">msmb</span> <span class="pre">tICA</span></code>,
+<code class="docutils literal notranslate"><span class="pre">msmb</span> <span class="pre">PCA</span></code>, and clustering commands is stored in HDF5 format.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">dir-npy</span></code> format stores the dataset as a collection of uncompressed
+numpy <code class="docutils literal notranslate"><span class="pre">.npy</span></code> files in a directory on disk. This is the most suitable for
+large datasets, because it enables features like memory-mapped IO. The
+transformed output of <code class="docutils literal notranslate"><span class="pre">msmb</span></code> Featurizer commands are stored in
+<code class="docutils literal notranslate"><span class="pre">dir-npy</span></code> format.</p>
+</section>
+<section id="trajectory-datasets-read-only">
+<h3>Trajectory Datasets - Read only<a class="headerlink" href="#trajectory-datasets-read-only" title="Link to this heading">¶</a></h3>
+<p>Trajectory datasets are loaded using MDTraj. This requires specifying a
+<a class="reference external" href="http://en.wikipedia.org/wiki/Glob_%28programming%29">glob</a> pattern for
+the trajectories, as well as the topology. MSMBuilder does not write
+trajectory datasets.</p>
+</section>
+<section id="provenance-information">
+<h3>Provenance Information<a class="headerlink" href="#provenance-information" title="Link to this heading">¶</a></h3>
+<p>When msmbuilder saves a dataset, it also saves information which can be
+used to trace the provenance of the dataset.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>msmb<span class="w"> </span>AtomPairsFeaturizer<span class="w"> </span>--out<span class="w"> </span>atom_pairs<span class="w">  </span>--trjs<span class="w"> </span><span class="s1">&#39;*.dcd&#39;</span><span class="w">  </span>--pair_indices<span class="w"> </span>atom_indices.txt<span class="w">  </span>--top<span class="w"> </span>top.pdb
+
+<span class="o">[</span>...<span class="o">]</span>
+
+$<span class="w"> </span>ls<span class="w"> </span>atom_pairs
+<span class="m">00000000</span>.npy<span class="w">   </span><span class="m">00000002</span>.npy<span class="w">   </span><span class="m">00000004</span>.npy<span class="w">   </span><span class="m">00000006</span>.npy<span class="w">   </span><span class="m">00000008</span>.npy<span class="w">   </span>PROVENANCE.txt
+<span class="m">00000001</span>.npy<span class="w">   </span><span class="m">00000003</span>.npy<span class="w">   </span><span class="m">00000005</span>.npy<span class="w">   </span><span class="m">00000007</span>.npy<span class="w">   </span><span class="m">00000009</span>.npy
+
+$<span class="w"> </span>cat<span class="w"> </span>atom_pairs/PROVENANCE.txt
+MSMBuilder<span class="w"> </span>Dataset:
+<span class="w">  </span>MSMBuilder:<span class="w">       </span><span class="m">3</span>.0.0-beta.dev-99bc8a9
+<span class="w">  </span>Command:<span class="w">  </span>msmb<span class="w"> </span>AtomPairsFeaturizer<span class="w"> </span>--out<span class="w"> </span>atom_pairs<span class="w">  </span>--trjs<span class="w"> </span><span class="s1">&#39;*.dcd&#39;</span><span class="w">  </span>--pair_indices
+<span class="w">  </span>Path:<span class="w">             </span>atom_pairs/
+<span class="w">  </span>Username:<span class="w"> </span>rmcgibbo
+<span class="w">  </span>Hostname:<span class="w"> </span>Computer-3.local
+<span class="w">  </span>Date:<span class="w">             </span>December<span class="w"> </span><span class="m">01</span>,<span class="w"> </span><span class="m">2014</span><span class="w"> </span><span class="m">12</span>:16<span class="w"> </span>AM
+<span class="w">  </span>Comments:
+
+<span class="o">==</span><span class="w"> </span>Derived<span class="w"> </span><span class="nv">from</span><span class="w"> </span><span class="o">==</span>
+MDTraj<span class="w"> </span>dataset:
+<span class="w">  </span>path:<span class="w">             </span>*.dcd
+<span class="w">  </span>topology:<span class="w"> </span>/Users/rmcgibbo/msmbuilder_data/alanine_dipeptide/top.pdb
+<span class="w">  </span>stride:<span class="w">   </span><span class="m">1</span>
+<span class="w">  </span>atom_indices<span class="w">      </span>None
+</pre></div>
+</div>
+</section>
+</section>
+<section id="models">
+<h2>Models<a class="headerlink" href="#models" title="Link to this heading">¶</a></h2>
+<p>MSMBuilder models can be losslessly persisted to disk using Python’s pickle
+infrastructure. We recommend using the functions
+<a class="reference internal" href="#msmbuilder.utils.load" title="msmbuilder.utils.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">msmbuilder.utils.load()</span></code></a> and <a class="reference internal" href="#msmbuilder.utils.dump" title="msmbuilder.utils.dump"><code class="xref py py-func docutils literal notranslate"><span class="pre">msmbuilder.utils.dump()</span></code></a> to load and
+save models respectively. The pickle format is not secure against malicious
+attacks. Don’t load MSMBuilder models from untrusted sources.</p>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="msmbuilder.dataset.dataset">
+<span class="sig-prename descclassname"><span class="pre">msmbuilder.dataset.</span></span><span class="sig-name descname"><span class="pre">dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.dataset.dataset" title="Link to this definition">¶</a></dt>
+<dd><p>Open a dataset object</p>
+<p>MSMBuilder supports several dataset ‘formats’ for storing
+lists of sequences on disk.</p>
+<p>This function can also be used as a context manager.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>path</strong><span class="classifier">str</span></dt><dd><p>The path to the dataset on the filesystem</p>
+</dd>
+<dt><strong>mode</strong><span class="classifier">{‘r’, ‘w’, ‘a’}</span></dt><dd><p>Open a dataset for reading, writing, or appending. Note that
+some formats only support a subset of these modes.</p>
+</dd>
+<dt><strong>fmt</strong><span class="classifier">{‘dir-npy’, ‘hdf5’, ‘mdtraj’}</span></dt><dd><p>The format of the data on disk</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">dir-npy</span></code></dt><dd><p>A directory of binary numpy files, one file per sequence</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hdf5</span></code></dt><dd><p>A single hdf5 file with each sequence as an array node</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mdtraj</span></code></dt><dd><p>A read-only set of trajectory files that can be loaded
+with mdtraj</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">bool</span></dt><dd><p>Whether to print information about the dataset</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="msmbuilder.utils.dump">
+<span class="sig-prename descclassname"><span class="pre">msmbuilder.utils.</span></span><span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.utils.dump" title="Link to this definition">¶</a></dt>
+<dd><p>Save an arbitrary python object using pickle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>value</strong><span class="classifier">any Python object</span></dt><dd><p>The object to store to disk using pickle.</p>
+</dd>
+<dt><strong>filename</strong><span class="classifier">string</span></dt><dd><p>The name of the file in which it is to be stored</p>
+</dd>
+<dt><strong>compress</strong><span class="classifier">None</span></dt><dd><p>No longer used</p>
+</dd>
+<dt><strong>cache_size</strong><span class="classifier">positive number, optional</span></dt><dd><p>No longer used</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#msmbuilder.utils.load" title="msmbuilder.utils.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a></dt><dd><p>corresponding loader</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="msmbuilder.utils.load">
+<span class="sig-prename descclassname"><span class="pre">msmbuilder.utils.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.utils.load" title="Link to this definition">¶</a></dt>
+<dd><p>Load an object that has been saved with dump.</p>
+<p>We try to open it using the pickle protocol. As a fallback, we
+use joblib.load. Joblib was the default prior to msmbuilder v3.2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filename</strong><span class="classifier">string</span></dt><dd><p>The name of the file to load.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_hmm/msmbuilder.hmm.VonMisesHMM.html" class="btn btn-neutral float-left" title="msmbuilder.hmm.VonMisesHMM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="io.html" class="btn btn-neutral float-right" title="I/O" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

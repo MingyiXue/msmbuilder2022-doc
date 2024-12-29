@@ -1,0 +1,228 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transition Path Theory &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="msmbuilder.tpt.fluxes" href="_tpt/msmbuilder.tpt.fluxes.html" />
+    <link rel="prev" title="msmbuilder.msm.ContinuousTimeMSM.score" href="_gmrq/msmbuilder.msm.ContinuousTimeMSM.score.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Transition Path Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_tpt/msmbuilder.tpt.fluxes.html">msmbuilder.tpt.fluxes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_tpt/msmbuilder.tpt.net_fluxes.html">msmbuilder.tpt.net_fluxes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_tpt/msmbuilder.tpt.fraction_visited.html">msmbuilder.tpt.fraction_visited</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_tpt/msmbuilder.tpt.hub_scores.html">msmbuilder.tpt.hub_scores</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_tpt/msmbuilder.tpt.paths.html">msmbuilder.tpt.paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_tpt/msmbuilder.tpt.top_path.html">msmbuilder.tpt.top_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_tpt/msmbuilder.tpt.committors.html">msmbuilder.tpt.committors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_tpt/msmbuilder.tpt.conditional_committors.html">msmbuilder.tpt.conditional_committors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_tpt/msmbuilder.tpt.mfpts.html">msmbuilder.tpt.mfpts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Transition Path Theory</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tpt.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="transition-path-theory">
+<span id="tpt"></span><h1>Transition Path Theory<a class="headerlink" href="#transition-path-theory" title="Link to this heading">¶</a></h1>
+<p>Transition path theory (TPT) is a way to extract the highest-flux pathways
+of your system from an estimated MSM.</p>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<p>These are some canonical references for TPT. Note that TPT is really a
+specialization of ideas very familiar to the mathematical study of Markov
+chains, and there are many books, manuscripts in the mathematical
+literature that cover the same concepts.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>E, Weinan and Vanden-Eijnden, Eric Towards a Theory of Transition Paths
+J. Stat. Phys. 123 503-523 (2006)</p>
+</aside>
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Metzner, P., Schutte, C. &amp; Vanden-Eijnden, E. Transition path theory
+for Markov jump processes. Multiscale Model. Simul. 7, 1192-1219
+(2009).</p>
+</aside>
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<p>Berezhkovskii, A., Hummer, G. &amp; Szabo, A. Reactive flux and folding
+pathways in network models of coarse-grained protein dynamics. J.
+Chem. Phys. 130, 205102 (2009).</p>
+</aside>
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<p>Noé, Frank, et al. “Constructing the equilibrium ensemble of folding
+pathways from short off-equilibrium simulations.” PNAS 106.45 (2009):
+19011-19016.</p>
+</aside>
+</aside>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_tpt/msmbuilder.tpt.fluxes.html#msmbuilder.tpt.fluxes" title="msmbuilder.tpt.fluxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fluxes</span></code></a>(sources, sinks, msm[, for_committors])</p></td>
+<td><p>Compute the transition path theory flux matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_tpt/msmbuilder.tpt.net_fluxes.html#msmbuilder.tpt.net_fluxes" title="msmbuilder.tpt.net_fluxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">net_fluxes</span></code></a>(sources, sinks, msm[, for_committors])</p></td>
+<td><p>Computes the transition path theory net flux matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_tpt/msmbuilder.tpt.fraction_visited.html#msmbuilder.tpt.fraction_visited" title="msmbuilder.tpt.fraction_visited"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fraction_visited</span></code></a>(source, sink, waypoint, msm)</p></td>
+<td><p>Calculate the fraction of times a walker on <cite>tprob</cite> going from <cite>sources</cite> to <cite>sinks</cite> will travel through the set of states <cite>waypoints</cite> en route.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_tpt/msmbuilder.tpt.hub_scores.html#msmbuilder.tpt.hub_scores" title="msmbuilder.tpt.hub_scores"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hub_scores</span></code></a>(msm[, waypoints])</p></td>
+<td><p>Calculate the hub score for one or more waypoints</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_tpt/msmbuilder.tpt.paths.html#msmbuilder.tpt.paths" title="msmbuilder.tpt.paths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paths</span></code></a>(sources, sinks, net_flux[, ...])</p></td>
+<td><p>Get the top N paths by iteratively performing Dijkstra's algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_tpt/msmbuilder.tpt.top_path.html#msmbuilder.tpt.top_path" title="msmbuilder.tpt.top_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">top_path</span></code></a>(sources, sinks, net_flux)</p></td>
+<td><p>Use the Dijkstra algorithm for finding the shortest path connecting a set of source states from a set of sink states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_tpt/msmbuilder.tpt.committors.html#msmbuilder.tpt.committors" title="msmbuilder.tpt.committors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">committors</span></code></a>(sources, sinks, msm)</p></td>
+<td><p>Get the forward committors of the reaction sources -&gt; sinks.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_tpt/msmbuilder.tpt.conditional_committors.html#msmbuilder.tpt.conditional_committors" title="msmbuilder.tpt.conditional_committors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conditional_committors</span></code></a>(source, sink, ...)</p></td>
+<td><p>Computes the conditional committors <span class="math notranslate nohighlight">\(q^{ABC^+}\)</span> which are is the probability of starting in one state and visiting state B before A while also visiting state C at some point.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_tpt/msmbuilder.tpt.mfpts.html#msmbuilder.tpt.mfpts" title="msmbuilder.tpt.mfpts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mfpts</span></code></a>(msm[, sinks, lag_time, errors, n_samples])</p></td>
+<td><p>Gets the Mean First Passage Time (MFPT) for all states to a <em>set</em> of sinks.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_gmrq/msmbuilder.msm.ContinuousTimeMSM.score.html" class="btn btn-neutral float-left" title="msmbuilder.msm.ContinuousTimeMSM.score" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_tpt/msmbuilder.tpt.fluxes.html" class="btn btn-neutral float-right" title="msmbuilder.tpt.fluxes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

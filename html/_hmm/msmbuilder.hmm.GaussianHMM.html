@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.hmm.GaussianHMM &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.hmm.VonMisesHMM" href="msmbuilder.hmm.VonMisesHMM.html" />
+    <link rel="prev" title="Hidden Markov models (HMMs)" href="../hmm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../hmm.html#hmms-for-biophysics">HMMs for Biophysics</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../hmm.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.hmm.GaussianHMM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.hmm.GaussianHMM"><code class="docutils literal notranslate"><span class="pre">GaussianHMM</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.hmm.VonMisesHMM.html">msmbuilder.hmm.VonMisesHMM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../hmm.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+      <li class="breadcrumb-item active">msmbuilder.hmm.GaussianHMM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_hmm/msmbuilder.hmm.GaussianHMM.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-hmm-gaussianhmm">
+<h1>msmbuilder.hmm.GaussianHMM<a class="headerlink" href="#msmbuilder-hmm-gaussianhmm" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.hmm.GaussianHMM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.hmm.</span></span><span class="sig-name descname"><span class="pre">GaussianHMM</span></span><a class="headerlink" href="#msmbuilder.hmm.GaussianHMM" title="Link to this definition">¶</a></dt>
+<dd><p>Reversible Gaussian Hidden Markov Model L1-Fusion Regularization</p>
+<p>This model estimates Hidden Markov model for a vector dataset which is
+contained to be reversible (satisfy detailed balance) with Gaussian
+emission distributions. This model is similar to a <code class="docutils literal notranslate"><span class="pre">MarkovStateModel</span></code>
+without a “hard” assignments of conformations to clusters. Optionally, it
+can apply L1-regularization to the positions of the Gaussians. See [1] for
+details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n_states</strong><span class="classifier">int</span></dt><dd><p>The number of components (states) in the model</p>
+</dd>
+<dt><strong>n_init</strong><span class="classifier">int</span></dt><dd><p>Number of time the EM algorithm will be run with different
+random seeds. The final results will be the best output of
+n_init consecutive runs in terms of log likelihood.</p>
+</dd>
+<dt><strong>n_iter</strong><span class="classifier">int</span></dt><dd><p>The maximum number of iterations of expectation-maximization to
+run during each fitting round.</p>
+</dd>
+<dt><strong>n_lqa_iter</strong><span class="classifier">int</span></dt><dd><p>The number of iterations of the local quadratic approximation fixed
+point equations to solve when computing the new means with a nonzero
+L1 fusion penalty.</p>
+</dd>
+<dt><strong>thresh</strong><span class="classifier">float</span></dt><dd><p>Convergence threshold for the log-likelihood during expectation
+maximization. When the increase in the log-likelihood is less
+than thresh between subsequent rounds of E-M, fitting will finish.</p>
+</dd>
+<dt><strong>fusion_prior</strong><span class="classifier">float</span></dt><dd><p>The strength of the L1 fusion prior.</p>
+</dd>
+<dt><strong>reversible_type</strong><span class="classifier">str</span></dt><dd><p>Method by which the reversibility of the transition matrix
+is enforced. ‘mle’ uses a maximum likelihood method that is
+solved by numerical optimization (BFGS), and ‘transpose’
+uses a more restrictive (but less computationally complex)
+direct symmetrization of the expected number of counts.</p>
+</dd>
+<dt><strong>vars_prior</strong><span class="classifier">float, optional</span></dt><dd><p>A prior used on the variance. This can be useful in the undersampled
+regime where states may be collapsing onto a single point, but
+is generally not needed.</p>
+</dd>
+<dt><strong>vars_weight</strong><span class="classifier">float, optional</span></dt><dd><p>Weight of the vars prior</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int, optional</span></dt><dd><p>Random state, used during sampling.</p>
+</dd>
+<dt><strong>timing</strong><span class="classifier">bool, default=False</span></dt><dd><p>Print detailed timing information about the fitting process.</p>
+</dd>
+<dt><strong>n_hotstart</strong><span class="classifier">{int, ‘all’}</span></dt><dd><p>Number of sequences to use when hotstarting the EM.
+Default=’all’</p>
+</dd>
+<dt><strong>init_algo</strong><span class="classifier">str</span></dt><dd><p>Use this algorithm to hotstart the means and covariances.  Must
+be one of “kmeans” or “GMM”</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>means_</strong></dt><dd></dd>
+<dt><strong>vars_</strong></dt><dd></dd>
+<dt><strong>transmat_</strong></dt><dd></dd>
+<dt><strong>populations_</strong></dt><dd></dd>
+<dt><strong>fit_logprob_</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_centroids</span></code></p></td>
+<td><p>Find conformations most representative of model means.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">draw_samples</span></code></p></td>
+<td><p>Sample conformations from each state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></p></td>
+<td><p>Estimate model parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code></p></td>
+<td><p>Find most likely hidden-state sequence corresponding to each data timeseries.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></p></td>
+<td><p>Find most likely hidden-state sequence corresponding to each data timeseries.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code></p></td>
+<td><p>Log-likelihood of sequences under the model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code></p></td>
+<td><p>Get a string summarizing the model.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="rba4272ecca4b-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>McGibbon, Robert T. et al., “Understanding Protein Dynamics with
+L1-Regularized Reversible Hidden Markov Models” Proc. 31st Intl.
+Conf. on Machine Learning (ICML). 2014.</p>
+</div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../hmm.html" class="btn btn-neutral float-left" title="Hidden Markov models (HMMs)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.hmm.VonMisesHMM.html" class="btn btn-neutral float-right" title="msmbuilder.hmm.VonMisesHMM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

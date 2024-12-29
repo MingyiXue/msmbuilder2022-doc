@@ -1,0 +1,552 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Publications" href="publications.html" />
+    <link rel="prev" title="FAQs" href="faq.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v3-9-dev">v3.9-dev</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-changes">API Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-features">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#improvements">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-8-april-26-2017">v3.8 (April 26, 2017)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">API Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-7-january-26-2017">v3.7 (January 26, 2017)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">API Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-6-september-15-2016">v3.6 (September 15, 2016)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">API Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-5-june-14-2016">v3.5 (June 14, 2016)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">API Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-4-march-29-2016">v3.4 (March 29, 2016)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">API Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-3-august-27-2015">v3.3 (August 27, 2015)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">API Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">New Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-2-april-14-2015">v3.2 (April 14, 2015)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-1-feb-27-2015">v3.1 (Feb 27, 2015)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-0-1-january-9-2015">v3.0.1 (January 9, 2015)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v3-0-0-january-9-2015">v3.0.0 (January 9, 2015)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Changelog</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/changelog.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="changelog">
+<span id="id1"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
+<section id="v3-9-dev">
+<h2>v3.9-dev<a class="headerlink" href="#v3-9-dev" title="Link to this heading">¶</a></h2>
+<section id="api-changes">
+<h3>API Changes<a class="headerlink" href="#api-changes" title="Link to this heading">¶</a></h3>
+</section>
+<section id="new-features">
+<h3>New Features<a class="headerlink" href="#new-features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added minimum variance cluster analysis (MVCA) for macrostating to
+msmbuilder.lumping</p></li>
+<li><p>Added the Bayesian agglomerative clustering engine (BACE) for macrostating
+to msmbuilder.lumping</p></li>
+</ul>
+</section>
+<section id="improvements">
+<h3>Improvements<a class="headerlink" href="#improvements" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed dependency issue for python3.11/12 and added python3.11/12 in build-code workflow</p></li>
+<li><p>Added pip install</p></li>
+<li><p>Fixed dependency issue for python3.10</p></li>
+<li><p>Fixed dependency issue for numpy</p></li>
+<li><p>Added github action workflow for PR.</p></li>
+<li><p>Fixed bugs in <code class="docutils literal notranslate"><span class="pre">APM</span></code> algorithm.</p></li>
+<li><p>Added supports for ARM architecture CPU.</p></li>
+</ul>
+</section>
+</section>
+<section id="v3-8-april-26-2017">
+<h2>v3.8 (April 26, 2017)<a class="headerlink" href="#v3-8-april-26-2017" title="Link to this heading">¶</a></h2>
+<p>We’re pleased to annoounce the release of MSMBuilder 3.8. This release
+features updates and improvements to contact featurizers, kernel tICA, HMMs,
+and preprocessing. There are also some bugfixes and API hygiene improements.
+We recommend all users upgrade to MSMBuilder 3.8.</p>
+<section id="id2">
+<h3>API Changes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+</section>
+<section id="id3">
+<h3>New Features<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ContactFeaturizer</span></code> now lets you use a soft_min option for closest</p></li>
+</ul>
+<p>contact distances.</p>
+</section>
+<section id="id4">
+<h3>Improvements<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">stride</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">KernelTICA</span></code> now works as intended to</p></li>
+</ul>
+<p>automatically generate a set of landmark points (gh-972).
+- The <code class="docutils literal notranslate"><span class="pre">contacts</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">CommonContactFeaturizer</span></code> now performs as the
+contacts method in regular <code class="docutils literal notranslate"><span class="pre">ContactFeaturizer</span></code> albeit after validating all
+the contacts.
+- <code class="docutils literal notranslate"><span class="pre">GaussianHMM</span></code> and <code class="docutils literal notranslate"><span class="pre">VonMisesHMM</span></code> are now compatible with
+<code class="docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code> workflows (gh-980).
+- <code class="docutils literal notranslate"><span class="pre">msmbuilder.preprocessing</span></code> is now compatible with
+<code class="docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code> workflows (gh-987).
+- Fixed error in pickling HMMs (gh-996).</p>
+</section>
+</section>
+<section id="v3-7-january-26-2017">
+<h2>v3.7 (January 26, 2017)<a class="headerlink" href="#v3-7-january-26-2017" title="Link to this heading">¶</a></h2>
+<p>We’re pleased to announce the release of MSMBuilder 3.7. This release
+introduces several new featurizers that can handle multiple sequences or
+multiple chains within a topology file. There are also some bugfixes and
+API hygiene improvements. We recommend all users upgrade to MSMBuilder 3.7.</p>
+<section id="id5">
+<h3>API Changes<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TrajFeatureUnion</span></code> and <code class="docutils literal notranslate"><span class="pre">SubsetFeatureUnion</span></code> have been removed due to
+incompatibilities with the <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> API.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>New Features<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">KSparseTICA</span></code> lets you specify the number of non-zero entries, <code class="docutils literal notranslate"><span class="pre">k</span></code>
+rather than a regularization strength (gh-916).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BootStrapMarkovStateModel</span></code> optionally saves all the models that it
+generates (gh-919).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tICA</span></code> supports commute mapping (see 10.1021/acs.jctc.6b00762)
+(gh-925).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CommonContactFeaturizer</span></code> featurizes different trajectories with
+different topologies using a common set of inter-residue contacts
+(gh-876).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msmbuilder.tpt.mfpt.mfpts</span></code> can now compute distributions of MFPTs, accounting
+for the model error due to finite sampling.</p></li>
+<li><p>Three new featurization schemes for protein-ligand trajectories are
+now available: <code class="docutils literal notranslate"><span class="pre">LigandContactFeaturizer</span></code>,
+<code class="docutils literal notranslate"><span class="pre">BinaryLigandContactFeaturizer</span></code>, and <code class="docutils literal notranslate"><span class="pre">LigandRMSDFeaturizer</span></code> (gh-883).</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>Improvements<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Compatibility with scikit-learn 0.18 (gh-915).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FeatureSelector</span></code> feature order is deterministic (gh-920).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SASAFeaturizer</span></code> supports the <code class="docutils literal notranslate"><span class="pre">describe_features</span></code> method (gh-913).</p></li>
+<li><p>All <code class="docutils literal notranslate"><span class="pre">LandmarkAgglomerative</span></code> clusterers now have <code class="docutils literal notranslate"><span class="pre">cluster_centers_</span></code> except
+when <code class="docutils literal notranslate"><span class="pre">metric</span> <span class="pre">=</span> <span class="pre">rmsd</span></code> (gh-958)</p></li>
+</ul>
+</section>
+</section>
+<section id="v3-6-september-15-2016">
+<h2>v3.6 (September 15, 2016)<a class="headerlink" href="#v3-6-september-15-2016" title="Link to this heading">¶</a></h2>
+<p>We’re pleased to announce the release of MSMBuilder 3.6. This release
+introduces project templating and a whole host of new <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> estimators.
+There are also some bugfixes and API hygiene improvements. We recommend all
+users upgrade to MSMBuilder 3.6.</p>
+<section id="id8">
+<h3>API Changes<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">version.short_version</span></code> is now 3.y instead of 3.y.z (gh-829).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weighted_transform</span></code> is no longer supported in tICA methods (gh-807). Please
+used <code class="docutils literal notranslate"><span class="pre">kinetic_mapping</span></code>.</p></li>
+<li><p>The cached filenames and formats for DoubleWell, QuadWell,
+and MullerPotential example datasets have changed. The API through
+<code class="docutils literal notranslate"><span class="pre">msmbuilder.example_datasets</span></code> is still the same, but the data may
+be re-generated instead of using a cached version from a previous installation
+of MSMBuilder (gh-854).</p></li>
+<li><p>The alias for Ward clustering has been removed. Modelers should now use
+<code class="docutils literal notranslate"><span class="pre">LandmarkAgglomerative(linkage='ward')</span></code> (gh-874). Ward clustering is also
+available in <code class="docutils literal notranslate"><span class="pre">AgglomerativeClustering</span></code>, but without a prediction algorithm.</p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>New Features<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Butterworth</span></code>, <code class="docutils literal notranslate"><span class="pre">DoubleEWMA</span></code>, <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>, <code class="docutils literal notranslate"><span class="pre">RobustScaler</span></code> are
+available via the command line (gh-895).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BinaryContactFeaturizer</span></code> featurizes a trajectory into a
+boolean array corresponding to whether each residue-residue
+distance is below a cutoff (gh-798).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LogisticContactFeaturizer</span></code> produces a logistic transform
+of residue-residue distances about a center distance (#798).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FactorAnalysis</span></code>, <code class="docutils literal notranslate"><span class="pre">FastICA</span></code>, and <code class="docutils literal notranslate"><span class="pre">KernelPCA</span></code> are available in the
+<code class="docutils literal notranslate"><span class="pre">decomposition</span></code> module (gh-807).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Butterworth</span></code>, <code class="docutils literal notranslate"><span class="pre">EWMA</span></code>, and <code class="docutils literal notranslate"><span class="pre">DoubleEWMA</span></code> are available in the
+<code class="docutils literal notranslate"><span class="pre">preprocessing</span></code> module (gh-818).</p></li>
+<li><p>We encourage users to download the <code class="docutils literal notranslate"><span class="pre">msmb_data</span></code> conda package to easily
+install example data. The data can be loaded through existing methods
+in <code class="docutils literal notranslate"><span class="pre">msmbuilder.example_datasets</span></code> (gh-854, gh-867).</p></li>
+<li><p>An example dataset <code class="docutils literal notranslate"><span class="pre">MinimalFsPeptide</span></code> is available. This is a strided
+version of the existing <code class="docutils literal notranslate"><span class="pre">FsPeptide</span></code> dataset. We use it for testing,
+when a fully-converged dataset is not required (gh-867).</p></li>
+<li><p>Project templates! Read the new tutorial or the <a class="reference internal" href="io.html#io"><span class="std std-ref">I/O</span></a> page for
+details (gh-768).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LandmarkAgglomerative</span></code> clustering now features the <code class="docutils literal notranslate"><span class="pre">ward</span></code> linkage
+option. An algorithm for predicting cluster assignments with the
+<code class="docutils literal notranslate"><span class="pre">ward</span></code> objective function has been developed and implemented (gh-874).</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3>Improvements<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Remove a unicode character from <code class="docutils literal notranslate"><span class="pre">ktica.py</span></code> (gh-833)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msmbuilder.decomposition.KernelTICA</span></code> now includes all parameters in its
+<code class="docutils literal notranslate"><span class="pre">__init__</span></code>, making it compatible with Osprey (gh-823).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msmbuilder.tpt</span></code> methods can now handle <code class="docutils literal notranslate"><span class="pre">BayesianMarkovStateModels</span></code> as
+input. Please note that we still do not recommend using this module with
+<code class="docutils literal notranslate"><span class="pre">BootStrapMarkovStateModel</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="v3-5-june-14-2016">
+<h2>v3.5 (June 14, 2016)<a class="headerlink" href="#v3-5-june-14-2016" title="Link to this heading">¶</a></h2>
+<p>We’re pleased to announce the release of MSMBuilder 3.5. This release
+wraps more relevant <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> estimators and transformers. There are
+also some bugfixes and API hygiene improvements. We recommend all users
+upgrade to MSMBuilder 3.5.</p>
+<section id="id11">
+<h3>API Changes<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">msmbuilder.featurizer.FeatureUnion</span></code> is now deprecated. Please use
+<code class="docutils literal notranslate"><span class="pre">msmbuilder.feature_selection.FeatureSelector</span></code> instead (#799).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msmbuilder.feature_extraction</span></code> has been added to conform to the
+<code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> API. This is essentially an alias of
+<code class="docutils literal notranslate"><span class="pre">msmbuilder.featurizer</span></code> (#799).</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>New Features<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">KernelTICA</span></code>, <code class="docutils literal notranslate"><span class="pre">Nystroem</span></code>, and <code class="docutils literal notranslate"><span class="pre">LandmarkNystroem</span></code> are available in the
+<code class="docutils literal notranslate"><span class="pre">decomposition</span></code> module (#807).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FeatureSelector</span></code> and <code class="docutils literal notranslate"><span class="pre">VarianceThreshold</span></code> are available in the
+<code class="docutils literal notranslate"><span class="pre">feature_selection</span></code> module (#799).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SparsePCA</span></code> and <code class="docutils literal notranslate"><span class="pre">MiniBatchSparsePCA</span></code> are available in the
+<code class="docutils literal notranslate"><span class="pre">decomposition</span></code> module (#791).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Binarizer</span></code>, <code class="docutils literal notranslate"><span class="pre">FunctionTransformer</span></code>, <code class="docutils literal notranslate"><span class="pre">Imputer</span></code>, <code class="docutils literal notranslate"><span class="pre">KernelCenterer</span></code>,
+<code class="docutils literal notranslate"><span class="pre">LabelBinarizer</span></code>, <code class="docutils literal notranslate"><span class="pre">MultiLabelBinarizer</span></code>, <code class="docutils literal notranslate"><span class="pre">MinMaxScaler</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MaxAbsScaler</span></code>, <code class="docutils literal notranslate"><span class="pre">Normalizer</span></code>, <code class="docutils literal notranslate"><span class="pre">RobustScaler</span></code>, <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code> are available in the <code class="docutils literal notranslate"><span class="pre">preprocessing</span></code>
+module (#796).</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id13">
+<h3>Improvements<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Fix a compilation error on gcc 5 (#783)</p></li>
+<li><p>Fix pickle-ing of <code class="docutils literal notranslate"><span class="pre">ContinuousTimeMSM</span></code>. The <code class="docutils literal notranslate"><span class="pre">optimizer_state_</span></code>
+parameter is not saved (#822).</p></li>
+</ul>
+</section>
+</section>
+<section id="v3-4-march-29-2016">
+<h2>v3.4 (March 29, 2016)<a class="headerlink" href="#v3-4-march-29-2016" title="Link to this heading">¶</a></h2>
+<p>We’re pleased to announce MSMBuilder 3.4. It contains a plethora of new
+features, bug fixes, and improvements.</p>
+<section id="id14">
+<h3>API Changes<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Range-based slicing on dataset objects is no longer allowed. Keys in the
+dataset object don’t have to be continuous. The empty slice, e.g. <code class="docutils literal notranslate"><span class="pre">ds[:]</span></code>
+loads all trajectories in a list (#610).</p></li>
+<li><p>Ward clustering has been renamed AgglomerativeClustering in scikit-learn.
+Please use the new msmbuilder wrapper class AgglomerativeClustering. An
+alias for Ward has been made available (#685).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PCCA.trimmed_microstates_to_macrostates</span></code> has been removed. This
+dictionary was actually keyed by <em>untrimmed</em> microstate labels.
+<code class="docutils literal notranslate"><span class="pre">PCCA.transform</span></code> would throw an exception when operating on a system
+with trimming because it was using this misleading dictionary. Please use
+<code class="docutils literal notranslate"><span class="pre">pcca.microstate_mapping_</span></code> for this functionality (#709).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UnionDataset</span></code> has been removed after deprecation in 3.3. Please use
+<code class="docutils literal notranslate"><span class="pre">FeatureUnion</span></code> instead (#671).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SubsetFeaturizer</span></code> and ilk have been removed from the
+<code class="docutils literal notranslate"><span class="pre">msmbuilder.featurizer</span></code> namespace. Please import them from
+<code class="docutils literal notranslate"><span class="pre">msmbuilder.featurizer.subset</span></code> (#738).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FirstSlicer</span></code> has been removed. Use <code class="docutils literal notranslate"><span class="pre">Slicer(first=x)</span></code> for the same
+functionality (#738).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msmbuilder.featurizer.load</span></code> has been removed. <code class="docutils literal notranslate"><span class="pre">Featurizer.save</span></code>
+has been removed. Please use <code class="docutils literal notranslate"><span class="pre">utils.load</span></code>, <code class="docutils literal notranslate"><span class="pre">utils.dump</span></code> (#738).</p></li>
+</ul>
+</section>
+<section id="id15">
+<h3>New Features<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Dataset objects can call, <code class="docutils literal notranslate"><span class="pre">fit_transform_with()</span></code> to simplify the
+common pattern of applying an estimator to a dataset object to produce a
+new dataset object (#610).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kinetic_mapping</span></code> is a new option to <code class="docutils literal notranslate"><span class="pre">tICA</span></code>. It’s similar to
+<code class="docutils literal notranslate"><span class="pre">weighted_transform</span></code>, but based on a better theoretical framework.
+<code class="docutils literal notranslate"><span class="pre">weighted_transform</span></code> is deprecated (#766).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VonMisesFeaturizer</span></code> uses soft bins around the unit-circle to give an
+alternate representation of dihedral angles (#744).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MarkovStateModel</span></code> has a <code class="docutils literal notranslate"><span class="pre">partial_transform()</span></code> method (#707).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KappaAngleFeaturizer</span></code> is available via the command line (#681).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MarkovStateModel</span></code> has a new attribute, <code class="docutils literal notranslate"><span class="pre">percent_retained_</span></code>, for
+ergodic trimming (#689).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AlphaAngleFeaturizer</span></code> computes the dihedral angles between alpha
+carbons (#691).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FunctionFeaturizer</span></code> computes features based on an arbitrary Python
+function or callable (#717).</p></li>
+<li><p>Automatic State Partitioning (APM) uses kinetic information to cluster
+conformations (#748).</p></li>
+</ul>
+</section>
+<section id="id16">
+<h3>Improvements<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Consistent counts setup and ergodic cutoff across various flavors of
+Markov models (#718, #729, #701, #705).</p></li>
+<li><p>Tests no longer depend on <code class="docutils literal notranslate"><span class="pre">sklearn.hmm</span></code>, which has been removed (#690).</p></li>
+<li><p>Improvements to <code class="docutils literal notranslate"><span class="pre">RSMDFeaturizer</span></code> (#695, #764).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SparseTICA</span></code> is completely re-written with large performance
+improvements when dealing with large numbers of features (#704).</p></li>
+<li><p>Links for downloading example data are un-broken after figshare
+changed URLs (#751).</p></li>
+</ul>
+</section>
+</section>
+<section id="v3-3-august-27-2015">
+<h2>v3.3 (August 27, 2015)<a class="headerlink" href="#v3-3-august-27-2015" title="Link to this heading">¶</a></h2>
+<p>We’re pleased to announce the release of MSMBuilder v3.3.0. The focus of this
+release is a completely re-written module for constructing HMMs as well as bug
+fixes and incremental improvements.</p>
+<section id="id17">
+<h3>API Changes<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FeatureUnion</span></code> is an estimator that deprecates the functionality of
+<code class="docutils literal notranslate"><span class="pre">UnionDataset</span></code>. Passing a list of paths to <code class="docutils literal notranslate"><span class="pre">dataset()</span></code> will no longer
+automatically yield a <code class="docutils literal notranslate"><span class="pre">UnionDataset</span></code>. This behavior is still available by
+specifying <code class="docutils literal notranslate"><span class="pre">fmt=&quot;dir-npy-union&quot;</span></code>, but is deprecated (#611).</p></li>
+<li><p>The command line flag for featurizers <code class="docutils literal notranslate"><span class="pre">--out</span></code> (deprecated in 3.2) now saves
+the featurizer as a pickle file (#546). Please use <code class="docutils literal notranslate"><span class="pre">--transformed</span></code> for the
+old behavior. This is consistent with other command-line commands.</p></li>
+<li><p>The default number of timescales in <code class="docutils literal notranslate"><span class="pre">MarkovStateModel</span></code> is now one less than
+the number of states (was 10). This addresses some bugs with
+<code class="docutils literal notranslate"><span class="pre">implied_timescales</span></code> and PCCA(+) (#603).</p></li>
+</ul>
+</section>
+<section id="id18">
+<h3>New Features<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GaussianHMM</span></code> and <code class="docutils literal notranslate"><span class="pre">VonMisesHMM</span></code> is rewritten to feature higher code reuse
+and code quality (#583, #582, #584, #572, #570).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KDTree</span></code> can find n nearest points to e.g. a cluster center (#599).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Slicer</span></code> featurizer can slice feature arrays as part of a pipeline
+(#567).</p></li>
+</ul>
+</section>
+<section id="id19">
+<h3>Improvements<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PCCAPlus</span></code> is compatible with scipy 0.16 (#620).</p></li>
+<li><p>Documentation improvements (#618, #608, #604, #602)</p></li>
+<li><p>Test improvements, especially for Windows (#593, #590, #588, #579, #578,
+#577, #576)</p></li>
+<li><p>Bug fix: <code class="docutils literal notranslate"><span class="pre">MarkovStateModel.sample()</span></code> produced trajectories of incorrect
+length. This function is still deprecated (#556).</p></li>
+<li><p>Bug fix: The muller example dataset did not respect users’ specifications for
+initial coordinates (#631).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MarkovStateModel.draw_samples</span></code> failed if discrete trajectories did not
+contain every possible state (#638). Function can now accept a single
+trajectory, as well as a list of them.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SuperposeFeaturizer</span></code> now respects the topology argument when loading the
+reference trajectory (#555).</p></li>
+</ul>
+</section>
+</section>
+<section id="v3-2-april-14-2015">
+<h2>v3.2 (April 14, 2015)<a class="headerlink" href="#v3-2-april-14-2015" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tICA</span></code> ignores too-short trajectories during fitting instead of raising
+an exception</p></li>
+<li><p>New methods for sampling from MSM models</p></li>
+<li><p>Datasets can be opened in “append” mode</p></li>
+<li><p>Compatibility with scipy 0.16</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils.dump</span></code> saves using the pickle protocol. <code class="docutils literal notranslate"><span class="pre">utils.load</span></code> is backwards
+compatible.</p></li>
+<li><p>The command line flag for featurizers <code class="docutils literal notranslate"><span class="pre">--out</span></code> is deprecated. Use
+<code class="docutils literal notranslate"><span class="pre">--transformed</span></code> instead. This is consistent with other command-line
+commands.</p></li>
+<li><p>Bug fixes</p></li>
+</ul>
+</section>
+<section id="v3-1-feb-27-2015">
+<h2>v3.1 (Feb 27, 2015)<a class="headerlink" href="#v3-1-feb-27-2015" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Numerous improvements to <code class="docutils literal notranslate"><span class="pre">ContinuousTimeMSM</span></code> optimization</p></li>
+<li><p>Switch <code class="docutils literal notranslate"><span class="pre">ContinuousTimeMSM.score</span></code> to transmat-style GMRQ</p></li>
+<li><p>New example dataset with Muller potential</p></li>
+<li><p>Assorted bug fixes in the command line layer</p></li>
+</ul>
+</section>
+<section id="v3-0-1-january-9-2015">
+<h2>v3.0.1 (January 9, 2015)<a class="headerlink" href="#v3-0-1-january-9-2015" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Fix missing file on PyPI.</p></li>
+</ul>
+</section>
+<section id="v3-0-0-january-9-2015">
+<h2>v3.0.0 (January 9, 2015)<a class="headerlink" href="#v3-0-0-january-9-2015" title="Link to this heading">¶</a></h2>
+<p>MSMBuilder 3.0 is a complete rewrite of our <a class="reference external" href="https://github.com/msmbuilder/msmbuilder-legacy">previous work</a>. The focus is on power
+and extensibility, with a much wider class of estimators and models
+supported throughout the codebase. All users are encouraged to switch to
+MSMBuilder 3.0.  Pre-release versions of MSMBuilder 3.0 were called
+mixtape.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="faq.html" class="btn btn-neutral float-left" title="FAQs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="publications.html" class="btn btn-neutral float-right" title="Publications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

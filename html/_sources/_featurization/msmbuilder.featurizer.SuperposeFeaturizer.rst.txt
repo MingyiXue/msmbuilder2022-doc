@@ -1,0 +1,35 @@
+﻿msmbuilder.featurizer.SuperposeFeaturizer
+=========================================
+
+.. currentmodule:: msmbuilder.featurizer
+
+.. autoclass:: SuperposeFeaturizer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SuperposeFeaturizer.__init__
+      ~SuperposeFeaturizer.describe_features
+      ~SuperposeFeaturizer.featurize
+      ~SuperposeFeaturizer.fit
+      ~SuperposeFeaturizer.fit_transform
+      ~SuperposeFeaturizer.get_metadata_routing
+      ~SuperposeFeaturizer.get_params
+      ~SuperposeFeaturizer.partial_transform
+      ~SuperposeFeaturizer.set_fit_request
+      ~SuperposeFeaturizer.set_output
+      ~SuperposeFeaturizer.set_params
+      ~SuperposeFeaturizer.set_transform_request
+      ~SuperposeFeaturizer.summarize
+      ~SuperposeFeaturizer.transform
+   
+   
+
+   
+   
+   

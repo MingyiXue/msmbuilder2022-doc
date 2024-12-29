@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.cluster.LandmarkAgglomerative &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.cluster.AffinityPropagation" href="msmbuilder.cluster.AffinityPropagation.html" />
+    <link rel="prev" title="msmbuilder.cluster.RegularSpatial" href="msmbuilder.cluster.RegularSpatial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../cluster.html">Clustering</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cluster.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KCenters.html">msmbuilder.cluster.KCenters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KMeans.html">msmbuilder.cluster.KMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KMedoids.html">msmbuilder.cluster.KMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMedoids.html">msmbuilder.cluster.MiniBatchKMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.RegularSpatial.html">msmbuilder.cluster.RegularSpatial</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.cluster.LandmarkAgglomerative</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.cluster.LandmarkAgglomerative"><code class="docutils literal notranslate"><span class="pre">LandmarkAgglomerative</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.AffinityPropagation.html">msmbuilder.cluster.AffinityPropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.GMM.html">msmbuilder.cluster.GMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MeanShift.html">msmbuilder.cluster.MeanShift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMeans.html">msmbuilder.cluster.MiniBatchKMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.SpectralClustering.html">msmbuilder.cluster.SpectralClustering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../cluster.html">Clustering</a></li>
+      <li class="breadcrumb-item active">msmbuilder.cluster.LandmarkAgglomerative</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_cluster/msmbuilder.cluster.LandmarkAgglomerative.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-cluster-landmarkagglomerative">
+<h1>msmbuilder.cluster.LandmarkAgglomerative<a class="headerlink" href="#msmbuilder-cluster-landmarkagglomerative" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.cluster.LandmarkAgglomerative">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.cluster.</span></span><span class="sig-name descname"><span class="pre">LandmarkAgglomerative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_landmarks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linkage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">landmark_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'stride'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_landmarks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ward_predictor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ward'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.LandmarkAgglomerative" title="Link to this definition">¶</a></dt>
+<dd><p>Landmark-based agglomerative hierarchical clustering</p>
+<p>Landmark-based agglomerative clustering is a simple scalable version of
+“standard” hierarchical clustering which doesn’t require computing the full
+matrix of pairwise distances between all data points. The idea is
+basically to subsample only <code class="docutils literal notranslate"><span class="pre">n_landmarks</span></code> “landmark”
+data points, cluster them, and then assign labels to the remaining data
+points based on their distances to (and the labels of) the landmarks.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>n_clusters</strong><span class="classifier">int</span></dt><dd><p>The number of clusters to find.</p>
+</dd>
+<dt><strong>n_landmarks</strong><span class="classifier">int, optional</span></dt><dd><p>Memory-saving approximation. Instead of actually clustering every
+point, we instead select n_landmark points either randomly or by
+striding the data matrix (see <code class="docutils literal notranslate"><span class="pre">landmark_strategy</span></code>). Then we cluster
+the only the landmarks, and then assign the remaining dataset based
+on distances to the landmarks. Note that n_landmarks=None is equivalent
+to using every point in the dataset as a landmark.</p>
+</dd>
+<dt><strong>linkage</strong><span class="classifier">{‘single’, ‘complete’, ‘average’, ‘ward’}, default=’average’</span></dt><dd><p>Which linkage criterion to use. The linkage criterion determines which
+distance to use between sets of observation. The algorithm will merge
+the pairs of cluster that minimize this criterion.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>average uses the average of the distances of each observation of
+the two sets.</p></li>
+<li><p>complete or maximum linkage uses the maximum distances between
+all observations of the two sets.</p></li>
+<li><p>single uses the minimum distance between all observations of the
+two sets.</p></li>
+<li><p>ward linkage minimizes the within-cluster variance</p></li>
+</ul>
+</div></blockquote>
+<p>The linkage also effects the predict() method and the use of landmarks.
+After computing the distance from each new data point to the landmarks,
+the new data point will be assigned to the cluster that minimizes the
+linkage function between the new data point and each of the landmarks.
+(i.e with <code class="docutils literal notranslate"><span class="pre">single</span></code>, new data points will be assigned the label of
+the closest landmark, with <code class="docutils literal notranslate"><span class="pre">average</span></code>, it will be assigned the label
+of the landmark s.t. the mean distance from the test point to all the
+landmarks with that label is minimized, etc.)</p>
+</dd>
+<dt><strong>metric</strong><span class="classifier">string or callable, default= “euclidean”</span></dt><dd><p>Metric used to compute the distance between samples.</p>
+</dd>
+<dt><strong>landmark_strategy</strong><span class="classifier">{‘stride’, ‘random’}, default=’stride’</span></dt><dd><p>Method for determining landmark points. Only matters when n_landmarks
+is not None. “stride” takes landmarks every n-th data point in X, and
+random selects them  uniformly at random.</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">integer or numpy.RandomState, optional</span></dt><dd><p>The generator used to select random landmarks. Only used if
+landmark_strategy==’random’. If an integer is given, it fixes the seed.
+Defaults to the global numpy random number generator.</p>
+</dd>
+<dt><strong>max_landmarks</strong><span class="classifier">int, optional, default=None</span></dt><dd><p>Useful for hyperparameter searching. If n_clusters exceeds n_landmarks,
+max_landmarks will be used. Otherwise, n_landmarks will be used. If
+None, no cutoff is enforced on n_landmarks, which may result in memory 
+issues.</p>
+</dd>
+<dt><strong>ward_predictor</strong><span class="classifier">{‘single’, ‘complete’, ‘average’, ‘ward’}, default=’ward’</span></dt><dd><p>Which criterion to use when predicting cluster assignments after
+fitting with ward linkage.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>landmark_labels_</strong><span class="classifier">np.array, [n_landmarks]</span></dt><dd></dd>
+<dt><strong>landmarks_</strong><span class="classifier">np.array, [n_landmarks, X.shape]</span></dt><dd></dd>
+<dt><strong>cluster_centers_</strong><span class="classifier">np.array, [n_clusters, X.shape]</span></dt><dd><p>Coordinates of cluster centers (unless RMSD is the metric)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the  clustering on the data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y])</p></td>
+<td><p>Performs clustering on X and returns cluster labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<div role="list" class="citation-list">
+<div class="citation" id="r0de52a25b01c-1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Mullner, D. “Modern hierarchical, agglomerative clustering
+algorithms.” arXiv:1109.2378 (2011).</p>
+</div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.cluster.LandmarkAgglomerative.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_landmarks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linkage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">landmark_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'stride'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_landmarks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ward_predictor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ward'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.LandmarkAgglomerative.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.cluster.LandmarkAgglomerative.__init__" title="msmbuilder.cluster.LandmarkAgglomerative.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(n_clusters[, n_landmarks, linkage, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the  clustering on the data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y])</p></td>
+<td><p>Performs clustering on X and returns cluster labels.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.cluster.RegularSpatial.html" class="btn btn-neutral float-left" title="msmbuilder.cluster.RegularSpatial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.cluster.AffinityPropagation.html" class="btn btn-neutral float-right" title="msmbuilder.cluster.AffinityPropagation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Writing Plugins" href="plugins.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">FAQs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/faq.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="faqs">
+<span id="faq"></span><h1>FAQs<a class="headerlink" href="#faqs" title="Link to this heading">¶</a></h1>
+<p><strong>How should I get started?</strong></p>
+<ol class="arabic simple">
+<li><p>If you have a lot of data, use a subset of it to get started.  You will
+be able to iterate much more quickly and explore the impact of different
+modeling and parameter choices running on your laptop. Once you’ve got a
+sense for what works, start to scale your analysis up to a full MD
+dataset.</p></li>
+<li><p>Use the <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Anaconda scientific python distribution</span></a> and
+its <a class="reference external" href="http://conda.pydata.org/docs/">conda</a> package manager to install
+python packages.</p></li>
+<li><p><a class="reference external" href="https://github.com/msmbuilder/msmbuilder/issues">Get involved on the github issue tracker</a>.</p></li>
+</ol>
+<p><strong>How do I report a bug?</strong></p>
+<p>Post a note on the <a class="reference external" href="https://github.com/msmbuilder/msmbuilder/issues">github issue tracker</a>.</p>
+<p><strong>How do I contribute a new feature?</strong></p>
+<p>File a pull request on <a class="reference external" href="https://github.com/msmbuilder/msmbuilder/">github</a>. If you’re not familiar
+with github, there are some instructions on the scikit-learn site <a class="reference external" href="http://scikit-learn.org/stable/developers/index.html#how-to-contribute">here</a>.</p>
+<p><strong>Where should I start with the MSM literature?</strong></p>
+<p>Some of the key PIs involved in research on Markov modeling of biomolecular
+conformational dynamics include
+<a class="reference external" href="http://scholar.google.com/scholar?hl=en&amp;q=Hans+C.+Andersen&amp;btnG=&amp;as_sdt=1%2C5&amp;as_sdtp=">Hans Andersen</a>,
+<a class="reference external" href="http://www.niddk.nih.gov/about-niddk/staff-directory/intramural/robert-barrington-best/pages/research-summary.aspx">Robert Best</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=zXobc4MAAAAJ&amp;hl=en">Greg Bowman</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=aq2vRkIAAAAJ&amp;hl=en">Amedeo Caflisch</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=nnEg7_8AAAAJ&amp;hl=en">John Chodera</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=xsx-ru4AAAAJ&amp;hl=en">Peter Deuflhard</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=t3u4Y3EAAAAJ&amp;hl=en&amp;oi=ao">Ken Dill</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=-_kX4kMAAAAJ&amp;hl=en&amp;oi=ao">Gianni De Fabritiis</a>,
+<a class="reference external" href="http://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;q=Helmut+Grubmuller">Helmut Grubmuller</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=cDpFo0oAAAAJ&amp;hl=en&amp;oi=ao">Xuhui Huang</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=df7O5IkAAAAJ&amp;hl=en">Ronald Levy</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=QGiLc_cAAAAJ&amp;hl=en&amp;oi=ao">Frank Noe</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=cWe_xpUAAAAJ&amp;hl=en&amp;oi=ao">Vijay Pande</a>,
+<a class="reference external" href="http://scholar.google.com/scholar?oi=bibs&amp;hl=en&amp;q=Jed+Pitera">Jed Pitera</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=hoGTGlMAAAAJ&amp;hl=en">Benoit Roux</a>,
+<a class="reference external" href="http://scholar.google.com/scholar?q=Christof+Sch%C3%BCtte&amp;btnG=&amp;hl=en&amp;as_sdt=0%2C5">Christof Schutte</a>,
+<a class="reference external" href="http://scholar.google.de/citations?user=pclnAzsAAAAJ&amp;hl=de">Bill Swope</a>,
+<a class="reference external" href="http://scholar.google.com/citations?user=OZfliS4AAAAJ&amp;hl=en&amp;oi=ao">Eric Vanden-Eijnden</a>, and
+<a class="reference external" href="http://scholar.google.de/citations?user=gBwM5-gAAAAJ">Marcus Weber</a>.</p>
+<p>In 2014, Greg Bowman, Vijay Pande, and Frank Noe edited the book
+<a class="reference external" href="http://dx.doi.org/10.1007/978-94-007-7606-7">An Introduction to Markov State Models and Their Application to Long Timescale
+Molecular Simulation</a>,
+which features contributions from many of the authors above.</p>
+<p>Two outstanding reviews (the first is somewhat old, but still very much worth
+reading) of the field are</p>
+<ul class="simple">
+<li><p>Noe, F, and S. Fischer. <a class="reference external" href="http://dx.doi.org/10.1016/j.sbi.2008.01.008">Transition networks for modeling the
+kinetics of conformational change in macromolecules.</a>
+Curr. Opin. Struct. Biol. 18.2 (2008): 154-162.</p></li>
+<li><p>Prinz, J.-H., et al. <a class="reference external" href="http://dx.doi.org/10.1063/1.3565032">Markov models of molecular kinetics:
+Generation and validation.</a>
+J. Chem. Phys. 134.17 (2011): 174105.</p></li>
+</ul>
+<p>Methodologically, some of our favorite recent papers (2013-) include: <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<ul class="simple">
+<li><p>Nuske, F., et al. <a class="reference external" href="http://dx.doi.org/10.1021/ct4009156">Variational approach to molecular kinetics</a> J. Chem. Theory Comput. 10.4 (2014): 1739-1752.</p></li>
+<li><p>Schwantes, C. R., and V. S. Pande. <a class="reference external" href="http://dx.doi.org/10.1021/ct300878a">Improvements in markov state
+model construction reveal many non-native interactions in the folding of
+NTL9</a> J. Chem. Theory Comput. 9.4 (2013):
+2000-2009.</p></li>
+<li><p>Perez-Hernandez, G., et al. <a class="reference external" href="http://dx.doi.org/10.1063/1.4811489">Identification of slow molecular order
+parameters for Markov model construction</a>
+J Chem. Phys. (2013): 015102.</p></li>
+<li><p>Noe, F., et al. <a class="reference external" href="http://dx.doi.org/10.1063/1.4828816">Projected and Hidden Markov Models for calculating
+kinetics and metastable states of complex molecules.</a> J. Chem. Phys. 139.18 (2013): 184114.</p></li>
+<li><p>McGibbon, R. T., et al. <a class="reference external" href="http://arxiv.org/abs/1405.1444">Understanding Protein Dynamics with L1-Regularized
+Reversible Hidden Markov Models.</a>
+arXiv:1405.1444 (2014).</p></li>
+</ul>
+<p>Some particularly notable recent applications of MSMs include</p>
+<ul class="simple">
+<li><p>Shukla, D, et al. <a class="reference external" href="http://dx.doi.org/10.1038/ncomms4397">Activation pathway of Src kinase reveals intermediate
+states as targets for drug design.</a>
+Nat. Commun. 5 (2014).</p></li>
+<li><p>Sadiq, S. K., F. Noe, and G. De Fabritiis. <a class="reference external" href="http://dx.doi.org/10.1073/pnas.1210983109">Kinetic characterization of the
+critical step in HIV-1 protease maturation.</a>
+Proc. Natl. Acad. Sci. U.S.A 109.50 (2012): 20449-20454.</p></li>
+<li><p>Kohlhoff, K. J., et al. <a class="reference external" href="http://dx.doi.org/10.1038/nchem.1821">Cloud-based simulations on Google Exacycle
+reveal ligand modulation of GPCR activation pathways.</a> Nat. Chem. 6.1 (2014): 15-21.</p></li>
+</ul>
+<p><strong>What is the relationship between MSMBuilder and other packages?</strong></p>
+<p>Another software packages that performs similar analyses is <a class="reference external" href="http://emma-project.org">EMMA</a>.  MSMBuilder inherits a lot of ideas about API
+design, machine learning, and software engineering from <a class="reference external" href="http://scikit-learn.org/">scikit-learn</a>. MSMBuilder also has a number of python
+dependencies. See the <a class="reference internal" href="installation.html#installation"><span class="std std-ref">Installation</span></a> page for details.</p>
+<p><strong>How much MD sampling do I need to build an MSM?</strong></p>
+<p>There’s no definitive way to answer this question – in general reasoning
+about the convergence of any stochastic sampling is very tricky. We can’t
+really be certain that there isn’t another free energy minima that our
+simulations didn’t find.</p>
+<p>An MSM (or tICA, HMM, etc) can help you answer this question. Using the
+MSM, compare the slowest relaxation timescales in your model with the total
+amount of aggregate sampling you have. If your system takes hundreds of
+microseconds to relax to equilibrium according to your model, you probably
+want at minimum hundreds of microseconds of sampling.</p>
+<p>Another thing you can do is to split your data set into a couple (e.g.
+2-10) chunks, and then repeat your analysis on subsets of the data. For
+example, break your data up into 5 chunks and then build 5 MSMs, each of
+which is fit using 4/5 of the data (with one chunk left out). If the 5 MSMs
+are all consistent with one another, you might have very good sampling. If
+they give totally different results from one another, you don’t have enough
+sampling.</p>
+<p><strong>How can I validate an MSM?</strong></p>
+<p>The gold standard is to use your MSM to make predictions about experimental
+observables for a real molecular system that can be tested in the lab. The
+relaxation timescales which are calculated by MSMs, tICA, HMMs, and other
+types of kinetic models correspond to approximations for the relaxation
+timescales that should be observed in experiments like T-jump spectroscopy.
+It’s best to look in the literature for this. See for example <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> and
+<a class="footnote-reference brackets" href="#f3" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> for a couple cool connections between MSMs and IR experiments.</p>
+<p>One tricky part about validating an MSM by comparing to experiments is that
+there are multiple possible reasons that an MSM could be “wrong”. The MD
+forcefield used for the simulations might not be a sufficiently accurate
+model of reality. You might not have enough sampling. The MSM itself might
+not resolve the slow degrees of freedom in the system (e.g. because of poor
+clustering).</p>
+<p>Another good idea is to build multiple MSMs, and see if they are consistent
+with one another. For example, a common thing is to compare the implied
+timescales of a series of MSMs built with the same clustering but with
+different lag time (which should converge). See the validation section of
+<a class="footnote-reference brackets" href="#f4" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>.</p>
+<p><strong>How can statistical models like MSMs be used to accelerate MD?</strong></p>
+<p>See Bowman, G R., D. L. Ensign, and S. S. Pande. <a class="reference external" href="http://dx.doi.org/10.1021/ct900620b">Enhanced modeling via
+network theory: Adaptive sampling of markov state models.</a>
+J. Chem. Theory Compt. 6.3 (2010): 787-794 and
+Doerr, S., and G. De Fabritiis. <a class="reference external" href="http://dx.doi.org/10.1021/ct400919u">On-the-fly learning and sampling of ligand
+binding by high-throughput molecular simulations.</a>
+J. Chem. Theory Comput. (2014).</p>
+<p><strong>What are the tradeoffs between running a large number
+of short MD simulations vs. a few long ones?</strong></p>
+<p>Thats a good question.</p>
+<p><strong>My simulations use replica exchange, aMD, or metadynamics.
+Can I use these tools to analyze them?</strong></p>
+<p>Yes, but you’re going to have to be careful. Replica exchange, aMD,
+meta-dynamics, and other related thermodynamic sampling methods sacrifice
+physical kinetics to achieve potentially faster thermodynamic sampling.  So
+you’re going to need to be careful about interpreting the time-related
+quantities from any models you might build using msmbuilder such as the
+transition matrix of an MSM, or tICA eigenvalues. With clustering you’re
+fine.</p>
+<p><strong>Why am I getting MemoryErrors?</strong></p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+  File &quot;file.py&quot;, line 5, in &lt;module&gt;
+    np.zeros((N, M))
+MemoryError
+</pre></div>
+</div>
+<p>If you’re running models in msmbuilder and you get a traceback with a
+MemoryError (e.g. above), the reason is that you don’t have enough RAM in
+your machine to run whatever you’re trying to run. One thing you can do is
+just get more RAM, but his isn’t going to scale very far.</p>
+<p>To debug this kind of issue, you need really to reason about the size of
+the arrays that are being created, which means thinking about the number of
+data points in your dataset, the number of features, etc. Some algorithms,
+like <code class="xref py py-class docutils literal notranslate"><span class="pre">LandmarkHierarchical</span></code> let you trace off
+the memory requirement against accuracy.</p>
+<p>If you’re trying to build models with thousands of features, consider
+running a dimensionality reduction algorithm like
+<a class="reference internal" href="_decomposition/msmbuilder.decomposition.PCA.html#msmbuilder.decomposition.PCA" title="msmbuilder.decomposition.PCA"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCA</span></code></a> or
+<a class="reference internal" href="_decomposition/msmbuilder.decomposition.tICA.html#msmbuilder.decomposition.tICA" title="msmbuilder.decomposition.tICA"><code class="xref py py-class docutils literal notranslate"><span class="pre">tICA</span></code></a> first. Or if you have milliseconds
+of MD data sampled at a picosecond frequency, consider subsampling (e.g.
+only analyze every 100th or 10,000th snapshot from your simulations).</p>
+<p><strong>How can I cite MSMBuilder?</strong></p>
+<p>Please cite <a class="reference external" href="http://pubs.acs.org/doi/abs/10.1021/ct200463m">MSMBuilder2: Modeling Conformational Dynamics on the
+Picosecond to Millisecond Scale</a> Most of the individual
+methods that are implemented in MSMBuilder were also introduced in
+published papers. The documentation for each class or command should have
+the appropriate references listed.</p>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Of course, this is merely an opinion</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Zhuang, W, et al. <a class="reference external" href="http://pubs.acs.org/doi/abs/10.1021/jp109592b">Simulating the T-jump-triggered unfolding dynamics of trpzip2 peptide and its time-resolved IR and two-dimensional IR signals using the Markov state model approach.</a> J. Phys. Chem. B 115.18 (2011): 5415-5424.</p>
+</aside>
+<aside class="footnote brackets" id="f3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Baiz, C. R., et al. <a class="reference external" href="http://dx.doi.org/10.1016/j.bpj.2014.02.008">A Molecular Interpretation of 2D IR Protein Folding Experiments with Markov State Models.</a> Biophysical journal 106.6 (2014): 1359-1370.</p>
+</aside>
+<aside class="footnote brackets" id="f4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>Pande, V S., K. Beauchamp, and G. R. Bowman. <a class="reference external" href="http://dx.doi.org/10.1016/j.ymeth.2010.06.002">Everything you wanted to know about Markov State Models but were afraid to ask</a> Methods 52.1 (2010): 99-105.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plugins.html" class="btn btn-neutral float-left" title="Writing Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

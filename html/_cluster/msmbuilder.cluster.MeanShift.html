@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.cluster.MeanShift &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.cluster.MiniBatchKMeans" href="msmbuilder.cluster.MiniBatchKMeans.html" />
+    <link rel="prev" title="msmbuilder.cluster.GMM" href="msmbuilder.cluster.GMM.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../cluster.html">Clustering</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cluster.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KCenters.html">msmbuilder.cluster.KCenters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KMeans.html">msmbuilder.cluster.KMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KMedoids.html">msmbuilder.cluster.KMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMedoids.html">msmbuilder.cluster.MiniBatchKMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.RegularSpatial.html">msmbuilder.cluster.RegularSpatial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.LandmarkAgglomerative.html">msmbuilder.cluster.LandmarkAgglomerative</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.AffinityPropagation.html">msmbuilder.cluster.AffinityPropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.GMM.html">msmbuilder.cluster.GMM</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.cluster.MeanShift</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.cluster.MeanShift"><code class="docutils literal notranslate"><span class="pre">MeanShift</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMeans.html">msmbuilder.cluster.MiniBatchKMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.SpectralClustering.html">msmbuilder.cluster.SpectralClustering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../cluster.html">Clustering</a></li>
+      <li class="breadcrumb-item active">msmbuilder.cluster.MeanShift</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_cluster/msmbuilder.cluster.MeanShift.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-cluster-meanshift">
+<h1>msmbuilder.cluster.MeanShift<a class="headerlink" href="#msmbuilder-cluster-meanshift" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.cluster.MeanShift">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.cluster.</span></span><span class="sig-name descname"><span class="pre">MeanShift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seeds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bin_seeding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bin_freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.MeanShift" title="Link to this definition">¶</a></dt>
+<dd><p>Mean shift clustering using a flat kernel.</p>
+<p>Mean shift clustering aims to discover “blobs” in a smooth density of
+samples. It is a centroid-based algorithm, which works by updating
+candidates for centroids to be the mean of the points within a given
+region. These candidates are then filtered in a post-processing stage to
+eliminate near-duplicates to form the final set of centroids.</p>
+<p>Seeding is performed using a binning technique for scalability.</p>
+<p>For an example of how to use MeanShift clustering, refer to:
+<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_mean_shift.html#sphx-glr-auto-examples-cluster-plot-mean-shift-py" title="(in scikit-learn v1.6)"><span>A demo of the mean-shift clustering algorithm</span></a>.</p>
+<p>Read more in the <a class="reference external" href="https://scikit-learn.org/stable/modules/clustering.html#mean-shift" title="(in scikit-learn v1.6)"><span class="xref std std-ref">User Guide</span></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>bandwidth</strong><span class="classifier">float, default=None</span></dt><dd><p>Bandwidth used in the flat kernel.</p>
+<p>If not given, the bandwidth is estimated using
+sklearn.cluster.estimate_bandwidth; see the documentation for that
+function for hints on scalability (see also the Notes, below).</p>
+</dd>
+<dt><strong>seeds</strong><span class="classifier">array-like of shape (n_samples, n_features), default=None</span></dt><dd><p>Seeds used to initialize kernels. If not set,
+the seeds are calculated by clustering.get_bin_seeds
+with bandwidth as the grid size and default values for
+other parameters.</p>
+</dd>
+<dt><strong>bin_seeding</strong><span class="classifier">bool, default=False</span></dt><dd><p>If true, initial kernel locations are not locations of all
+points, but rather the location of the discretized version of
+points, where points are binned onto a grid whose coarseness
+corresponds to the bandwidth. Setting this option to True will speed
+up the algorithm because fewer seeds will be initialized.
+The default value is False.
+Ignored if seeds argument is not None.</p>
+</dd>
+<dt><strong>min_bin_freq</strong><span class="classifier">int, default=1</span></dt><dd><p>To speed up the algorithm, accept only those bins with at least
+min_bin_freq points as seeds.</p>
+</dd>
+<dt><strong>cluster_all</strong><span class="classifier">bool, default=True</span></dt><dd><p>If true, then all points are clustered, even those orphans that are
+not within any kernel. Orphans are assigned to the nearest kernel.
+If false, then orphans are given cluster label -1.</p>
+</dd>
+<dt><strong>n_jobs</strong><span class="classifier">int, default=None</span></dt><dd><p>The number of jobs to use for the computation. The following tasks benefit
+from the parallelization:</p>
+<ul class="simple">
+<li><p>The search of nearest neighbors for bandwidth estimation and label
+assignments. See the details in the docstring of the
+<code class="docutils literal notranslate"><span class="pre">NearestNeighbors</span></code> class.</p></li>
+<li><p>Hill-climbing optimization for all seeds.</p></li>
+</ul>
+<p>See <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-n_jobs" title="(in scikit-learn v1.6)"><span class="xref std std-term">Glossary</span></a> for more details.</p>
+<p><code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-n_jobs" title="(in scikit-learn v1.6)"><span class="xref std std-term">Glossary</span></a>
+for more details.</p>
+</dd>
+<dt><strong>max_iter</strong><span class="classifier">int, default=300</span></dt><dd><p>Maximum number of iterations, per seed point before the clustering
+operation terminates (for that seed point), if has not converged yet.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.22.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>cluster_centers_</strong><span class="classifier">ndarray of shape (n_clusters, n_features)</span></dt><dd><p>Coordinates of cluster centers.</p>
+</dd>
+<dt><strong>labels_</strong><span class="classifier">list of arrays, each of shape [sequence_length, ]</span></dt><dd><p>The label of each point is an integer in [0, n_clusters).</p>
+</dd>
+<dt><strong>n_iter_</strong><span class="classifier">int</span></dt><dd><p>Maximum number of iterations performed on each seed.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.22.</span></p>
+</div>
+</dd>
+<dt><strong>n_features_in_</strong><span class="classifier">int</span></dt><dd><p>Number of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+<dt><strong>feature_names_in_</strong><span class="classifier">ndarray of shape (<cite>n_features_in_</cite>,)</span></dt><dd><p>Names of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>. Defined only when <cite>X</cite>
+has feature names that are all strings.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the  clustering on the data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y])</p></td>
+<td><p>Performs clustering on X and returns cluster labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="msmbuilder.cluster.KMeans.html#msmbuilder.cluster.KMeans" title="msmbuilder.cluster.KMeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KMeans</span></code></a></dt><dd><p>K-Means clustering.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Scalability:</p>
+<p>Because this implementation uses a flat kernel and
+a Ball Tree to look up members of each kernel, the complexity will tend
+towards O(T*n*log(n)) in lower dimensions, with n the number of samples
+and T the number of points. In higher dimensions the complexity will
+tend towards O(T*n^2).</p>
+<p>Scalability can be boosted by using fewer seeds, for example by using
+a higher value of min_bin_freq in the get_bin_seeds function.</p>
+<p>Note that the estimate_bandwidth function is much less scalable than the
+mean shift algorithm and will be the bottleneck if it is used.</p>
+<p class="rubric">References</p>
+<p>Dorin Comaniciu and Peter Meer, “Mean Shift: A robust approach toward
+feature space analysis”. IEEE Transactions on Pattern Analysis and
+Machine Intelligence. 2002. pp. 603-619.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">MeanShift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clustering</span> <span class="o">=</span> <span class="n">MeanShift</span><span class="p">(</span><span class="n">bandwidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clustering</span><span class="o">.</span><span class="n">labels_</span>
+<span class="go">array([1, 1, 1, 0, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clustering</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="go">array([1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clustering</span>
+<span class="go">MeanShift(bandwidth=2)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.cluster.MeanShift.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bandwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seeds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bin_seeding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_bin_freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.MeanShift.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.cluster.MeanShift.__init__" title="msmbuilder.cluster.MeanShift.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*[, bandwidth, seeds, bin_seeding, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit the  clustering on the data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y])</p></td>
+<td><p>Performs clustering on X and returns cluster labels.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.cluster.GMM.html" class="btn btn-neutral float-left" title="msmbuilder.cluster.GMM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.cluster.MiniBatchKMeans.html" class="btn btn-neutral float-right" title="msmbuilder.cluster.MiniBatchKMeans" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

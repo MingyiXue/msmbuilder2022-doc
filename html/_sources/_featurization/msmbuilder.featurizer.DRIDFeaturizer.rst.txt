@@ -1,0 +1,35 @@
+﻿msmbuilder.featurizer.DRIDFeaturizer
+====================================
+
+.. currentmodule:: msmbuilder.featurizer
+
+.. autoclass:: DRIDFeaturizer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DRIDFeaturizer.__init__
+      ~DRIDFeaturizer.describe_features
+      ~DRIDFeaturizer.featurize
+      ~DRIDFeaturizer.fit
+      ~DRIDFeaturizer.fit_transform
+      ~DRIDFeaturizer.get_metadata_routing
+      ~DRIDFeaturizer.get_params
+      ~DRIDFeaturizer.partial_transform
+      ~DRIDFeaturizer.set_fit_request
+      ~DRIDFeaturizer.set_output
+      ~DRIDFeaturizer.set_params
+      ~DRIDFeaturizer.set_transform_request
+      ~DRIDFeaturizer.summarize
+      ~DRIDFeaturizer.transform
+   
+   
+
+   
+   
+   

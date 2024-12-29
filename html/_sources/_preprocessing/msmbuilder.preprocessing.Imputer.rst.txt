@@ -1,0 +1,36 @@
+﻿msmbuilder.preprocessing.Imputer
+================================
+
+.. currentmodule:: msmbuilder.preprocessing
+
+.. autoclass:: Imputer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Imputer.__init__
+      ~Imputer.fit
+      ~Imputer.fit_transform
+      ~Imputer.get_feature_names_out
+      ~Imputer.get_metadata_routing
+      ~Imputer.get_params
+      ~Imputer.inverse_transform
+      ~Imputer.partial_fit
+      ~Imputer.partial_transform
+      ~Imputer.set_output
+      ~Imputer.set_params
+      ~Imputer.set_partial_fit_request
+      ~Imputer.set_transform_request
+      ~Imputer.summarize
+      ~Imputer.transform
+   
+   
+
+   
+   
+   

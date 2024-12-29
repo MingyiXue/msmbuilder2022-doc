@@ -1,0 +1,35 @@
+﻿msmbuilder.preprocessing.Binarizer
+==================================
+
+.. currentmodule:: msmbuilder.preprocessing
+
+.. autoclass:: Binarizer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Binarizer.__init__
+      ~Binarizer.fit
+      ~Binarizer.fit_transform
+      ~Binarizer.get_feature_names_out
+      ~Binarizer.get_metadata_routing
+      ~Binarizer.get_params
+      ~Binarizer.partial_fit
+      ~Binarizer.partial_transform
+      ~Binarizer.set_output
+      ~Binarizer.set_params
+      ~Binarizer.set_partial_fit_request
+      ~Binarizer.set_transform_request
+      ~Binarizer.summarize
+      ~Binarizer.transform
+   
+   
+
+   
+   
+   

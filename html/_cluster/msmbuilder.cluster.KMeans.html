@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.cluster.KMeans &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.cluster.KMedoids" href="msmbuilder.cluster.KMedoids.html" />
+    <link rel="prev" title="msmbuilder.cluster.KCenters" href="msmbuilder.cluster.KCenters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../cluster.html">Clustering</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cluster.html#algorithms">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KCenters.html">msmbuilder.cluster.KCenters</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.cluster.KMeans</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.cluster.KMeans"><code class="docutils literal notranslate"><span class="pre">KMeans</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.KMedoids.html">msmbuilder.cluster.KMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMedoids.html">msmbuilder.cluster.MiniBatchKMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.RegularSpatial.html">msmbuilder.cluster.RegularSpatial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.LandmarkAgglomerative.html">msmbuilder.cluster.LandmarkAgglomerative</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.AffinityPropagation.html">msmbuilder.cluster.AffinityPropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.GMM.html">msmbuilder.cluster.GMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MeanShift.html">msmbuilder.cluster.MeanShift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMeans.html">msmbuilder.cluster.MiniBatchKMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.cluster.SpectralClustering.html">msmbuilder.cluster.SpectralClustering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../cluster.html">Clustering</a></li>
+      <li class="breadcrumb-item active">msmbuilder.cluster.KMeans</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_cluster/msmbuilder.cluster.KMeans.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-cluster-kmeans">
+<h1>msmbuilder.cluster.KMeans<a class="headerlink" href="#msmbuilder-cluster-kmeans" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.cluster.KMeans">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.cluster.</span></span><span class="sig-name descname"><span class="pre">KMeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k-means++'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lloyd'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.KMeans" title="Link to this definition">¶</a></dt>
+<dd><p>K-Means clustering.</p>
+<p>Read more in the <a class="reference external" href="https://scikit-learn.org/stable/modules/clustering.html#k-means" title="(in scikit-learn v1.6)"><span class="xref std std-ref">User Guide</span></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>n_clusters</strong><span class="classifier">int, default=8</span></dt><dd><p>The number of clusters to form as well as the number of
+centroids to generate.</p>
+<p>For an example of how to choose an optimal value for <cite>n_clusters</cite> refer to
+<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html#sphx-glr-auto-examples-cluster-plot-kmeans-silhouette-analysis-py" title="(in scikit-learn v1.6)"><span>Selecting the number of clusters with silhouette analysis on KMeans clustering</span></a>.</p>
+</dd>
+<dt><strong>init</strong><span class="classifier">{‘k-means++’, ‘random’}, callable or array-like of shape             (n_clusters, n_features), default=’k-means++’</span></dt><dd><p>Method for initialization:</p>
+<ul class="simple">
+<li><p>‘k-means++’ : selects initial cluster centroids using sampling             based on an empirical probability distribution of the points’             contribution to the overall inertia. This technique speeds up             convergence. The algorithm implemented is “greedy k-means++”. It             differs from the vanilla k-means++ by making several trials at             each sampling step and choosing the best centroid among them.</p></li>
+<li><p>‘random’: choose <cite>n_clusters</cite> observations (rows) at random from         data for the initial centroids.</p></li>
+<li><p>If an array is passed, it should be of shape (n_clusters, n_features)        and gives the initial centers.</p></li>
+<li><p>If a callable is passed, it should take arguments X, n_clusters and a        random state and return an initialization.</p></li>
+</ul>
+<p>For an example of how to use the different <cite>init</cite> strategy, see the example
+entitled <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html#sphx-glr-auto-examples-cluster-plot-kmeans-digits-py" title="(in scikit-learn v1.6)"><span>A demo of K-Means clustering on the handwritten digits data</span></a>.</p>
+</dd>
+<dt><strong>n_init</strong><span class="classifier">‘auto’ or int, default=’auto’</span></dt><dd><p>Number of times the k-means algorithm is run with different centroid
+seeds. The final results is the best output of <cite>n_init</cite> consecutive runs
+in terms of inertia. Several runs are recommended for sparse
+high-dimensional problems (see <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/text/plot_document_clustering.html#kmeans-sparse-high-dim" title="(in scikit-learn v1.6)"><span>Clustering sparse data with k-means</span></a>).</p>
+<p>When <cite>n_init=’auto’</cite>, the number of runs depends on the value of init:
+10 if using <cite>init=’random’</cite> or <cite>init</cite> is a callable;
+1 if using <cite>init=’k-means++’</cite> or <cite>init</cite> is an array-like.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.2: </span>Added ‘auto’ option for <cite>n_init</cite>.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.4: </span>Default value for <cite>n_init</cite> changed to <cite>‘auto’</cite>.</p>
+</div>
+</dd>
+<dt><strong>max_iter</strong><span class="classifier">int, default=300</span></dt><dd><p>Maximum number of iterations of the k-means algorithm for a
+single run.</p>
+</dd>
+<dt><strong>tol</strong><span class="classifier">float, default=1e-4</span></dt><dd><p>Relative tolerance with regards to Frobenius norm of the difference
+in the cluster centers of two consecutive iterations to declare
+convergence.</p>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">int, default=0</span></dt><dd><p>Verbosity mode.</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int, RandomState instance or None, default=None</span></dt><dd><p>Determines random number generation for centroid initialization. Use
+an int to make the randomness deterministic.
+See <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-random_state" title="(in scikit-learn v1.6)"><span class="xref std std-term">Glossary</span></a>.</p>
+</dd>
+<dt><strong>copy_x</strong><span class="classifier">bool, default=True</span></dt><dd><p>When pre-computing distances it is more numerically accurate to center
+the data first. If copy_x is True (default), then the original data is
+not modified. If False, the original data is modified, and put back
+before the function returns, but small numerical differences may be
+introduced by subtracting and then adding the data mean. Note that if
+the original data is not C-contiguous, a copy will be made even if
+copy_x is False. If the original data is sparse, but not in CSR format,
+a copy will be made even if copy_x is False.</p>
+</dd>
+<dt><strong>algorithm</strong><span class="classifier">{“lloyd”, “elkan”}, default=”lloyd”</span></dt><dd><p>K-means algorithm to use. The classical EM-style algorithm is <cite>“lloyd”</cite>.
+The <cite>“elkan”</cite> variation can be more efficient on some datasets with
+well-defined clusters, by using the triangle inequality. However it’s
+more memory intensive due to the allocation of an extra array of shape
+<cite>(n_samples, n_clusters)</cite>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.18: </span>Added Elkan algorithm</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 1.1: </span>Renamed “full” to “lloyd”, and deprecated “auto” and “full”.
+Changed “auto” to use “lloyd” instead of “elkan”.</p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>cluster_centers_</strong><span class="classifier">ndarray of shape (n_clusters, n_features)</span></dt><dd><p>Coordinates of cluster centers. If the algorithm stops before fully
+converging (see <code class="docutils literal notranslate"><span class="pre">tol</span></code> and <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>), these will not be
+consistent with <code class="docutils literal notranslate"><span class="pre">labels_</span></code>.</p>
+</dd>
+<dt><strong>labels_</strong><span class="classifier">list of arrays, each of shape [sequence_length, ]</span></dt><dd><p>The label of each point is an integer in [0, n_clusters).</p>
+</dd>
+<dt><strong>inertia_</strong><span class="classifier">float</span></dt><dd><p>Sum of squared distances of samples to their closest cluster center,
+weighted by the sample weights if provided.</p>
+</dd>
+<dt><strong>n_iter_</strong><span class="classifier">int</span></dt><dd><p>Number of iterations run.</p>
+</dd>
+<dt><strong>n_features_in_</strong><span class="classifier">int</span></dt><dd><p>Number of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+<dt><strong>feature_names_in_</strong><span class="classifier">ndarray of shape (<cite>n_features_in_</cite>,)</span></dt><dd><p>Names of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>. Defined only when <cite>X</cite>
+has feature names that are all strings.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y, sample_weight])</p></td>
+<td><p>Fit the  clustering on the data Parameters ---------- sequences : list of array-like, each of shape [sequence_length, n_features]     A list of multivariate timeseries. Each sequence may have     a different length, but they all must have the same number     of features. Returns ------- self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y, sample_weight])</p></td>
+<td><p>Performs clustering on X and returns cluster labels. Parameters ---------- sequences : list of array-like, each of shape [sequence_length, n_features]     A list of multivariate timeseries. Each sequence may have     a different length, but they all must have the same number     of features. Returns ------- Y : list of ndarray, each of shape [sequence_length, ]     Cluster labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y, sample_weight])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y, sample_weight])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to. In the vector quantization literature, <cite>cluster_centers_</cite> is called the code book and each value returned by <cite>predict</cite> is the index of the closest code in the code book. Parameters ---------- X : array-like shape=(n_samples, n_features)     A single timeseries. Returns ------- Y : array, shape=(n_samples,)     Index of the cluster that each sample belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y, sample_weight])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to. In the vector quantization literature, <cite>cluster_centers_</cite> is called the code book and each value returned by <cite>predict</cite> is the index of the closest code in the code book. Parameters ---------- sequences : list of array-like, each of shape [sequence_length, n_features]     A list of multivariate timeseries. Each sequence may have     a different length, but they all must have the same number     of features. Returns ------- Y : list of arrays, each of shape [sequence_length,]     Index of the closest center each sample belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X[, y, sample_weight])</p></td>
+<td><p>Opposite of the value of X on the K-means objective.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sample_weight, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sample_weight, ...])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_score_request</span></code>(*[, sample_weight])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">score</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="msmbuilder.cluster.MiniBatchKMeans.html#msmbuilder.cluster.MiniBatchKMeans" title="msmbuilder.cluster.MiniBatchKMeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MiniBatchKMeans</span></code></a></dt><dd><p>Alternative online implementation that does incremental updates of the centers positions using mini-batches. For large scale learning (say n_samples &gt; 10k) MiniBatchKMeans is probably much faster than the default batch implementation.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The k-means problem is solved using either Lloyd’s or Elkan’s algorithm.</p>
+<p>The average complexity is given by O(k n T), where n is the number of
+samples and T is the number of iteration.</p>
+<p>The worst case complexity is given by O(n^(k+2/p)) with
+n = n_samples, p = n_features.
+Refer to <a class="reference external" href="https://doi.org/10.1145/1137856.1137880">“How slow is the k-means method?” D. Arthur and S. Vassilvitskii -
+SoCG2006.</a> for more details.</p>
+<p>In practice, the k-means algorithm is very fast (one of the fastest
+clustering algorithms available), but it falls in local minima. That’s why
+it can be useful to restart it several times.</p>
+<p>If the algorithm stops before fully converging (because of <code class="docutils literal notranslate"><span class="pre">tol</span></code> or
+<code class="docutils literal notranslate"><span class="pre">max_iter</span></code>), <code class="docutils literal notranslate"><span class="pre">labels_</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster_centers_</span></code> will not be consistent,
+i.e. the <code class="docutils literal notranslate"><span class="pre">cluster_centers_</span></code> will not be the means of the points in each
+cluster. Also, the estimator will reassign <code class="docutils literal notranslate"><span class="pre">labels_</span></code> after the last
+iteration to make <code class="docutils literal notranslate"><span class="pre">labels_</span></code> consistent with <code class="docutils literal notranslate"><span class="pre">predict</span></code> on the training
+set.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+<span class="go">array([1, 1, 1, 0, 0, 0], dtype=int32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="go">array([1, 0], dtype=int32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
+<span class="go">array([[10.,  2.],</span>
+<span class="go">       [ 1.,  2.]])</span>
+</pre></div>
+</div>
+<p>For examples of common problems with K-Means and how to address them see
+<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_assumptions.html#sphx-glr-auto-examples-cluster-plot-kmeans-assumptions-py" title="(in scikit-learn v1.6)"><span>Demonstration of k-means assumptions</span></a>.</p>
+<p>For a demonstration of how K-Means can be used to cluster text documents see
+<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/text/plot_document_clustering.html#sphx-glr-auto-examples-text-plot-document-clustering-py" title="(in scikit-learn v1.6)"><span>Clustering text documents using k-means</span></a>.</p>
+<p>For a comparison between K-Means and MiniBatchKMeans refer to example
+<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_mini_batch_kmeans.html#sphx-glr-auto-examples-cluster-plot-mini-batch-kmeans-py" title="(in scikit-learn v1.6)"><span>Comparison of the K-Means and MiniBatchKMeans clustering algorithms</span></a>.</p>
+<p>For a comparison between K-Means and BisectingKMeans refer to example
+<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_bisect_kmeans.html#sphx-glr-auto-examples-cluster-plot-bisect-kmeans-py" title="(in scikit-learn v1.6)"><span>Bisecting K-Means and Regular K-Means Performance Comparison</span></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.cluster.KMeans.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k-means++'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lloyd'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.cluster.KMeans.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.cluster.KMeans.__init__" title="msmbuilder.cluster.KMeans.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([n_clusters, init, n_init, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y, sample_weight])</p></td>
+<td><p>Fit the  clustering on the data Parameters ---------- sequences : list of array-like, each of shape [sequence_length, n_features]     A list of multivariate timeseries. Each sequence may have     a different length, but they all must have the same number     of features. Returns ------- self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_predict</span></code>(sequences[, y, sample_weight])</p></td>
+<td><p>Performs clustering on X and returns cluster labels. Parameters ---------- sequences : list of array-like, each of shape [sequence_length, n_features]     A list of multivariate timeseries. Each sequence may have     a different length, but they all must have the same number     of features. Returns ------- Y : list of ndarray, each of shape [sequence_length, ]     Cluster labels.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y, sample_weight])</p></td>
+<td><p>Alias for fit_predict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_predict</span></code>(X[, y, sample_weight])</p></td>
+<td><p>Predict the closest cluster each sample in X belongs to. In the vector quantization literature, <cite>cluster_centers_</cite> is called the code book and each value returned by <cite>predict</cite> is the index of the closest code in the code book. Parameters ---------- X : array-like shape=(n_samples, n_features)     A single timeseries. Returns ------- Y : array, shape=(n_samples,)     Index of the cluster that each sample belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(X)</p></td>
+<td><p>Alias for partial_predict</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(sequences[, y, sample_weight])</p></td>
+<td><p>Predict the closest cluster each sample in each sequence in sequences belongs to. In the vector quantization literature, <cite>cluster_centers_</cite> is called the code book and each value returned by <cite>predict</cite> is the index of the closest code in the code book. Parameters ---------- sequences : list of array-like, each of shape [sequence_length, n_features]     A list of multivariate timeseries. Each sequence may have     a different length, but they all must have the same number     of features. Returns ------- Y : list of arrays, each of shape [sequence_length,]     Index of the closest center each sample belongs to.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">score</span></code>(X[, y, sample_weight])</p></td>
+<td><p>Opposite of the value of X on the K-means objective.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sample_weight, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_predict_request</span></code>(*[, sample_weight, ...])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_score_request</span></code>(*[, sample_weight])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">score</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Alias for predict</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.cluster.KCenters.html" class="btn btn-neutral float-left" title="msmbuilder.cluster.KCenters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.cluster.KMedoids.html" class="btn btn-neutral float-right" title="msmbuilder.cluster.KMedoids" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿msmbuilder.cluster.RegularSpatial
+=================================
+
+.. currentmodule:: msmbuilder.cluster
+
+.. autoclass:: RegularSpatial
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RegularSpatial.__init__
+      ~RegularSpatial.fit
+      ~RegularSpatial.fit_predict
+      ~RegularSpatial.fit_transform
+      ~RegularSpatial.get_metadata_routing
+      ~RegularSpatial.get_params
+      ~RegularSpatial.partial_predict
+      ~RegularSpatial.partial_transform
+      ~RegularSpatial.predict
+      ~RegularSpatial.set_fit_request
+      ~RegularSpatial.set_output
+      ~RegularSpatial.set_params
+      ~RegularSpatial.set_predict_request
+      ~RegularSpatial.set_transform_request
+      ~RegularSpatial.summarize
+      ~RegularSpatial.transform
+   
+   
+
+   
+   
+   

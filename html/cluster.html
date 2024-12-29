@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clustering &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="msmbuilder.cluster.KCenters" href="_cluster/msmbuilder.cluster.KCenters.html" />
+    <link rel="prev" title="msmbuilder.decomposition.PCA" href="_decomposition/msmbuilder.decomposition.PCA.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Clustering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#algorithms">Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.KCenters.html">msmbuilder.cluster.KCenters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.KMeans.html">msmbuilder.cluster.KMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.KMedoids.html">msmbuilder.cluster.KMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.MiniBatchKMedoids.html">msmbuilder.cluster.MiniBatchKMedoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.RegularSpatial.html">msmbuilder.cluster.RegularSpatial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.LandmarkAgglomerative.html">msmbuilder.cluster.LandmarkAgglomerative</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.AffinityPropagation.html">msmbuilder.cluster.AffinityPropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.GMM.html">msmbuilder.cluster.GMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.MeanShift.html">msmbuilder.cluster.MeanShift</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.MiniBatchKMeans.html">msmbuilder.cluster.MiniBatchKMeans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_cluster/msmbuilder.cluster.SpectralClustering.html">msmbuilder.cluster.SpectralClustering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Clustering</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cluster.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="clustering">
+<span id="cluster"></span><h1>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">¶</a></h1>
+<p>Clustering MD trajectories groups the data <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> into a set of
+clusters such that conformations in the same cluster are structurally
+similar to one another, and conformations in different clusters are
+structurally distinct. The questions that arise are</p>
+<ol class="arabic simple">
+<li><p>How should “structurally similar” be defined? What distance metric
+should be used?</p></li>
+<li><p>Given the distance metric, what algorithm should be used to actually
+cluster the data?</p></li>
+</ol>
+<p>On point 1, there is no consensus in the protein MD literature. Popular
+distance metrics include cartesian root-mean-squared deviation of atomic
+positions (RMSD) <a class="footnote-reference brackets" href="#f3" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>, distances based on the number of native contacts
+formed, distances based on the difference in backbone dihedral angles, and
+probably others.</p>
+<p>On point 2, “Optimal” clustering is NP-hard <a class="footnote-reference brackets" href="#f2" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, so there’s usually a
+tradeoff between clustering quality and computational cost. For that reason,
+MSMBuilder has a variety of different clustering algorithms implemented.</p>
+<section id="algorithms">
+<h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
+<p>All clustering algorithms in MSMBuilder follow the following basic API.
+Hyperparameters, including the number of clusters, random seeds, the
+distance metric (if applicable) are passed to the class constructor.
+Then, the computation is done by calling <code class="docutils literal notranslate"><span class="pre">fit(sequences)</span></code>. The argument
+to <code class="docutils literal notranslate"><span class="pre">fit</span></code> should be a <em>list</em> of molecular dynamics trajectories or a list
+of 2D numpy arrays, each of shape <code class="docutils literal notranslate"><span class="pre">(length_of_trajecotry,</span> <span class="pre">n_features)</span></code>.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.KCenters.html#msmbuilder.cluster.KCenters" title="msmbuilder.cluster.KCenters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KCenters</span></code></a></p></td>
+<td><p>K-Centers clustering</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.KMeans.html#msmbuilder.cluster.KMeans" title="msmbuilder.cluster.KMeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KMeans</span></code></a></p></td>
+<td><p>K-Means clustering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.KMedoids.html#msmbuilder.cluster.KMedoids" title="msmbuilder.cluster.KMedoids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KMedoids</span></code></a></p></td>
+<td><p>K-Medoids clustering</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.MiniBatchKMedoids.html#msmbuilder.cluster.MiniBatchKMedoids" title="msmbuilder.cluster.MiniBatchKMedoids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MiniBatchKMedoids</span></code></a></p></td>
+<td><p>Mini-Batch K-Medoids clustering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.RegularSpatial.html#msmbuilder.cluster.RegularSpatial" title="msmbuilder.cluster.RegularSpatial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegularSpatial</span></code></a></p></td>
+<td><p>Regular spatial clustering.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.LandmarkAgglomerative.html#msmbuilder.cluster.LandmarkAgglomerative" title="msmbuilder.cluster.LandmarkAgglomerative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LandmarkAgglomerative</span></code></a></p></td>
+<td><p>Landmark-based agglomerative hierarchical clustering</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.AffinityPropagation.html#msmbuilder.cluster.AffinityPropagation" title="msmbuilder.cluster.AffinityPropagation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AffinityPropagation</span></code></a></p></td>
+<td><p>Perform Affinity Propagation Clustering of data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.GMM.html#msmbuilder.cluster.GMM" title="msmbuilder.cluster.GMM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GMM</span></code></a></p></td>
+<td><p>Gaussian Mixture.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.MeanShift.html#msmbuilder.cluster.MeanShift" title="msmbuilder.cluster.MeanShift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeanShift</span></code></a></p></td>
+<td><p>Mean shift clustering using a flat kernel.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.MiniBatchKMeans.html#msmbuilder.cluster.MiniBatchKMeans" title="msmbuilder.cluster.MiniBatchKMeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MiniBatchKMeans</span></code></a></p></td>
+<td><p>Mini-Batch K-Means clustering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_cluster/msmbuilder.cluster.SpectralClustering.html#msmbuilder.cluster.SpectralClustering" title="msmbuilder.cluster.SpectralClustering"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpectralClustering</span></code></a></p></td>
+<td><p>Apply clustering to a projection of the normalized Laplacian.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>The “data”, for MD, refers to snapshots of the structure of a molecular system at a given time point – i.e the set of cartesian coordinates for all the atoms, or some mathematical transformation thereof.</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">2</a><span class="fn-bracket">]</span></span>
+<p>Aloise, Daniel, et al. <a class="reference external" href="http://link.springer.com/article/10.1007/s10994-009-5103-0#page-1">NP-hardness of Euclidean sum-of-squares clustering.</a> Machine Learning 75.2 (2009): 245-248.</p>
+</aside>
+<aside class="footnote brackets" id="f3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">3</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Root-mean-square_deviation_of_atomic_positions">http://en.wikipedia.org/wiki/Root-mean-square_deviation_of_atomic_positions</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_decomposition/msmbuilder.decomposition.PCA.html" class="btn btn-neutral float-left" title="msmbuilder.decomposition.PCA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_cluster/msmbuilder.cluster.KCenters.html" class="btn btn-neutral float-right" title="msmbuilder.cluster.KCenters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

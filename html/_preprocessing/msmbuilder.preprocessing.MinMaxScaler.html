@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>msmbuilder.preprocessing.MinMaxScaler &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="../_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="msmbuilder.preprocessing.MaxAbsScaler" href="msmbuilder.preprocessing.MaxAbsScaler.html" />
+    <link rel="prev" title="msmbuilder.preprocessing.MultiLabelBinarizer" href="msmbuilder.preprocessing.MultiLabelBinarizer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../preprocessing.html">Preprocessing</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../preprocessing.html#preprocessors">Preprocessors</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Binarizer.html">msmbuilder.preprocessing.Binarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Butterworth.html">msmbuilder.preprocessing.Butterworth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.EWMA.html">msmbuilder.preprocessing.EWMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.DoubleEWMA.html">msmbuilder.preprocessing.DoubleEWMA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Imputer.html">msmbuilder.preprocessing.Imputer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.KernelCenterer.html">msmbuilder.preprocessing.KernelCenterer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.LabelBinarizer.html">msmbuilder.preprocessing.LabelBinarizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.MultiLabelBinarizer.html">msmbuilder.preprocessing.MultiLabelBinarizer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">msmbuilder.preprocessing.MinMaxScaler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#msmbuilder.preprocessing.MinMaxScaler"><code class="docutils literal notranslate"><span class="pre">MinMaxScaler</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.MaxAbsScaler.html">msmbuilder.preprocessing.MaxAbsScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.Normalizer.html">msmbuilder.preprocessing.Normalizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.RobustScaler.html">msmbuilder.preprocessing.RobustScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.StandardScaler.html">msmbuilder.preprocessing.StandardScaler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="msmbuilder.preprocessing.PolynomialFeatures.html">msmbuilder.preprocessing.PolynomialFeatures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hmm.html">Hidden Markov models (HMMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../preprocessing.html">Preprocessing</a></li>
+      <li class="breadcrumb-item active">msmbuilder.preprocessing.MinMaxScaler</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_preprocessing/msmbuilder.preprocessing.MinMaxScaler.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="msmbuilder-preprocessing-minmaxscaler">
+<h1>msmbuilder.preprocessing.MinMaxScaler<a class="headerlink" href="#msmbuilder-preprocessing-minmaxscaler" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="msmbuilder.preprocessing.MinMaxScaler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">msmbuilder.preprocessing.</span></span><span class="sig-name descname"><span class="pre">MinMaxScaler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.preprocessing.MinMaxScaler" title="Link to this definition">¶</a></dt>
+<dd><p>Transform features by scaling each feature to a given range.</p>
+<p>This estimator scales and translates each feature individually such
+that it is in the given range on the training set, e.g. between
+zero and one.</p>
+<p>The transformation is given by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X_std</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">X_std</span> <span class="o">*</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span> <span class="o">+</span> <span class="nb">min</span>
+</pre></div>
+</div>
+<p>where min, max = feature_range.</p>
+<p>This transformation is often used as an alternative to zero mean,
+unit variance scaling.</p>
+<p><cite>MinMaxScaler</cite> doesn’t reduce the effect of outliers, but it linearly
+scales them down into a fixed range, where the largest occurring data point
+corresponds to the maximum value and the smallest one corresponds to the
+minimum value. For an example visualization, refer to <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_all_scaling.html#plot-all-scaling-minmax-scaler-section" title="(in scikit-learn v1.6)"><span class="xref std std-ref">Compare
+MinMaxScaler with other scalers</span></a>.</p>
+<p>Read more in the <a class="reference external" href="https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing-scaler" title="(in scikit-learn v1.6)"><span class="xref std std-ref">User Guide</span></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>feature_range</strong><span class="classifier">tuple (min, max), default=(0, 1)</span></dt><dd><p>Desired range of transformed data.</p>
+</dd>
+<dt><strong>copy</strong><span class="classifier">bool, default=True</span></dt><dd><p>Set to False to perform inplace row normalization and avoid a
+copy (if the input is already a numpy array).</p>
+</dd>
+<dt><strong>clip</strong><span class="classifier">bool, default=False</span></dt><dd><p>Set to True to clip transformed values of held-out data to
+provided <cite>feature range</cite>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt><strong>min_</strong><span class="classifier">ndarray of shape (n_features,)</span></dt><dd><p>Per feature adjustment for minimum. Equivalent to
+<code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">-</span> <span class="pre">X.min(axis=0)</span> <span class="pre">*</span> <span class="pre">self.scale_</span></code></p>
+</dd>
+<dt><strong>scale_</strong><span class="classifier">ndarray of shape (n_features,)</span></dt><dd><p>Per feature relative scaling of the data. Equivalent to
+<code class="docutils literal notranslate"><span class="pre">(max</span> <span class="pre">-</span> <span class="pre">min)</span> <span class="pre">/</span> <span class="pre">(X.max(axis=0)</span> <span class="pre">-</span> <span class="pre">X.min(axis=0))</span></code></p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.17: </span><em>scale_</em> attribute.</p>
+</div>
+</dd>
+<dt><strong>data_min_</strong><span class="classifier">ndarray of shape (n_features,)</span></dt><dd><p>Per feature minimum seen in the data</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.17: </span><em>data_min_</em></p>
+</div>
+</dd>
+<dt><strong>data_max_</strong><span class="classifier">ndarray of shape (n_features,)</span></dt><dd><p>Per feature maximum seen in the data</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.17: </span><em>data_max_</em></p>
+</div>
+</dd>
+<dt><strong>data_range_</strong><span class="classifier">ndarray of shape (n_features,)</span></dt><dd><p>Per feature range <code class="docutils literal notranslate"><span class="pre">(data_max_</span> <span class="pre">-</span> <span class="pre">data_min_)</span></code> seen in the data</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.17: </span><em>data_range_</em></p>
+</div>
+</dd>
+<dt><strong>n_features_in_</strong><span class="classifier">int</span></dt><dd><p>Number of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 0.24.</span></p>
+</div>
+</dd>
+<dt><strong>n_samples_seen_</strong><span class="classifier">int</span></dt><dd><p>The number of samples processed by the estimator.
+It will be reset on new calls to fit, but increments across
+<code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> calls.</p>
+</dd>
+<dt><strong>feature_names_in_</strong><span class="classifier">ndarray of shape (<cite>n_features_in_</cite>,)</span></dt><dd><p>Names of features seen during <a class="reference external" href="https://scikit-learn.org/stable/glossary.html#term-fit" title="(in scikit-learn v1.6)"><span class="xref std std-term">fit</span></a>. Defined only when <cite>X</cite>
+has feature names that are all strings.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit Preprocessing to X.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model and apply preprocessing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(X)</p></td>
+<td><p>Undo the scaling of X according to feature_range.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_fit</span></code>(sequence[, y])</p></td>
+<td><p>Fit Preprocessing to X. Parameters ---------- sequence : array-like, [sequence_length, n_features]     A multivariate timeseries. y : None     Ignored Returns ------- self.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence)</p></td>
+<td><p>Apply preprocessing to single sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_partial_fit_request</span></code>(*[, sequence])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply preprocessing to sequences</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">minmax_scale</span></code></dt><dd><p>Equivalent function without the estimator API.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>NaNs are treated as missing values: disregarded in fit, and maintained in
+transform.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="go">MinMaxScaler()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">data_max_</span><span class="p">)</span>
+<span class="go">[ 1. 18.]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="go">[[0.   0.  ]</span>
+<span class="go"> [0.25 0.25]</span>
+<span class="go"> [0.5  0.5 ]</span>
+<span class="go"> [1.   1.  ]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]))</span>
+<span class="go">[[1.5 0. ]]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="msmbuilder.preprocessing.MinMaxScaler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmbuilder.preprocessing.MinMaxScaler.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#msmbuilder.preprocessing.MinMaxScaler.__init__" title="msmbuilder.preprocessing.MinMaxScaler.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([feature_range, copy, clip])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(sequences[, y])</p></td>
+<td><p>Fit Preprocessing to X.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_transform</span></code>(sequences[, y])</p></td>
+<td><p>Fit the model and apply preprocessing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_names_out</span></code>([input_features])</p></td>
+<td><p>Get output feature names for transformation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_metadata_routing</span></code>()</p></td>
+<td><p>Get metadata routing of this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_params</span></code>([deep])</p></td>
+<td><p>Get parameters for this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inverse_transform</span></code>(X)</p></td>
+<td><p>Undo the scaling of X according to feature_range.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_fit</span></code>(sequence[, y])</p></td>
+<td><p>Fit Preprocessing to X. Parameters ---------- sequence : array-like, [sequence_length, n_features]     A multivariate timeseries. y : None     Ignored Returns ------- self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">partial_transform</span></code>(sequence)</p></td>
+<td><p>Apply preprocessing to single sequence</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fit_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output</span></code>(*[, transform])</p></td>
+<td><p>Set output container.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_params</span></code>(**params)</p></td>
+<td><p>Set the parameters of this estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_partial_fit_request</span></code>(*[, sequence])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">partial_fit</span></code> method.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_transform_request</span></code>(*[, sequences])</p></td>
+<td><p>Request metadata passed to the <code class="docutils literal notranslate"><span class="pre">transform</span></code> method.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">summarize</span></code>()</p></td>
+<td><p>Return some diagnostic summary statistics about this Markov model</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code>(sequences)</p></td>
+<td><p>Apply preprocessing to sequences</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="msmbuilder.preprocessing.MultiLabelBinarizer.html" class="btn btn-neutral float-left" title="msmbuilder.preprocessing.MultiLabelBinarizer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="msmbuilder.preprocessing.MaxAbsScaler.html" class="btn btn-neutral float-right" title="msmbuilder.preprocessing.MaxAbsScaler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

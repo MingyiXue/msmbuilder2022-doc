@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hidden Markov models (HMMs) &mdash; MSMBuilder 3.8.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/msmb.css?v=51bd699f" />
+
+  
+      <script src="_static/documentation_options.js?v=fb7e056b"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="msmbuilder.hmm.GaussianHMM" href="_hmm/msmbuilder.hmm.GaussianHMM.html" />
+    <link rel="prev" title="msmbuilder.msm.ContinuousTimeMSM" href="_ratematrix/msmbuilder.msm.ContinuousTimeMSM.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/logo-200px.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="background.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="featurization.html">Featurization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection.html">Feature Selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decomposition.html">Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msm.html">Markov state models (MSMs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmrq.html">Model Selection using GMRQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tpt.html">Transition Path Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ratematrix.html">Continuous-time MSMs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hidden Markov models (HMMs)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hmms-for-biophysics">HMMs for Biophysics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithms">Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_hmm/msmbuilder.hmm.GaussianHMM.html">msmbuilder.hmm.GaussianHMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_hmm/msmbuilder.hmm.VonMisesHMM.html">msmbuilder.hmm.VonMisesHMM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">I/O</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apipatterns.html">API Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Writing Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="publications.html">Publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSMBuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Hidden Markov models (HMMs)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/hmm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hidden-markov-models-hmms">
+<span id="hmm"></span><h1>Hidden Markov models (HMMs)<a class="headerlink" href="#hidden-markov-models-hmms" title="Link to this heading">¶</a></h1>
+<figure class="align-right" id="id3">
+<a class="reference internal image-reference" href="_images/kde-vs-histogram.png"><img alt="_images/kde-vs-histogram.png" src="_images/kde-vs-histogram.png" style="width: 300px; height: 300px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">KDE is to histogram as HMM is to MSM</span><a class="headerlink" href="#id3" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>One potential weakness of <a class="reference internal" href="msm.html#msm"><span class="std std-ref">MSMs</span></a> is that they use discrete
+states with “hard” cutoffs. In some sense, an MSM forms an approximation to
+the transfer operator in the same sense that a histogram is an
+approximation a probability density function. When a probability density
+function is smooth, better performance can often be achieved with <a class="reference external" href="http://scikit-learn.org/stable/modules/density.html">kernel
+density estimators</a>,
+or <a class="reference external" href="http://en.wikipedia.org/wiki/Mixture_model">mixture models</a>, which
+smooth the data in a potentially more natural way.</p>
+<p>A Gaussian hidden Markov model (HMM) is one way of applying this same logic
+to probabilistic models of dynamics of molecular systems. Like
+<a class="reference internal" href="msm.html#msm"><span class="std std-ref">MSMs</span></a>, the HMM also models the dynamics of the system as a
+first-order Markov jump process between a discrete set of states. The
+difference is that the states in the HMM are not associated with discrete
+non-overlapping regions of phase space defined by clustering – instead, the
+states are Gaussian distributions. Because the Gaussian distribution has
+infinite support, there is no unique and unambiguous mapping from a given
+conformation to a single state. Each state is a distribution over all
+conformations.</p>
+<p>HMMs have been widely used in many fields, from speech processing to
+bioinformatics. Many good reviews have been written, such as <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+<section id="hmms-for-biophysics">
+<h2>HMMs for Biophysics<a class="headerlink" href="#hmms-for-biophysics" title="Link to this heading">¶</a></h2>
+<p>In <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, McGibbon et. al. introduced a reversible Gaussian HMM for studying
+protein dynamics. The class <a class="reference internal" href="_hmm/msmbuilder.hmm.GaussianHMM.html#msmbuilder.hmm.GaussianHMM" title="msmbuilder.hmm.GaussianHMM"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianHMM</span></code></a> implements the algorithm
+described in that paper. Compared to a “vanilla” HMM:</p>
+<ul class="simple">
+<li><p>The transition matrix is constrained to obey detailed balance. Detailed
+balance is a necessary condition for the the model to satisfy the 2nd law
+of thermodynamics. It also aids analysis, because models that don’t
+satisfy detailed balance don’t necessarily have a unique equilibrium
+distribution that they relax to in the limit of infinite time.</p></li>
+<li><p>We added a penalty term (tunable via the <code class="docutils literal notranslate"><span class="pre">fusion_prior</span></code> hyperparameter)
+on the pairwise difference between the means of each of the states. This
+helps encourage a sense of sparisty where each state might be different
+from the other states along only a subset of the coordinates.</p></li>
+</ul>
+</section>
+<section id="algorithms">
+<h2>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_hmm/msmbuilder.hmm.GaussianHMM.html#msmbuilder.hmm.GaussianHMM" title="msmbuilder.hmm.GaussianHMM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GaussianHMM</span></code></a></p></td>
+<td><p>Reversible Gaussian Hidden Markov Model L1-Fusion Regularization</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_hmm/msmbuilder.hmm.VonMisesHMM.html#msmbuilder.hmm.VonMisesHMM" title="msmbuilder.hmm.VonMisesHMM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VonMisesHMM</span></code></a></p></td>
+<td><p>Hidden Markov Model with von Mises Emissions</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Rabiner, Lawrence, and Biing-Hwang Juang. <a class="reference external" href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=1165342&amp;tag=1">An introduction to hidden Markov models</a> ASSP Magazine, IEEE 3.1 (1986): 4-16.</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>McGibbon, Robert T. et al., <a class="reference external" href="http://arxiv.org/abs/1405.1444">Understanding Protein Dynamics with L1-Regularized Reversible Hidden Markov Models</a> Proc. 31st Intl. Conf. on Machine Learning (ICML). 2014.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_ratematrix/msmbuilder.msm.ContinuousTimeMSM.html" class="btn btn-neutral float-left" title="msmbuilder.msm.ContinuousTimeMSM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_hmm/msmbuilder.hmm.GaussianHMM.html" class="btn btn-neutral float-right" title="msmbuilder.hmm.GaussianHMM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Stanford University and the Authors.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = 'http://msmbuilder.org/versions.json'
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        3.8.6
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+﻿msmbuilder.hmm.GaussianHMM
+==========================
+
+.. currentmodule:: msmbuilder.hmm
+
+.. autoclass:: GaussianHMM
