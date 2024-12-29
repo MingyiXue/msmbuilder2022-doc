@@ -5,6 +5,6 @@ notebook
 jinja2
 openmm
 nbconvert
-msmb_data
+# msmb_data
 pyparsing
-msmexplorer
+# msmexplorer
