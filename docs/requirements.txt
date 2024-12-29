@@ -8,3 +8,4 @@ nbconvert
 # msmb_data
 pyparsing
 # msmexplorer
+msmb_theme
