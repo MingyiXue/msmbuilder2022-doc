@@ -36,6 +36,7 @@ jobs:
           cd ..
       - name: Sphinx build
         run: |
+          msmb --version
           echo $CONDA/bin >> $GITHUB_PATH
           cd docs/
           make html
