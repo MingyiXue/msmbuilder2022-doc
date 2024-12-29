@@ -33,8 +33,10 @@ jobs:
           sudo apt-get install -y pandoc
           cd docs/
           pip install -r requirements.txt
+          cd ..
       - name: Sphinx build
         run: |
+          cd docs/
           make html
           echo '<meta http-equiv="refresh" content="0; url=./html/index.html" />' > _build/index.html
       - name: Deploy to GitHub Pages
