@@ -27,7 +27,7 @@ jobs:
           # conda install -yq zlib
           # conda install h5py
           # python -m pip install --upgrade pip
-          python -m pip install mambuilder2022
+          python -m pip install msmbuilder2022
       - name: Install sphinx dependencies
         run: |
           sudo apt-get install -y pandoc
