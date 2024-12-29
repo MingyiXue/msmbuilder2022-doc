@@ -33,9 +33,15 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.mathjax',
+    "sphinx.ext.intersphinx",
     'numpydoc',
-    'notebook_sphinxext',
+    # 'notebook_sphinxext', # TODO: fix notebooks
+    "doi_role",
 ]
+
+intersphinx_mapping = {
+    'sklearn': ('http://scikit-learn.org/stable', None)
+}
 
 autosummary_generate = True
 autodoc_default_flags = ['members', 'inherited-members']
